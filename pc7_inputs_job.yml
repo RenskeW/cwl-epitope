@@ -1,0 +1,6 @@
+script:
+  class: File
+  path: get_pc7_inputs.py
+fasta: 
+  class: File
+  path: test.fasta
