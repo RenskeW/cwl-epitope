@@ -1,5 +1,4 @@
-# fasta_path:
-#   class: File
-#   path: test.fasta
-message: Hello
-message_file: You did it!
+fasta_path:
+  class: File
+  location: ./test.fasta
+  format: http://edamontology.org/format_2200

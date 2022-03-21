@@ -46,6 +46,7 @@ steps:
   # combine_features:
   #   run:
   #     class: Operation
+  #   input
   #   doc: |
   #     "Combines PC7, PSP19, HHM & PSSM input features into 1 file per fasta sequence."
 

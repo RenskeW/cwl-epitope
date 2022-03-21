@@ -2,14 +2,18 @@
 Definition:
 Generation of PC7 input features.
 
-Inputs: *.fasta
+Inputs: 
+- *.fasta: file containing fasta sequences in ??? format
+- name of output directory to store script output. Will be created if it doesn't exist already.
 
-Outputs: *.input files for every sequence in the .fasta file.
+
+Outputs: 
+- *.input files for every sequence in the .fasta file.
 
 """
 
 import argparse
-#import os
+import os
 #import sys
 import numpy as np
 
@@ -21,10 +25,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Generates PC7 features for every sequence in .fasta file.')
     
     # Arguments
-    parser.add_argument('fasta', help='path to .fasta file containing fasta sequences.')
-    # parser.add_argument('-o', dest='out_path', help='path to output directory'
-    #                                                 'This arguments is required!', required=True)
-
+    parser.add_argument('fasta', help='Path to .fasta file containing fasta sequences.')
+    parser.add_argument('-o', dest='out_path', help='Path to output directory. This argument is required!', required=True)
 
     return parser.parse_args()
 
@@ -79,8 +81,8 @@ def make_pc7(file, resname_to_pc7_dict):
     This function was adapted from make_input() from OPUS-TASS Github repo https://github.com/thuxugang/opus_tass/blob/master/inference_utils.py
     7pc
     """    
-    filename = file[0].split('.')[0]
-    fasta = file[1]   
+    filename = file[0].split('.')[0] # PDB ID
+    fasta = file[1] # fasta sequence  
     
     seq_len = len(fasta)
     
@@ -95,22 +97,30 @@ def make_pc7(file, resname_to_pc7_dict):
 def main():
     args = parse_args() 
     fasta_path = args.fasta
-    #out_path = args.out_path
+    out_path = args.out_path
 
     files = read_fasta(fasta_path) 
 
+    # Create directory to store output files
+    if not os.path.exists(out_path):
+        os.mkdir(out_path)
+        print(f"Created new directory {out_path} to store PC7 input features.")
+    else:
+        print(f"Using existing directory {out_path} to store PC7 input features.")
+
     # Create PC7 dictionary
-    resname_to_psp_dict = get_pc7_dict()
+    resname_to_pc7_dict = get_pc7_dict()
 
     # Loop through sequences, assign pc7 features to each residue in each sequence.
     for file in files:
-        pc7, filename = make_pc7(file, resname_to_psp_dict)
+        pc7, filename = make_pc7(file, resname_to_pc7_dict)
         
         # Save PC7 features for this sequence
-        #pc7_path = f"{out_path}/pc7_{filename}.input"
-        pc7_path = f"xxtmppc7_{filename}.input"
-        np.savetxt(pc7_path, pc7, fmt="%.4f")
+        pc7_path = f"{out_path}/pc7_{filename}.input"
 
+        np.savetxt(pc7_path, pc7, fmt="%.4f")
+        
+    print(f"Saved PC7 input features for all sequences in {fasta_path} in {out_path}.")
     
     
 if __name__ == "__main__":
