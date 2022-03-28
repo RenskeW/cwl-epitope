@@ -43,11 +43,22 @@ steps:
     doc: |
       Generates PSP19 features per residue. Output stored in 1 file per sequence.
        
-  # combine_features:
-  #   run:
-  #     class: Operation
-  #   doc: |
-  #     "Combines PC7, PSP19, HHM & PSSM input features into 1 file per fasta sequence."
+  combine_features:
+    in: 
+      fasta: fasta_path
+    out: [features]
+    run:
+      class: Operation
+      inputs:
+        fasta: 
+          type: Any 
+      outputs:
+        features: 
+          type: Directory
+        
+    doc: |
+      "Combines PC7, PSP19, HHM & PSSM input features into 1 file per fasta sequence."
+  
 
   
 
