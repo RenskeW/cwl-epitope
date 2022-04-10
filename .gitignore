@@ -1,1 +1,10 @@
 cwltool_deps/
+tools/quay.io*
+tools/cache
+*/slurm-*.out
+*/S*.sh
+*quay.io*
+*amancevice_*
+prov_output/prov_dir/snapshot/
+prov_output/prov_dir/data/
+

@@ -1,0 +1,37 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:uuid:08a19089-a0d9-4f65-b0d5-25083a014fff> a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "psp19_T0963-D1.input"^^xsd:string ;
+    ore:proxyFor <urn:uuid:8b00d016-c9f4-4e90-a478-06946049700e> ;
+    ore:proxyIn <urn:uuid:6292bf8b-5b54-48ae-a3b2-dbecc4ba4f2e> .
+
+<urn:uuid:10c797e6-5760-4925-ba5d-13f297612d11> a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "psp19_test.input"^^xsd:string ;
+    ore:proxyFor id:faaff77d-50f0-4b31-a723-0fc20799b26f ;
+    ore:proxyIn <urn:uuid:6292bf8b-5b54-48ae-a3b2-dbecc4ba4f2e> .
+
+id:d8c697e2-db11-4454-aec5-baa9fc12830e a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "psp19_T1011-D1.input"^^xsd:string ;
+    ore:proxyFor <urn:uuid:923d5f72-7cfb-4a2d-b1b2-149f5651eff9> ;
+    ore:proxyIn <urn:uuid:6292bf8b-5b54-48ae-a3b2-dbecc4ba4f2e> .
+
+<urn:uuid:6292bf8b-5b54-48ae-a3b2-dbecc4ba4f2e> a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates <urn:uuid:08a19089-a0d9-4f65-b0d5-25083a014fff>,
+        <urn:uuid:10c797e6-5760-4925-ba5d-13f297612d11>,
+        id:d8c697e2-db11-4454-aec5-baa9fc12830e .
+

@@ -1,0 +1,37 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:uuid:1a3a742e-3ef6-4122-a4e3-f1bf6daaa414> a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "T1011-D1.hhm"^^xsd:string ;
+    ore:proxyFor id:c7569023-e315-4fc0-9c16-e08b03d3fbf8 ;
+    ore:proxyIn id:f267d76a-cfec-4702-8966-d511dc99e7b6 .
+
+<urn:uuid:3ea5606c-d226-4745-ace1-517a68369698> a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "T0963-D1.hhm"^^xsd:string ;
+    ore:proxyFor <urn:uuid:09d5f5a1-52d6-4baf-93ec-cec83cc66e7e> ;
+    ore:proxyIn id:f267d76a-cfec-4702-8966-d511dc99e7b6 .
+
+id:e379e0a2-e5f4-4200-8c92-d4180c62f898 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "test.hhm"^^xsd:string ;
+    ore:proxyFor id:ed19b79f-8624-4c39-bb02-21f4bf4f4418 ;
+    ore:proxyIn id:f267d76a-cfec-4702-8966-d511dc99e7b6 .
+
+id:f267d76a-cfec-4702-8966-d511dc99e7b6 a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates <urn:uuid:1a3a742e-3ef6-4122-a4e3-f1bf6daaa414>,
+        <urn:uuid:3ea5606c-d226-4745-ace1-517a68369698>,
+        id:e379e0a2-e5f4-4200-8c92-d4180c62f898 .
+

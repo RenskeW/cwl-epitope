@@ -1,8 +1,0 @@
-[2022-03-21T09:26:31,515.348911Z] [cwltool] /Users/renskedewit/opt/anaconda3/bin/cwltool --provenance provenance niaa_wf.cwl niaa_wf_job.yml
-[2022-03-21T09:26:31,526.931047Z] Resolved 'niaa_wf.cwl' to 'file:///Users/renskedewit/Documents/GitHub/cwl-epitope/niaa_wf.cwl'
-[2022-03-21T09:26:38,765.036106Z] [provenance] Adding to RO file:///Users/renskedewit/Documents/GitHub/cwl-epitope/test.fasta
-[2022-03-21T09:26:38,780.064106Z] [workflow ] start
-[2022-03-21T09:26:38,780.853033Z] [workflow ] starting step generate_pc7
-[2022-03-21T09:26:38,781.301975Z] [step generate_pc7] start
-[2022-03-21T09:26:40,861.948013Z] Workflow error, try again with --debug for more information:
-Docker is not available for this tool, try --no-container to disable Docker, or install a user space Docker replacement like uDocker with --user-space-docker-cmd.: Command '['docker', 'images', '--no-trunc', '--all']' returned non-zero exit status 1.

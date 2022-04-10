@@ -9,13 +9,14 @@ inputs:
 
 
 outputs:
-
-  pc7_features:
+  # pc7_features, psp19_features & hhm_features can be replaced later by opus_tass inputs
+  pc7_features: 
     type: Directory
     outputSource: generate_pc7/pc7_features
   psp19_features:
     type: Directory
     outputSource: generate_psp19/psp19_features
+  
 
 ############## INPUT FEATURE GENERATION ################
 steps:  
@@ -43,12 +44,22 @@ steps:
     doc: |
       Generates PSP19 features per residue. Output stored in 1 file per sequence.
        
-  # combine_features:
-  #   run:
-  #     class: Operation
-  #   input
-  #   doc: |
-  #     "Combines PC7, PSP19, HHM & PSSM input features into 1 file per fasta sequence."
+  combine_features:
+    in: 
+      fasta: fasta_path
+    out: [features]
+    run:
+      class: Operation
+      inputs:
+        fasta: 
+          type: Any 
+      outputs:
+        features: 
+          type: Directory
+        
+    doc: |
+      "Combines PC7, PSP19, HHM & PSSM input features into 1 file per fasta sequence."
+  
 
   
 

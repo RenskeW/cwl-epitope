@@ -18,6 +18,8 @@ Outputs:
 
 import argparse
 import os
+import tempfile
+from pathlib import Path
 
 def parse_args():
     """
@@ -27,9 +29,10 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Combines features into 1 file for every fasta sequence, stores files in 1 output directory.')
     
     # Arguments
-    parser.add_argument('hhblits', help='Path to hhblits', type=str)
+    parser.add_argument('--path', help='Path to hhblits', type=str, default='hhblits')
     parser.add_argument('fasta', help='Path to file containing fasta sequences')
     parser.add_argument('database', help='Path to database')
+    parser.add_argument('--outdir', help="output directory", default=os.path.abspath("./hhm_features"))
 
     return parser.parse_args()
 
@@ -57,18 +60,17 @@ def create_fasta(file, out_path):
     Create a new .fasta file for every query sequence.
     Code adapted from https://github.com/thuxugang/opus_tass/blob/ede95534e429da0949916aaff604cf11942264fc/inference_utils.py#L127
     """
-    filename = file[0].split('.')[0]
+    filename = file[0].split('.')[0] # name without .pdb extension
     fasta_content = ">" + filename + '\n' + file[1]
     
-    #fasta_path = os.path.join(out_path, filename+'.fasta')
-    fasta_path = f"{out_path}{filename}.fasta"
-  
+    fasta_path = Path(out_path) / f"{filename}.fasta" 
+ 
     if not os.path.exists(fasta_path):
         f = open(fasta_path, 'w')
         f.writelines(fasta_content)
         f.close()
 
-    return fasta_path[:-6]  # name without .fasta extension   
+    return fasta_path  # name without .fasta extension   
 
 def read_hhm(fname,seq):
     """
@@ -92,41 +94,36 @@ def main():
     ## parse input arguments
     args = parse_args()
 
-    hhblits = args.hhblits
+    hhblits = args.path
     database = args.database
     fasta_path = args.fasta 
+    out_dir = args.outdir
 
-    out_dir = "/scistor/informatica/hwt330/cwl-epitope/hhm_features/" # Change this later!
-    
     # Read fasta file, create new .fasta file for each sequence
     files = read_fasta(fasta_path)
 
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
     
+    temp_dir = tempfile.mkdtemp() # type=str, stores .fasta input files for hhblits
+    
     for file in files:
-        filename = create_fasta(file, out_dir)
+        fasta_input = create_fasta(file, temp_dir) ## hhblits input file
         seq = file[1] # the protein sequence
- 
-        print(f"Running {filename}.fasta against HHblits database...")
+        
+        protein_id = fasta_input.stem # file name without path or suffix
+        
+        print(f"Running {fasta_input} against HHblits database...")
 
-        #cmd = f"{hhblits} -i {filename}.fasta -d {database} -n 3 -Z 0 -o {filename}.hhr -ohhm {filename}.hhm"
-        cmd = f"{hhblits} -i {filename}.fasta -d {database} -ohhm {filename}.hhm"
+        # Define output paths
+        hhr_out = Path(temp_dir) / f"{protein_id}.hhr" # in temporary directory since output is not used in workflow
+        hhm_out = Path(out_dir) / f"{protein_id}.hhm"  # this output is later converted to OPUS-TASS input
 
-
+        # #cmd = f"{hhblits} -i {filename}.fasta -d {database} -n 3 -Z 0 -o {filename}.hhr -ohhm {filename}.hhm"
+        cmd = f"{hhblits} -i {fasta_input} -d {database} -o {hhr_out} -ohhm {hhm_out}"
+        
         os.system(cmd) # run the shell command
-        ## The following lines were adapted from get_hhm in OPUS-TASS repo (same as create_fasta)
-        if os.path.exists(f"{filename}.a3m"): # Remove the files which are not necesssary for OPUS-TASS
-            os.remove(f"{filename}.a3m")
-        if os.path.exists(f"{filename}.hhr"):
-            os.remove(f"{filename}.hhr")
 
-        # Extract the hhm input features from the .hhm file 
-        hhm = read_hhm(f"{filename}.hhm", seq) # adapted from https://github.com/thuxugang/opus_tass/blob/ede95534e429da0949916aaff604cf11942264fc/inference_utils.py#L169
-      
-        # Save hhm features for this sequence, adapted from https://github.com/thuxugang/opus_tass/blob/ede95534e429da0949916aaff604cf11942264fc/inference_utils.py
-        hhm_feature_outpath = f"{filename}.input"
-        np.savetxt(hhm_feature_outpath, hhm, fmt="%.4f")
         
     
     print(f"Saved hhm input features for all sequences in {fasta_path} in {out_dir}.")

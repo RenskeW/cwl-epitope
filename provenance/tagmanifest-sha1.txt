@@ -1,6 +1,0 @@
-aa813d63d70ac71b1223b83d71aa41200c0fd7e3  workflow/packed.cwl
-23198269687e33f0dfc44c1912712c60561f3a24  workflow/primary-job.json
-7e9a85afbba7f0e1240a800e9f85adba73b4747b  snapshot/niaa_wf.cwl
-f5aef6bcae13ec6fc98ca1159fef499c4d6b95b3  metadata/logs/engine.e207c481-015a-4bd5-870a-f8d5cb4db3ca.txt
-a37cf2973c9adb73537b9c4bfed73e2247b1ea21  metadata/manifest.json
-316f03cf3ad3a6b39632a41bc8fe583ad05a3570  bag-info.txt

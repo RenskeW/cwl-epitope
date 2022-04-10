@@ -1,0 +1,98 @@
+[2022-04-10T12:23:50,956.343651Z] [cwltool] /scistor/informatica/mce211/env3.6/bin/cwltool --singularity --provenance prov_dir /scistor/informatica/hwt330/cwl-epitope/niaa_wf.cwl
+[2022-04-10T12:23:50,961.996555Z] Resolved '/scistor/informatica/hwt330/cwl-epitope/niaa_wf.cwl' to 'file:///scistor/informatica/hwt330/cwl-epitope/niaa_wf.cwl'
+[2022-04-10T12:23:55,929.368258Z] [provenance] Adding to RO file:///scistor/informatica/hwt330/cwl-epitope/test.fasta
+[2022-04-10T12:23:55,933.099031Z] [workflow ] start
+[2022-04-10T12:23:55,933.398247Z] [workflow ] starting step generate_hhm
+[2022-04-10T12:23:55,933.557987Z] [step generate_hhm] start
+[2022-04-10T12:23:55,983.492374Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/prov_output
+[2022-04-10T12:23:56,254.236460Z] [job generate_hhm] /scratch/35756/vu_oflfz$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/35756/vu_oflfz:/SmsqSg \
+    --bind \
+    /scratch/35756/g1025s57:/tmp \
+    --bind \
+    /scistor/informatica/hwt330/hhblits/databases:/var/lib/cwl/stgfec4845c-88a2-418d-8b9a-473b2a3f01a9/databases:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/test.fasta:/var/lib/cwl/stgc3f05725-7db4-41a4-8de7-9a16973a6ad6/test.fasta:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/run_hhblits.py:/var/lib/cwl/stg1f879bd6-2c6d-48c4-a69f-dbc3a8431dd5/run_hhblits.py:ro \
+    --pwd \
+    /SmsqSg \
+    /scistor/informatica/hwt330/cwl-epitope/prov_output/quay.io_biocontainers_hhsuite:3.3.0--py39pl5321h67e14b5_5.sif \
+    python3 \
+    /var/lib/cwl/stg1f879bd6-2c6d-48c4-a69f-dbc3a8431dd5/run_hhblits.py \
+    /var/lib/cwl/stgc3f05725-7db4-41a4-8de7-9a16973a6ad6/test.fasta \
+    /var/lib/cwl/stgfec4845c-88a2-418d-8b9a-473b2a3f01a9/databases/pdb70 \
+    --outdir \
+    ./hhm_features
+[2022-04-10T12:38:25,961.115122Z] [job generate_hhm] completed success
+[2022-04-10T12:38:25,961.571932Z] [step generate_hhm] completed success
+[2022-04-10T12:38:25,962.413788Z] [workflow ] starting step generate_pc7
+[2022-04-10T12:38:25,962.576389Z] [step generate_pc7] start
+[2022-04-10T12:38:25,968.866587Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/prov_output
+[2022-04-10T12:38:25,969.426394Z] [job generate_pc7] /scratch/35756/zxq1wvm9$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/35756/zxq1wvm9:/SmsqSg \
+    --bind \
+    /scratch/35756/bhxlanjn:/tmp \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/test.fasta:/var/lib/cwl/stg91534608-f1b2-423f-b770-db5850fe7d77/test.fasta:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/get_pc7_inputs.py:/var/lib/cwl/stg08318a15-21fd-4eb9-aa21-418feeaf0e11/get_pc7_inputs.py:ro \
+    --pwd \
+    /SmsqSg \
+    /scistor/informatica/hwt330/cwl-epitope/prov_output/amancevice_pandas:1.3.4-slim.sif \
+    python3 \
+    /var/lib/cwl/stg08318a15-21fd-4eb9-aa21-418feeaf0e11/get_pc7_inputs.py \
+    /var/lib/cwl/stg91534608-f1b2-423f-b770-db5850fe7d77/test.fasta \
+    -o \
+    pc7_features
+[2022-04-10T12:38:28,14.017582Z] [job generate_pc7] completed success
+[2022-04-10T12:38:28,14.254093Z] [step generate_pc7] completed success
+[2022-04-10T12:38:28,14.771700Z] [workflow ] starting step generate_psp19
+[2022-04-10T12:38:28,14.927387Z] [step generate_psp19] start
+[2022-04-10T12:38:28,22.834539Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/prov_output
+[2022-04-10T12:38:28,25.139809Z] [job generate_psp19] /scratch/35756/irejlzsy$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/35756/irejlzsy:/SmsqSg \
+    --bind \
+    /scratch/35756/0ys0442d:/tmp \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/test.fasta:/var/lib/cwl/stg3bb4bd56-a737-4971-8136-a6dff64abf2b/test.fasta:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/get_psp19_inputs.py:/var/lib/cwl/stg393b2fcd-82ec-4a82-aee7-fda0df6863b3/get_psp19_inputs.py:ro \
+    --pwd \
+    /SmsqSg \
+    --net \
+    --network \
+    none \
+    /scistor/informatica/hwt330/cwl-epitope/prov_output/amancevice_pandas:1.3.4-slim.sif \
+    python3 \
+    /var/lib/cwl/stg393b2fcd-82ec-4a82-aee7-fda0df6863b3/get_psp19_inputs.py \
+    /var/lib/cwl/stg3bb4bd56-a737-4971-8136-a6dff64abf2b/test.fasta \
+    -o \
+    psp19_features
+[2022-04-10T12:38:29,753.798962Z] [job generate_psp19] completed success
+[2022-04-10T12:38:29,754.040718Z] [step generate_psp19] completed success
+[2022-04-10T12:38:29,754.368782Z] [workflow ] completed success
+[2022-04-10T12:38:30,234.456539Z] Final process status is success
+[2022-04-10T12:49:09,184.390545Z] [provenance] Finalizing Research Object
+[2022-04-10T12:49:09,197.254419Z] [provenance] Deleting existing /scistor/informatica/hwt330/cwl-epitope/prov_output/prov_dir
