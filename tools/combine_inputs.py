@@ -6,6 +6,7 @@ Inputs: 3 directories:
 - pc7 files
 - psp19 files
 - hhm profiles
+1 file, containing all fasta sequences
 
 Outputs are stored in new directory: opus_tass_inputs
 """
@@ -28,7 +29,7 @@ def parse_args():
     parser.add_argument('hhm', help='Path to directory containing hhm profiles.')
     parser.add_argument('pc7', help='Path to directory containing pc7 features.')
     parser.add_argument('psp19', help='Path to directory containing psp19 features.')
-    parser.add_argument('--outdir', help='Path to output directory.', default=".")
+    parser.add_argument('--outdir', help='Path to output directory.', default="./opus_tass_inputs")
 
     return parser.parse_args()
 
@@ -56,21 +57,25 @@ def read_hhm(fname, seq):
     """
     Adapted from https://github.com/thuxugang/opus_tass/blob/ede95534e429da0949916aaff604cf11942264fc/inference_utils.py#L75
     """
-    #num_hhm_cols = 22 # what was originally in OPUS-TASS code
-    num_hhm_cols = 23 # for some reason 22 gives an error
+    num_hhm_cols = 23 # 20 amino acids + extra columns
     
     hhm_col_names = [str(j) for j in range(num_hhm_cols)]
+    
     with open(fname,'r') as f:
         hhm = pd.read_csv(f, delim_whitespace=True, names=hhm_col_names)
 
-    pos1 = (hhm['0']=='HMM').idxmax()+3
-    print(pos1)
-    # num_cols = len(hhm.columns)
-    # hhm = hhm[pos1:-1].values[:,:num_hhm_cols].reshape([-1,44])
-    # hhm[hhm=='*']='9999'
-    # if hhm.shape[0] != len(seq):
-    #     raise ValueError('HHM file is in wrong format or incorrect!')
-    # return hhm[:,2:-12].astype(float)
+    pos1 = (hhm['0']=='HMM').idxmax()+3 # the line of the first amino acid
+    
+    # hhm_reshaped:
+    # Trim the hhm: strip header rows and last row (empty), remove last column.
+    # Reshape pd.DataFrame to np.array of nrows=len(seq) 
+    # Trim excess columns such that ncols=30 (20 amino acids (= emission probabilities) + 10 transition probabilities)
+    # Replace '*' with 9999 
+    hhm_reshaped = hhm.iloc[pos1:-1, :num_hhm_cols-1].to_numpy().reshape([-1, 2 * (num_hhm_cols-1)])[:,2:-12]
+    hhm_reshaped[hhm_reshaped=='*']='9999'
+    if hhm_reshaped.shape[0] != len(seq):
+        raise ValueError('HHM file is in wrong format or incorrect!')
+    return hhm_reshaped.astype(float)
 
 def make_input(file, parameters):
     """
@@ -79,7 +84,6 @@ def make_input(file, parameters):
     """    
     n_features = 56 # 30 hhm + 7 pc + 19 psp
     filename = file[0].split('.')[0]
-    #print(filename)
     fasta = file[1]   
     
     seq_len = len(fasta)
@@ -88,31 +92,17 @@ def make_input(file, parameters):
     hhm_path = Path(parameters["hhm"]) / f"{filename}.hhm"
     pc7_path = Path(parameters["pc7"]) / f"pc7_{filename}.input"
     psp19_path = Path(parameters["psp19"]) / f"psp19_{filename}.input"    
-    input_path = Path(parameters["out_dir"]) / f"{filename}.inputs" # output file which stores complete set of OPUS-TASS input features
-    
-    #print(hhm_path)
-    # Read files
+    input_path = Path(parameters["out_dir"]) / f"{filename}.inputs" # output file which stores complete set of OPUS-TASS input features  
+
+    # Read files and combine into one file with all the input features
     hhm = read_hhm(hhm_path, fasta)
-    pc7 = pd.read_csv(pc7_path, header=None)
-
-    #print(pc7)
-
-
-
+    pc7 = np.loadtxt(pc7_path, dtype=float)
+    psp = np.loadtxt(psp19_path, dtype=float)
     
-    # pc7 = np.zeros((seq_len, 7))
-    # for i in range(seq_len):
-    #     pc7[i] = resname_to_pc7_dict[fasta[i]]
-    
-    # psp = np.zeros((seq_len, 19))
-    # for i in range(seq_len):
-    #     psp19 = resname_to_psp_dict[fasta[i]]
-    #     for j in psp19:
-    #         psp[i][j-1] = 1
-    
-    # input_data = np.concatenate((pssm, hhm, pc7, psp),axis=1)
-    # assert input_data.shape == (seq_len, n_features)
-    # np.savetxt(input_path, input_data, fmt="%.4f")
+    input_data = np.concatenate((hhm, pc7, psp),axis=1)
+
+    assert input_data.shape == (seq_len, n_features)
+    np.savetxt(input_path, input_data, fmt="%.4f")
 
 
 def main():
@@ -121,13 +111,18 @@ def main():
     args = parse_args()
     
     fasta_path = args.fasta 
-    hhm_path = args.hhm
-    pc7_path = args.pc7
-    psp19_path = args.psp19
+    hhm_dir = args.hhm
+    pc7_dir = args.pc7
+    psp19_dir = args.psp19
     out_dir = args.outdir
+    # fasta_path = "/Users/renskedewit/Documents/GitHub/cwl-epitope/test.fasta" 
+    # hhm_dir = "/Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/hhm_features"
+    # pc7_dir = "/Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/pc7_features"
+    # psp19_dir = "/Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/psp19_features"
+    # out_dir = "/Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/combined_inputs"
 
     # Store parameters in dictionary
-    parameters = {"hhm" : hhm_path, "pc7" : pc7_path, "psp19" : psp19_path, "out_dir" : out_dir}
+    parameters = {"hhm" : hhm_dir, "pc7" : pc7_dir, "psp19" : psp19_dir, "out_dir" : out_dir}
     
     # Create directory to store output files
     if not os.path.exists(out_dir):
@@ -135,12 +130,8 @@ def main():
 
     files = read_fasta(fasta_path) # [[id1.pdb, seq1], [id2.pdb, seq2], ... ] 
 
-    for file in files[2:]:
+    for file in files:
         make_input(file, parameters)
-        #print(file)
-
-    
-
 
 
 if __name__ == "__main__":
