@@ -5,10 +5,10 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: amancevice/pandas:1.3.4-slim
-  # SoftwareRequirement:
-  #   packages: 
-  #     numpy:
-  #       specs: [ https://anaconda.org/conda-forge/numpy ]
+  SoftwareRequirement:
+    packages: 
+      numpy:
+        specs: [ https://anaconda.org/conda-forge/numpy ]
 
 baseCommand: python3
 inputs:
@@ -24,14 +24,10 @@ inputs:
     inputBinding:
       position: 2
   outdir:
-    # type: Directory
     type: string
     inputBinding: 
       position: 3
       prefix: -o
-    # default:
-    #   class: Directory
-    #   location: ./psp19_features
     default: "psp19_features"
 
 outputs: 

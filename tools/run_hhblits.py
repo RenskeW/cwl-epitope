@@ -123,9 +123,7 @@ def main():
         cmd = f"{hhblits} -i {fasta_input} -d {database} -o {hhr_out} -ohhm {hhm_out}"
         
         os.system(cmd) # run the shell command
-
-        
-    
+  
     print(f"Saved hhm input features for all sequences in {fasta_path} in {out_dir}.")
 
 
