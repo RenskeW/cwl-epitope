@@ -46,9 +46,12 @@ outputs:
     outputBinding:
       glob: $(inputs.outdir)
 
-s:programmingLanguage: Python
-s:isBasedOn: 
-- class: s:SoftwareApplication
+#add: Author = Renske
+s:mainEntity: # add that this is a commandlinetool
+  s:programmingLanguage: Python
+  s:codeRepository: https://github.com/RenskeW/cwl-epitope/blob/b5e31d42006fd7003716f57963646d47d1154549/tools/get_pc7_inputs.py
+  s:isBasedOn:
+  - class: s:SoftwareApplication
   s:name: OPUS-TASS
   s:identifier: https://bio.tools/opus-tass
 
@@ -57,5 +60,5 @@ $namespaces:
   edam: http://edamontology.org/
 
 $schemas:
-- https://bioschemas.org/profiles/ComputationalTool/1.0-RELEASE
+- https://schema.org/version/latest/schemaorg-current-https.rdf
 - https://edamontology.org/EDAM_1.25.owl
