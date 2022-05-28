@@ -1,9 +1,9 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-hints:
-  DockerRequirement:
-    dockerPull: quay.io/biocontainers/hhsuite:3.3.0--py39pl5321h67e14b5_5
+# hints:
+#   DockerRequirement:
+#     dockerPull: quay.io/biocontainers/hhsuite:3.3.0--py39pl5321h67e14b5_5
 
 baseCommand: python3
 
@@ -33,6 +33,12 @@ inputs:
     default: "pdb70"
     doc: |
       "The database against which to run the query protein sequence, must be located in $(inputs.database)"
+    # Metadata for a default input
+    <class??>: s:Dataset ### 
+    s:distribution: https://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz # downloadable form of dataset
+    s:version: "2020_06" # example value
+    s:url: https://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/ # location of page describing dataset
+
   output_directory_name:
     type: string
     default: "hhm_features" 
@@ -62,4 +68,32 @@ outputs:
       "Directory containing HHM profiles for each of the input protein sequences."
     # format: https://github.com/soedinglab/hh-suite/wiki#file-formats (.hhm)
 
+s:author: # the creator of this CWL document
+- class: s:Person
+  s:name: "Renske de Wit"
+  s:identifier: https://orcid.org/0000-0002-2961-9670 #change id
 
+s:license: <appropriate license for this CWL document>
+
+s:mainEntity: # the tool that this document describes
+  s:programmingLanguage: Python
+  s:applicationCategory: Command-line tool # follow bio.tools https://biotools.readthedocs.io/en/latest/curators_guide.html#tool-type
+  s:codeRepository: https://github.com/RenskeW/cwl-epitope/blob/main/tools/run_hhblits.py
+  s:isBasedOn: 
+  - class: s:SoftwareApplication
+    s:name: hhblits
+    s:applicationSuite: # the suite to which the tool belongs
+      s:name: HH-suite
+      s:identifier: https://bio.tools/hhsuite
+      s:softwareVersion: "v3.3.0" # same as specs field?
+      s:citation: # not s:publication since that specifies a publication EVENT
+      - class: s:ScholarlyArticle
+        s:identifier: https://doi.org/10.1186/s12859-019-3019-7
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+
+$schemas:
+- https://schema.org/version/latest/schemaorg-current-https.rdf
+- https://edamontology.org/EDAM_1.25.owl
