@@ -29,8 +29,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Combines features into 1 file for every fasta sequence, stores files in 1 output directory.')
     
     # Arguments
-    parser.add_argument('train_biodl_path', help='Path to biodl dataset.')
-    parser.add_argument('test_biodl_path', help='Path to biodl dataset.')
+    parser.add_argument('train_biodl_path', help='Path to biodl training dataset.')
+    parser.add_argument('test_biodl_path', help='Path to biodl testing dataset.')
     parser.add_argument('--outdir', help='Path to output directory.', default="./fasta_files")
 
     return parser.parse_args()
@@ -92,6 +92,7 @@ def map_identifiers(dataset):
     uniprot_ids = [i for i in dataset["uniprot_id"]]
 
     response = use_uniprot_mapping_tool(uniprot_ids)
+
     # Convert response to dictionary
     mapping = response_to_dictionary(response)
 
@@ -106,7 +107,7 @@ def map_identifiers(dataset):
         except KeyError:
             dataset = dataset.drop(index = i) # drop rows which do not map to any pdb id
 
-    return dataset
+    return dataset, response.decode('utf-8')
 
 def write_fasta_files(dataset, out_dir):
     """
@@ -156,10 +157,14 @@ def main():
     combined_data = merge_datasets(data_train_slim, data_test_slim)
 
     # Map the UniProt identifiers in the dataset to their associated pdb ids (obtained from UniProt mapping tool)
-    mapped_dataset = map_identifiers(combined_data)
+    mapped_dataset, uniprot_response = map_identifiers(combined_data)
 
     # Write each protein sequence together with its interface residues to a separate .fasta file.
     write_fasta_files(mapped_dataset, out_dir)
+
+    # Write UniProt response to a file as well
+    with open(Path(out_dir).parent / 'uniprot_mapping.tsv', 'w') as f:
+        f.write(uniprot_response)
 
     
 
