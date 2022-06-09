@@ -7,8 +7,6 @@ baseCommand: python3
 hints:
   DockerRequirement:
     dockerPull: biopython/biopython@sha256:437075df44b0c9b3da96f71040baef0086789de7edf73c81de4ace30a127a245
-  # DockerRequirement: # this doesn't work
-  #   dockerPull: quay.io/biocontainers/biopython@sha256:fa2c959d7b17b27dd1d3ca3dcc18ac4002f971d1731d57ddcdbd204afab90dba
   SoftwareRequirement:
     packages:
       pandas:
@@ -43,13 +41,13 @@ inputs:
     type: Directory
     default: # for testing purposes, remove this later!
       class: Directory
-      location: ./dssp_data
+      location: ../data/test_set/pdb_directory
   output_dir:
     type: string
-    default: "./dssp_scores"
+    default: "./dssp_output"
   dssp:
     type: string
-    default: "dssp" # in old container: dssp
+    default: "dssp" # for newer dssp versions: mkdssp
   rsa_cutoff:
     type: string
     default: "0.06"
