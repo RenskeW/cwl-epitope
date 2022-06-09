@@ -1,0 +1,19 @@
+PDB:    Biodl?  sabdab?
+2HKF    yes     yes
+5G5R    yes     yes
+5G5X    yes     yes
+4W6W    yes     yes
+4W6X    yes     yes
+4W6Y    yes     yes
+6WWZ    yes     yes
+-------------------
+2Y5I    yes     no
+5DWZ    yes     no
+2MSC    yes     no
+1ZVW    yes     no
+4M0R    yes     no
+5UMF    yes     no
+-------------------
+6MHP    no      yes
+6LFM    no      yes
+5JS9    no      yes
