@@ -6,7 +6,9 @@ baseCommand: python3
 
 hints:
   DockerRequirement:
-    dockerPull: biopython/biopython
+    dockerPull: biopython/biopython@sha256:437075df44b0c9b3da96f71040baef0086789de7edf73c81de4ace30a127a245
+  # DockerRequirement: # this doesn't work
+  #   dockerPull: quay.io/biocontainers/biopython@sha256:fa2c959d7b17b27dd1d3ca3dcc18ac4002f971d1731d57ddcdbd204afab90dba
   SoftwareRequirement:
     packages:
       pandas:
@@ -14,9 +16,12 @@ hints:
         specs: [ https://pypi.org/project/pandas/ ]
       biopython:
         specs: [ https://pypi.org/project/biopython/ ]
+        version: [ "1.75" ]
       dssp:
         specs: [ https://swift.cmbi.umcn.nl/gv/dssp/ ]
         version: [ "2.0.4" ] # this version does not support mmCIF files
+      python:
+        version: [ "3.5" ]
 
 arguments:
 - $(inputs.script.path)
@@ -44,7 +49,7 @@ inputs:
     default: "./dssp_scores"
   dssp:
     type: string
-    default: "dssp"
+    default: "dssp" # in old container: dssp
   rsa_cutoff:
     type: string
     default: "0.06"

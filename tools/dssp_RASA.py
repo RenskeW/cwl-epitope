@@ -1,7 +1,8 @@
 """
-This script uses BioPython & DSSP to calculate surface accessiblity and secondary structure.
+This script uses BioPython & DSSP to calculate surface accessiblity.
 
 @author: DS
+adapted by: RW (make script also produce secondary structure)
 
 """
 
@@ -14,6 +15,7 @@ from os import getcwd
 import logging
 from Bio.PDB import PDBParser
 from Bio.PDB.DSSP import DSSP
+import warnings
 
 
 """
@@ -49,6 +51,10 @@ def calculate_rsa(filename, rsa_cutoff, dssp_algo, output_dir):
     surface_exposed_res = []
     surface_exposed_score = []
     amino_acid = []
+    # phi = []
+    # psi = []
+    ss = []
+
     try:
         dssp = DSSP(model, filename, dssp=dssp_algo)
         for key in dssp.keys():
@@ -61,7 +67,13 @@ def calculate_rsa(filename, rsa_cutoff, dssp_algo, output_dir):
             surface_exposed_score.append(dssp[key][3])
             amino_acid.append(dssp[key][1])
 
-        df = pd.DataFrame({"amino_acid": amino_acid, "RASA_score": surface_exposed_score, "RASA_bool": surface_exposed_res})
+            ## Also extract phi/psi + secondary structure:
+            ss.append(dssp[key][2])
+            # phi.append(dssp[key][4])
+            # psi.append(dssp[key][5])
+
+
+        df = pd.DataFrame({"amino_acid": amino_acid, "RASA_score": surface_exposed_score, "RASA_bool": surface_exposed_res, "secondary_structure": ss})
 
         dest = join(output_dir, name+'_RASA.csv')
         df.to_csv(dest, index=False)
