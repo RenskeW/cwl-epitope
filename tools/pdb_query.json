@@ -1,0 +1,12 @@
+{
+    "query": {
+      "type": "terminal",
+      "service": "text",
+      "parameters": {
+        "attribute": "exptl.method",
+        "operator": "exact_match",
+        "value": "ELECTRON MICROSCOPY"
+      }
+    },
+    "return_type": "entry"
+  }
