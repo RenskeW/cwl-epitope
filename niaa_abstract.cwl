@@ -33,77 +33,67 @@ steps:
       "Use PDB search API to run a query on the Protein Data Bank. Returns .txt file with comma-separated PDB IDs which satisfy the query requirements.
       See https://search.rcsb.org/index.html#search-api for a tutorial."
   download_pdb_files:
-    in:
-      pdb_ids: run_pdb_query/pdb_ids
-      download_format: # which format should be downloaded from the pdb?
-        default: "pdb"
+    in: 
+      input_file: run_pdb_query/pdb_ids
+      script:
+        default:
+          class: File
+          location: ./tools/pdb_batch_download.sh # it should be path but then it doesn't work: [step download_pdb_files] Cannot make job: Invalid job input record: Anonymous file object must have 'contents' and 'basename' fields.
     out:
-      [ pdb_files_compressed ] # is this the unzipped directory already?
-    run: 
-      class: Operation
-      inputs:
-        pdb_ids:
-          type: File
-          label: ".txt file with comma-separated PDB ids"
-        download_format:
-          type: string
-          label: "Format of PDB downloads"
-      outputs: 
-        pdb_files_compressed:
-          type: Directory
-          label: "Directory of compressed pdb files with .ent.gz extension"
+      [ pdb_files, mmcif_files ]
+    run: ./tools/pdb_batch_download.cwl
     doc: |
-      "Batch download of PDB entries (in .pdb format) which were returned by the PDB search API. 
+      "Batch download of PDB entries (in .pdb & mmcif format) which were returned by the PDB search API. 
       See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
   decompress_pdb_files:
     in:
-      compressed_files: download_pdb_files/pdb_files_compressed
+      compressed_files: download_pdb_files/pdb_files
     out:
       [ decompressed_pdb_files ]
     run:
       class: Operation
       inputs:
         compressed_files:
-          type: Directory
+          type: File[]
       outputs:
         decompressed_pdb_files:
           type: Directory
     doc: |
       "Decompress the files in the unzipped directory."
-  download_mmcif_files:
-    in:
-      pdb_ids: run_pdb_query/pdb_ids
-      download_format: # which format should be downloaded from the pdb?
-        default: "mmcif"
-    out:
-      [ mmcif_files_compressed ] # is this the unzipped directory already?
-    run: 
-      class: Operation
-      inputs:
-        pdb_ids:
-          type: File
-          label: ".txt file with comma-separated PDB ids"
-        download_format:
-          type: string
-          default: "mmcif"
-          label: "Format of PDB downloads"
-      outputs: 
-        mmcif_files_compressed:
-          type: Directory
-          label: "Directory of compressed pdb files with .cif.gz extension"
-    doc: |
-      "Batch download of PDB entries (in .pdb format) which were returned by the PDB search API. 
-      See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
+  # download_mmcif_files:
+  #   in:
+  #     pdb_ids: run_pdb_query/pdb_ids
+  #     download_format: # which format should be downloaded from the pdb?
+  #       default: "mmcif"
+  #   out:
+  #     [ mmcif_files_compressed ] # is this the unzipped directory already?
+  #   run: 
+  #     class: Operation
+  #     inputs:
+  #       pdb_ids:
+  #         type: File
+  #         label: ".txt file with comma-separated PDB ids"
+  #       download_format:
+  #         type: string
+  #         default: "mmcif"
+  #         label: "Format of PDB downloads"
+  #     outputs: 
+  #       mmcif_files_compressed:
+  #         type: Directory
+  #         label: "Directory of compressed pdb files with .cif.gz extension"
+  #   doc: |
+  #     "Batch download of PDB entries (in .pdb format) which were returned by the PDB search API. 
+  #     See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
   decompress_mmcif_files:
     in:
-      compressed_files: download_mmcif_files/mmcif_files_compressed
+      compressed_files: download_pdb_files/mmcif_files
     out:
       [ decompressed_mmcif_files ]
     run:
       class: Operation
       inputs:
         compressed_files:
-          type: Directory
+          type: File[]
       outputs:
         decompressed_mmcif_files:
           type: Directory

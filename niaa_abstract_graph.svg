@@ -16,140 +16,140 @@
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_outputs</title>
-<polygon fill="#eeeeee" stroke="black" stroke-dasharray="5,2" points="276,-8 276,-84 394,-84 394,-8 276,-8"/>
-<text text-anchor="middle" x="335" y="-15.8" font-family="Times,serif" font-size="14.00">Workflow Outputs</text>
+<polygon fill="#eeeeee" stroke="black" stroke-dasharray="5,2" points="338,-8 338,-84 456,-84 456,-8 338,-8"/>
+<text text-anchor="middle" x="397" y="-15.8" font-family="Times,serif" font-size="14.00">Workflow Outputs</text>
 </g>
 <!-- generate_psp19 -->
 <g id="node1" class="node">
 <title>generate_psp19</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="284.5,-258.5 284.5,-294.5 385.5,-294.5 385.5,-258.5 284.5,-258.5"/>
-<text text-anchor="middle" x="335" y="-272.8" font-family="Times,serif" font-size="14.00">generate_psp19</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="365.5,-258.5 365.5,-294.5 466.5,-294.5 466.5,-258.5 365.5,-258.5"/>
+<text text-anchor="middle" x="416" y="-272.8" font-family="Times,serif" font-size="14.00">generate_psp19</text>
 </g>
 <!-- combine_features -->
 <g id="node2" class="node">
 <title>combine_features</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="199.5,-185.5 199.5,-221.5 312.5,-221.5 312.5,-185.5 199.5,-185.5"/>
-<text text-anchor="middle" x="256" y="-199.8" font-family="Times,serif" font-size="14.00">combine_features</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="243.5,-185.5 243.5,-221.5 356.5,-221.5 356.5,-185.5 243.5,-185.5"/>
+<text text-anchor="middle" x="300" y="-199.8" font-family="Times,serif" font-size="14.00">combine_features</text>
 </g>
 <!-- generate_psp19&#45;&gt;combine_features -->
 <g id="edge1" class="edge">
 <title>generate_psp19&#45;&gt;combine_features</title>
-<path fill="none" stroke="black" d="M315.88,-258.31C305.88,-249.33 293.49,-238.19 282.58,-228.39"/>
-<polygon fill="black" stroke="black" points="284.72,-225.61 274.95,-221.53 280.05,-230.82 284.72,-225.61"/>
+<path fill="none" stroke="black" d="M388.22,-258.49C372.83,-249.08 353.52,-237.26 336.88,-227.07"/>
+<polygon fill="black" stroke="black" points="338.32,-223.85 327.96,-221.61 334.66,-229.82 338.32,-223.85"/>
 </g>
 <!-- train_epitope_prediction_model -->
-<g id="node15" class="node">
+<g id="node14" class="node">
 <title>train_epitope_prediction_model</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="239.5,-112.5 239.5,-148.5 430.5,-148.5 430.5,-112.5 239.5,-112.5"/>
-<text text-anchor="middle" x="335" y="-126.8" font-family="Times,serif" font-size="14.00">train_epitope_prediction_model</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="301.5,-112.5 301.5,-148.5 492.5,-148.5 492.5,-112.5 301.5,-112.5"/>
+<text text-anchor="middle" x="397" y="-126.8" font-family="Times,serif" font-size="14.00">train_epitope_prediction_model</text>
 </g>
 <!-- combine_features&#45;&gt;train_epitope_prediction_model -->
-<g id="edge19" class="edge">
+<g id="edge18" class="edge">
 <title>combine_features&#45;&gt;train_epitope_prediction_model</title>
-<path fill="none" stroke="black" d="M275.12,-185.31C285.12,-176.33 297.51,-165.19 308.42,-155.39"/>
-<polygon fill="black" stroke="black" points="310.95,-157.82 316.05,-148.53 306.28,-152.61 310.95,-157.82"/>
+<path fill="none" stroke="black" d="M323.48,-185.31C336.11,-176.07 351.86,-164.54 365.53,-154.53"/>
+<polygon fill="black" stroke="black" points="367.73,-157.26 373.74,-148.53 363.6,-151.61 367.73,-157.26"/>
 </g>
-<!-- generate_hhm -->
+<!-- combine_labels -->
 <g id="node3" class="node">
-<title>generate_hhm</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="26,-258.5 26,-294.5 120,-294.5 120,-258.5 26,-258.5"/>
-<text text-anchor="middle" x="73" y="-272.8" font-family="Times,serif" font-size="14.00">generate_hhm</text>
+<title>combine_labels</title>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="249,-331.5 249,-367.5 351,-367.5 351,-331.5 249,-331.5"/>
+<text text-anchor="middle" x="300" y="-345.8" font-family="Times,serif" font-size="14.00">combine_labels</text>
 </g>
-<!-- generate_hhm&#45;&gt;combine_features -->
+<!-- combine_labels&#45;&gt;generate_psp19 -->
+<g id="edge17" class="edge">
+<title>combine_labels&#45;&gt;generate_psp19</title>
+<path fill="none" stroke="black" d="M327.78,-331.49C343.17,-322.08 362.48,-310.26 379.12,-300.07"/>
+<polygon fill="black" stroke="black" points="381.34,-302.82 388.04,-294.61 377.68,-296.85 381.34,-302.82"/>
+</g>
+<!-- combine_labels&#45;&gt;combine_features -->
 <g id="edge2" class="edge">
-<title>generate_hhm&#45;&gt;combine_features</title>
-<path fill="none" stroke="black" d="M116.83,-258.49C142.56,-248.51 175.26,-235.82 202.5,-225.26"/>
-<polygon fill="black" stroke="black" points="203.83,-228.49 211.89,-221.61 201.3,-221.97 203.83,-228.49"/>
+<title>combine_labels&#45;&gt;combine_features</title>
+<path fill="none" stroke="black" d="M248.62,-346.87C210.73,-342.64 161.5,-330.15 136,-295 105.76,-253.32 175.67,-228.58 233.41,-215.77"/>
+<polygon fill="black" stroke="black" points="234.23,-219.17 243.28,-213.66 232.77,-212.32 234.23,-219.17"/>
 </g>
 <!-- generate_pc7 -->
 <g id="node4" class="node">
 <title>generate_pc7</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="138.5,-258.5 138.5,-294.5 227.5,-294.5 227.5,-258.5 138.5,-258.5"/>
-<text text-anchor="middle" x="183" y="-272.8" font-family="Times,serif" font-size="14.00">generate_pc7</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="145.5,-258.5 145.5,-294.5 234.5,-294.5 234.5,-258.5 145.5,-258.5"/>
+<text text-anchor="middle" x="190" y="-272.8" font-family="Times,serif" font-size="14.00">generate_pc7</text>
+</g>
+<!-- combine_labels&#45;&gt;generate_pc7 -->
+<g id="edge15" class="edge">
+<title>combine_labels&#45;&gt;generate_pc7</title>
+<path fill="none" stroke="black" d="M273.65,-331.49C259.07,-322.08 240.75,-310.26 224.98,-300.07"/>
+<polygon fill="black" stroke="black" points="226.81,-297.1 216.51,-294.61 223.02,-302.98 226.81,-297.1"/>
+</g>
+<!-- generate_hhm -->
+<g id="node5" class="node">
+<title>generate_hhm</title>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="253,-258.5 253,-294.5 347,-294.5 347,-258.5 253,-258.5"/>
+<text text-anchor="middle" x="300" y="-272.8" font-family="Times,serif" font-size="14.00">generate_hhm</text>
+</g>
+<!-- combine_labels&#45;&gt;generate_hhm -->
+<g id="edge14" class="edge">
+<title>combine_labels&#45;&gt;generate_hhm</title>
+<path fill="none" stroke="black" d="M300,-331.31C300,-323.29 300,-313.55 300,-304.57"/>
+<polygon fill="black" stroke="black" points="303.5,-304.53 300,-294.53 296.5,-304.53 303.5,-304.53"/>
+</g>
+<!-- combine_labels&#45;&gt;train_epitope_prediction_model -->
+<g id="edge19" class="edge">
+<title>combine_labels&#45;&gt;train_epitope_prediction_model</title>
+<path fill="none" stroke="black" d="M351.28,-348.34C392.32,-345.16 447.57,-333.36 476,-295 509.25,-250.14 458.68,-189.1 424.36,-155.73"/>
+<polygon fill="black" stroke="black" points="426.56,-153 416.89,-148.66 421.74,-158.08 426.56,-153"/>
 </g>
 <!-- generate_pc7&#45;&gt;combine_features -->
 <g id="edge3" class="edge">
 <title>generate_pc7&#45;&gt;combine_features</title>
-<path fill="none" stroke="black" d="M200.67,-258.31C209.82,-249.42 221.14,-238.41 231.15,-228.67"/>
-<polygon fill="black" stroke="black" points="233.76,-231.01 238.49,-221.53 228.88,-225.99 233.76,-231.01"/>
+<path fill="none" stroke="black" d="M216.35,-258.49C230.93,-249.08 249.25,-237.26 265.02,-227.07"/>
+<polygon fill="black" stroke="black" points="266.98,-229.98 273.49,-221.61 263.19,-224.1 266.98,-229.98"/>
 </g>
-<!-- combine_labels -->
-<g id="node5" class="node">
-<title>combine_labels</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="205,-331.5 205,-367.5 307,-367.5 307,-331.5 205,-331.5"/>
-<text text-anchor="middle" x="256" y="-345.8" font-family="Times,serif" font-size="14.00">combine_labels</text>
-</g>
-<!-- combine_labels&#45;&gt;generate_psp19 -->
-<g id="edge18" class="edge">
-<title>combine_labels&#45;&gt;generate_psp19</title>
-<path fill="none" stroke="black" d="M275.12,-331.31C285.12,-322.33 297.51,-311.19 308.42,-301.39"/>
-<polygon fill="black" stroke="black" points="310.95,-303.82 316.05,-294.53 306.28,-298.61 310.95,-303.82"/>
-</g>
-<!-- combine_labels&#45;&gt;combine_features -->
+<!-- generate_hhm&#45;&gt;combine_features -->
 <g id="edge4" class="edge">
-<title>combine_labels&#45;&gt;combine_features</title>
-<path fill="none" stroke="black" d="M256,-331.42C256,-306.84 256,-261.25 256,-231.93"/>
-<polygon fill="black" stroke="black" points="259.5,-231.56 256,-221.56 252.5,-231.56 259.5,-231.56"/>
-</g>
-<!-- combine_labels&#45;&gt;generate_hhm -->
-<g id="edge15" class="edge">
-<title>combine_labels&#45;&gt;generate_hhm</title>
-<path fill="none" stroke="black" d="M212.17,-331.49C186.44,-321.51 153.74,-308.82 126.5,-298.26"/>
-<polygon fill="black" stroke="black" points="127.7,-294.97 117.11,-294.61 125.17,-301.49 127.7,-294.97"/>
-</g>
-<!-- combine_labels&#45;&gt;generate_pc7 -->
-<g id="edge16" class="edge">
-<title>combine_labels&#45;&gt;generate_pc7</title>
-<path fill="none" stroke="black" d="M238.33,-331.31C229.18,-322.42 217.86,-311.41 207.85,-301.67"/>
-<polygon fill="black" stroke="black" points="210.12,-298.99 200.51,-294.53 205.24,-304.01 210.12,-298.99"/>
-</g>
-<!-- combine_labels&#45;&gt;train_epitope_prediction_model -->
-<g id="edge20" class="edge">
-<title>combine_labels&#45;&gt;train_epitope_prediction_model</title>
-<path fill="none" stroke="black" d="M307.25,-343.09C338.22,-336.88 375.39,-323.56 395,-295 425.14,-251.11 385.43,-190.25 357.7,-156.52"/>
-<polygon fill="black" stroke="black" points="360.1,-153.93 350.96,-148.56 354.75,-158.45 360.1,-153.93"/>
+<title>generate_hhm&#45;&gt;combine_features</title>
+<path fill="none" stroke="black" d="M300,-258.31C300,-250.29 300,-240.55 300,-231.57"/>
+<polygon fill="black" stroke="black" points="303.5,-231.53 300,-221.53 296.5,-231.53 303.5,-231.53"/>
 </g>
 <!-- generate_dssp_labels -->
 <g id="node6" class="node">
 <title>generate_dssp_labels</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="190.5,-404.5 190.5,-440.5 321.5,-440.5 321.5,-404.5 190.5,-404.5"/>
-<text text-anchor="middle" x="256" y="-418.8" font-family="Times,serif" font-size="14.00">generate_dssp_labels</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="77.5,-404.5 77.5,-440.5 208.5,-440.5 208.5,-404.5 77.5,-404.5"/>
+<text text-anchor="middle" x="143" y="-418.8" font-family="Times,serif" font-size="14.00">generate_dssp_labels</text>
 </g>
 <!-- generate_dssp_labels&#45;&gt;combine_labels -->
 <g id="edge5" class="edge">
 <title>generate_dssp_labels&#45;&gt;combine_labels</title>
-<path fill="none" stroke="black" d="M256,-404.31C256,-396.29 256,-386.55 256,-377.57"/>
-<polygon fill="black" stroke="black" points="259.5,-377.53 256,-367.53 252.5,-377.53 259.5,-377.53"/>
+<path fill="none" stroke="black" d="M180.61,-404.49C202.29,-394.69 229.76,-382.27 252.88,-371.81"/>
+<polygon fill="black" stroke="black" points="254.49,-374.92 262.16,-367.61 251.6,-368.55 254.49,-374.92"/>
 </g>
 <!-- generate_epitope_labels -->
 <g id="node7" class="node">
 <title>generate_epitope_labels</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="25.5,-404.5 25.5,-440.5 172.5,-440.5 172.5,-404.5 25.5,-404.5"/>
-<text text-anchor="middle" x="99" y="-418.8" font-family="Times,serif" font-size="14.00">generate_epitope_labels</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="226.5,-404.5 226.5,-440.5 373.5,-440.5 373.5,-404.5 226.5,-404.5"/>
+<text text-anchor="middle" x="300" y="-418.8" font-family="Times,serif" font-size="14.00">generate_epitope_labels</text>
 </g>
 <!-- generate_epitope_labels&#45;&gt;combine_labels -->
 <g id="edge6" class="edge">
 <title>generate_epitope_labels&#45;&gt;combine_labels</title>
-<path fill="none" stroke="black" d="M136.61,-404.49C158.29,-394.69 185.76,-382.27 208.88,-371.81"/>
-<polygon fill="black" stroke="black" points="210.49,-374.92 218.16,-367.61 207.6,-368.55 210.49,-374.92"/>
+<path fill="none" stroke="black" d="M300,-404.31C300,-396.29 300,-386.55 300,-377.57"/>
+<polygon fill="black" stroke="black" points="303.5,-377.53 300,-367.53 296.5,-377.53 303.5,-377.53"/>
 </g>
 <!-- generate_ppi_labels -->
 <g id="node8" class="node">
 <title>generate_ppi_labels</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="355.5,-404.5 355.5,-440.5 480.5,-440.5 480.5,-404.5 355.5,-404.5"/>
-<text text-anchor="middle" x="418" y="-418.8" font-family="Times,serif" font-size="14.00">generate_ppi_labels</text>
+<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="391.5,-404.5 391.5,-440.5 516.5,-440.5 516.5,-404.5 391.5,-404.5"/>
+<text text-anchor="middle" x="454" y="-418.8" font-family="Times,serif" font-size="14.00">generate_ppi_labels</text>
 </g>
 <!-- generate_ppi_labels&#45;&gt;combine_labels -->
 <g id="edge7" class="edge">
 <title>generate_ppi_labels&#45;&gt;combine_labels</title>
-<path fill="none" stroke="black" d="M379.2,-404.49C356.72,-394.64 328.23,-382.16 304.31,-371.67"/>
-<polygon fill="black" stroke="black" points="305.61,-368.42 295.05,-367.61 302.8,-374.83 305.61,-368.42"/>
+<path fill="none" stroke="black" d="M417.11,-404.49C395.84,-394.69 368.9,-382.27 346.22,-371.81"/>
+<polygon fill="black" stroke="black" points="347.67,-368.62 337.12,-367.61 344.74,-374.98 347.67,-368.62"/>
 </g>
-<!-- download_mmcif_files -->
+<!-- download_pdb_files -->
 <g id="node9" class="node">
-<title>download_mmcif_files</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="251.5,-550.5 251.5,-586.5 394.5,-586.5 394.5,-550.5 251.5,-550.5"/>
-<text text-anchor="middle" x="323" y="-564.8" font-family="Times,serif" font-size="14.00">download_mmcif_files</text>
+<title>download_pdb_files</title>
+<polygon fill="lightgoldenrodyellow" stroke="black" points="159.5,-550.5 159.5,-586.5 286.5,-586.5 286.5,-550.5 159.5,-550.5"/>
+<text text-anchor="middle" x="223" y="-564.8" font-family="Times,serif" font-size="14.00">download_pdb_files</text>
 </g>
 <!-- decompress_mmcif_files -->
 <g id="node10" class="node">
@@ -157,32 +157,14 @@
 <polygon fill="none" stroke="black" stroke-dasharray="5,2" points="251.5,-477.5 251.5,-513.5 406.5,-513.5 406.5,-477.5 251.5,-477.5"/>
 <text text-anchor="middle" x="329" y="-491.8" font-family="Times,serif" font-size="14.00">decompress_mmcif_files</text>
 </g>
-<!-- download_mmcif_files&#45;&gt;decompress_mmcif_files -->
+<!-- download_pdb_files&#45;&gt;decompress_mmcif_files -->
 <g id="edge8" class="edge">
-<title>download_mmcif_files&#45;&gt;decompress_mmcif_files</title>
-<path fill="none" stroke="black" d="M324.45,-550.31C325.13,-542.29 325.95,-532.55 326.71,-523.57"/>
-<polygon fill="black" stroke="black" points="330.21,-523.79 327.56,-513.53 323.23,-523.2 330.21,-523.79"/>
-</g>
-<!-- decompress_mmcif_files&#45;&gt;generate_epitope_labels -->
-<g id="edge13" class="edge">
-<title>decompress_mmcif_files&#45;&gt;generate_epitope_labels</title>
-<path fill="none" stroke="black" d="M273.91,-477.49C240.87,-467.29 198.67,-454.27 164,-443.57"/>
-<polygon fill="black" stroke="black" points="165.03,-440.22 154.44,-440.61 162.96,-446.91 165.03,-440.22"/>
-</g>
-<!-- decompress_mmcif_files&#45;&gt;generate_ppi_labels -->
-<g id="edge17" class="edge">
-<title>decompress_mmcif_files&#45;&gt;generate_ppi_labels</title>
-<path fill="none" stroke="black" d="M350.54,-477.31C362.02,-468.16 376.31,-456.76 388.77,-446.82"/>
-<polygon fill="black" stroke="black" points="391.02,-449.5 396.65,-440.53 386.65,-444.03 391.02,-449.5"/>
-</g>
-<!-- download_pdb_files -->
-<g id="node11" class="node">
-<title>download_pdb_files</title>
-<polygon fill="none" stroke="black" stroke-dasharray="5,2" points="103.5,-550.5 103.5,-586.5 230.5,-586.5 230.5,-550.5 103.5,-550.5"/>
-<text text-anchor="middle" x="167" y="-564.8" font-family="Times,serif" font-size="14.00">download_pdb_files</text>
+<title>download_pdb_files&#45;&gt;decompress_mmcif_files</title>
+<path fill="none" stroke="black" d="M248.39,-550.49C262.32,-541.17 279.77,-529.47 294.87,-519.36"/>
+<polygon fill="black" stroke="black" points="297.09,-522.09 303.45,-513.61 293.19,-516.27 297.09,-522.09"/>
 </g>
 <!-- decompress_pdb_files -->
-<g id="node12" class="node">
+<g id="node11" class="node">
 <title>decompress_pdb_files</title>
 <polygon fill="none" stroke="black" stroke-dasharray="5,2" points="95,-477.5 95,-513.5 233,-513.5 233,-477.5 95,-477.5"/>
 <text text-anchor="middle" x="164" y="-491.8" font-family="Times,serif" font-size="14.00">decompress_pdb_files</text>
@@ -190,101 +172,107 @@
 <!-- download_pdb_files&#45;&gt;decompress_pdb_files -->
 <g id="edge9" class="edge">
 <title>download_pdb_files&#45;&gt;decompress_pdb_files</title>
-<path fill="none" stroke="black" d="M166.27,-550.31C165.93,-542.29 165.52,-532.55 165.14,-523.57"/>
-<polygon fill="black" stroke="black" points="168.64,-523.37 164.72,-513.53 161.64,-523.67 168.64,-523.37"/>
+<path fill="none" stroke="black" d="M208.72,-550.31C201.47,-541.59 192.54,-530.84 184.56,-521.25"/>
+<polygon fill="black" stroke="black" points="187.23,-518.98 178.15,-513.53 181.85,-523.46 187.23,-518.98"/>
+</g>
+<!-- decompress_mmcif_files&#45;&gt;generate_epitope_labels -->
+<g id="edge13" class="edge">
+<title>decompress_mmcif_files&#45;&gt;generate_epitope_labels</title>
+<path fill="none" stroke="black" d="M321.98,-477.31C318.63,-469.12 314.55,-459.12 310.82,-449.98"/>
+<polygon fill="black" stroke="black" points="313.98,-448.46 306.96,-440.53 307.5,-451.11 313.98,-448.46"/>
+</g>
+<!-- decompress_mmcif_files&#45;&gt;generate_ppi_labels -->
+<g id="edge16" class="edge">
+<title>decompress_mmcif_files&#45;&gt;generate_ppi_labels</title>
+<path fill="none" stroke="black" d="M358.94,-477.49C375.67,-467.99 396.72,-456.04 414.75,-445.79"/>
+<polygon fill="black" stroke="black" points="416.9,-448.6 423.87,-440.61 413.45,-442.51 416.9,-448.6"/>
 </g>
 <!-- decompress_pdb_files&#45;&gt;generate_dssp_labels -->
-<g id="edge12" class="edge">
+<g id="edge11" class="edge">
 <title>decompress_pdb_files&#45;&gt;generate_dssp_labels</title>
-<path fill="none" stroke="black" d="M186.27,-477.31C198.14,-468.16 212.9,-456.76 225.79,-446.82"/>
-<polygon fill="black" stroke="black" points="228.16,-449.41 233.93,-440.53 223.88,-443.87 228.16,-449.41"/>
+<path fill="none" stroke="black" d="M158.92,-477.31C156.52,-469.2 153.6,-459.34 150.92,-450.28"/>
+<polygon fill="black" stroke="black" points="154.23,-449.13 148.04,-440.53 147.52,-451.11 154.23,-449.13"/>
 </g>
 <!-- run_pdb_query -->
-<g id="node13" class="node">
+<g id="node12" class="node">
 <title>run_pdb_query</title>
 <polygon fill="none" stroke="black" stroke-dasharray="5,2" points="173.5,-623.5 173.5,-659.5 272.5,-659.5 272.5,-623.5 173.5,-623.5"/>
 <text text-anchor="middle" x="223" y="-637.8" font-family="Times,serif" font-size="14.00">run_pdb_query</text>
 </g>
-<!-- run_pdb_query&#45;&gt;download_mmcif_files -->
-<g id="edge10" class="edge">
-<title>run_pdb_query&#45;&gt;download_mmcif_files</title>
-<path fill="none" stroke="black" d="M246.95,-623.49C259.97,-614.25 276.25,-602.69 290.41,-592.64"/>
-<polygon fill="black" stroke="black" points="292.77,-595.26 298.9,-586.61 288.72,-589.55 292.77,-595.26"/>
-</g>
 <!-- run_pdb_query&#45;&gt;download_pdb_files -->
-<g id="edge11" class="edge">
+<g id="edge10" class="edge">
 <title>run_pdb_query&#45;&gt;download_pdb_files</title>
-<path fill="none" stroke="black" d="M209.44,-623.31C202.63,-614.68 194.25,-604.06 186.75,-594.53"/>
-<polygon fill="black" stroke="black" points="189.37,-592.21 180.43,-586.53 183.88,-596.55 189.37,-592.21"/>
+<path fill="none" stroke="black" d="M223,-623.31C223,-615.29 223,-605.55 223,-596.57"/>
+<polygon fill="black" stroke="black" points="226.5,-596.53 223,-586.53 219.5,-596.53 226.5,-596.53"/>
 </g>
 <!-- preprocess_sabdab_data -->
-<g id="node14" class="node">
+<g id="node13" class="node">
 <title>preprocess_sabdab_data</title>
 <polygon fill="none" stroke="black" stroke-dasharray="5,2" points="0,-623.5 0,-659.5 148,-659.5 148,-623.5 0,-623.5"/>
 <text text-anchor="middle" x="74" y="-637.8" font-family="Times,serif" font-size="14.00">preprocess_sabdab_data</text>
 </g>
 <!-- preprocess_sabdab_data&#45;&gt;generate_epitope_labels -->
-<g id="edge14" class="edge">
+<g id="edge12" class="edge">
 <title>preprocess_sabdab_data&#45;&gt;generate_epitope_labels</title>
-<path fill="none" stroke="black" d="M74.33,-623.21C75.12,-593.26 77.7,-529.86 86,-477 87.37,-468.27 89.45,-458.87 91.54,-450.43"/>
-<polygon fill="black" stroke="black" points="94.94,-451.26 94.05,-440.7 88.16,-449.51 94.94,-451.26"/>
+<path fill="none" stroke="black" d="M69.4,-623.3C61.77,-590.62 50.63,-519.03 86,-477 90.46,-471.7 158.19,-455.31 216.27,-442.06"/>
+<polygon fill="black" stroke="black" points="217.26,-445.42 226.24,-439.79 215.71,-438.6 217.26,-445.42"/>
 </g>
 <!-- predictions -->
-<g id="node20" class="node">
+<g id="node19" class="node">
 <title>predictions</title>
-<polygon fill="#94ddf4" stroke="black" points="296.5,-39.5 296.5,-75.5 373.5,-75.5 373.5,-39.5 296.5,-39.5"/>
-<text text-anchor="middle" x="335" y="-53.8" font-family="Times,serif" font-size="14.00">predictions</text>
+<polygon fill="#94ddf4" stroke="black" points="358.5,-39.5 358.5,-75.5 435.5,-75.5 435.5,-39.5 358.5,-39.5"/>
+<text text-anchor="middle" x="397" y="-53.8" font-family="Times,serif" font-size="14.00">predictions</text>
 </g>
 <!-- train_epitope_prediction_model&#45;&gt;predictions -->
-<g id="edge25" class="edge">
+<g id="edge24" class="edge">
 <title>train_epitope_prediction_model&#45;&gt;predictions</title>
-<path fill="none" stroke="black" d="M335,-112.31C335,-104.29 335,-94.55 335,-85.57"/>
-<polygon fill="black" stroke="black" points="338.5,-85.53 335,-75.53 331.5,-85.53 338.5,-85.53"/>
+<path fill="none" stroke="black" d="M397,-112.31C397,-104.29 397,-94.55 397,-85.57"/>
+<polygon fill="black" stroke="black" points="400.5,-85.53 397,-75.53 393.5,-85.53 400.5,-85.53"/>
 </g>
 <!-- biodl_test_dataset -->
-<g id="node16" class="node">
+<g id="node15" class="node">
 <title>biodl_test_dataset</title>
 <polygon fill="#94ddf4" stroke="black" points="416,-699.5 416,-735.5 530,-735.5 530,-699.5 416,-699.5"/>
 <text text-anchor="middle" x="473" y="-713.8" font-family="Times,serif" font-size="14.00">biodl_test_dataset</text>
 </g>
 <!-- biodl_test_dataset&#45;&gt;generate_ppi_labels -->
-<g id="edge21" class="edge">
+<g id="edge20" class="edge">
 <title>biodl_test_dataset&#45;&gt;generate_ppi_labels</title>
-<path fill="none" stroke="black" d="M473.72,-699.45C474.89,-659.5 474.89,-557.12 449,-477 445.95,-467.55 441.05,-457.94 436.04,-449.52"/>
-<polygon fill="black" stroke="black" points="438.92,-447.53 430.65,-440.92 432.99,-451.25 438.92,-447.53"/>
+<path fill="none" stroke="black" d="M471.9,-699.48C468.74,-650.73 459.63,-510.26 455.76,-450.7"/>
+<polygon fill="black" stroke="black" points="459.25,-450.32 455.11,-440.57 452.26,-450.77 459.25,-450.32"/>
 </g>
 <!-- biodl_train_dataset -->
-<g id="node17" class="node">
+<g id="node16" class="node">
 <title>biodl_train_dataset</title>
 <polygon fill="#94ddf4" stroke="black" points="278,-699.5 278,-735.5 398,-735.5 398,-699.5 278,-699.5"/>
 <text text-anchor="middle" x="338" y="-713.8" font-family="Times,serif" font-size="14.00">biodl_train_dataset</text>
 </g>
 <!-- biodl_train_dataset&#45;&gt;generate_ppi_labels -->
-<g id="edge22" class="edge">
+<g id="edge21" class="edge">
 <title>biodl_train_dataset&#45;&gt;generate_ppi_labels</title>
-<path fill="none" stroke="black" d="M349,-699.24C363.85,-675.1 390.07,-629.44 404,-587 414.25,-555.76 412.96,-546.74 416,-514 417.97,-492.78 418.41,-468.64 418.4,-450.64"/>
-<polygon fill="black" stroke="black" points="421.89,-450.53 418.34,-440.55 414.89,-450.57 421.89,-450.53"/>
+<path fill="none" stroke="black" d="M344.74,-699.48C364.12,-650.53 420.12,-509.09 443.52,-449.97"/>
+<polygon fill="black" stroke="black" points="446.82,-451.15 447.24,-440.57 440.31,-448.58 446.82,-451.15"/>
 </g>
 <!-- sabdab_summary_file -->
-<g id="node18" class="node">
+<g id="node17" class="node">
 <title>sabdab_summary_file</title>
 <polygon fill="#94ddf4" stroke="black" points="30.5,-699.5 30.5,-735.5 167.5,-735.5 167.5,-699.5 30.5,-699.5"/>
 <text text-anchor="middle" x="99" y="-713.8" font-family="Times,serif" font-size="14.00">sabdab_summary_file</text>
 </g>
 <!-- sabdab_summary_file&#45;&gt;preprocess_sabdab_data -->
-<g id="edge23" class="edge">
+<g id="edge22" class="edge">
 <title>sabdab_summary_file&#45;&gt;preprocess_sabdab_data</title>
 <path fill="none" stroke="black" d="M93.2,-699.34C90.17,-690.37 86.4,-679.2 83,-669.14"/>
 <polygon fill="black" stroke="black" points="86.28,-667.92 79.77,-659.57 79.65,-670.16 86.28,-667.92"/>
 </g>
 <!-- pdb_query -->
-<g id="node19" class="node">
+<g id="node18" class="node">
 <title>pdb_query</title>
 <polygon fill="#94ddf4" stroke="black" points="186,-699.5 186,-735.5 260,-735.5 260,-699.5 186,-699.5"/>
 <text text-anchor="middle" x="223" y="-713.8" font-family="Times,serif" font-size="14.00">pdb_query</text>
 </g>
 <!-- pdb_query&#45;&gt;run_pdb_query -->
-<g id="edge24" class="edge">
+<g id="edge23" class="edge">
 <title>pdb_query&#45;&gt;run_pdb_query</title>
 <path fill="none" stroke="black" d="M223,-699.34C223,-690.56 223,-679.66 223,-669.77"/>
 <polygon fill="black" stroke="black" points="226.5,-669.57 223,-659.57 219.5,-669.57 226.5,-669.57"/>

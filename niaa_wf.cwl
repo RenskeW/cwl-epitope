@@ -3,47 +3,54 @@
 cwlVersion: v1.2
 class: Workflow
 
-requirements:
-  ScatterFeatureRequirement: {}
+# requirements:
+#   ScatterFeatureRequirement: {}
 
-inputs: # add SAbDab, BioDL & PDB
+inputs: [] # add SAbDab, BioDL & PDB
   # fasta_path: 
   #   type: File
   #   default:
   #     class: File
   #     location: /scistor/informatica/hwt330/cwl-epitope/test.fasta
-  protein_ids:
-    type: string[]
-    default: [ "3tcl", "4hhb"]
-
-  # add location of cwl-epitope directory since tool paths are relative!
+  # protein_ids:
+  #   type: string[]
+  #   default: [ "3tcl", "4hhb"]
 
 outputs:
+  pdb_files: # the compressed pdb files
+    type: File[]
+    outputSource: download_pdb_files/pdb_files
+  mmcif_files: # the compressed pdb files
+    type: File[]
+    outputSource: download_pdb_files/mmcif_files
   # predictions: 
   #   type: Directory # I assume that each protein has 1 file containing predictions for all tasks
   #   outputSource: opus_tass/predictions
-  # pc7_features:
-  #   type: Directory
-  #   outputSource: generate_pc7/pc7_features
-  # psp19_features:
-  #   type: Directory
-  #   outputSource: generate_psp19/psp19_features
-  # hhm_features:
-  #   type: Directory
-  #   outputSource: generate_hhm/hhm_profiles
-  pdb_structures:
-    type: File[]
-    outputSource: download_pdb/pdb_file
 
 steps:
-  download_pdb:
-    label: "Download structures from PDB"
-    run: ./tools/mmcif_download.cwl
-    in:
-      pdb_id: protein_ids
-    scatter: pdb_id
+  # run_pdb_query:
+  download_pdb_files:
+    in: 
+      input_file: 
+        default:
+          class: File
+          location: ./tools/pdb_ids.txt # should be path
+      script:
+        default:
+          class: File
+          location: ./tools/pdb_batch_download.sh # it should be path but then it doesn't work: [step download_pdb_files] Cannot make job: Invalid job input record: Anonymous file object must have 'contents' and 'basename' fields.
     out:
-      [ pdb_file ] 
+      [ pdb_files, mmcif_files ]
+    run: ./tools/pdb_batch_download.cwl
+    
+  # download_pdb:
+  #   label: "Download structures from PDB"
+  #   run: ./tools/mmcif_download.cwl
+  #   in:
+  #     pdb_id: protein_ids
+  #   scatter: pdb_id
+  #   out:
+  #     [ pdb_file ] 
   # ############## INPUT FEATURE GENERATION ################
   # generate_pc7:
   #   label: "Generate PC7"
