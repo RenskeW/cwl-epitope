@@ -3,15 +3,20 @@
 cwlVersion: v1.2
 class: CommandLineTool
 
-baseCommand: [ bash ]
+baseCommand: [ sh ]
 
-# requirements: 
-#   NetworkAccess:
-#     networkAccess: True
+requirements: 
+  NetworkAccess:
+    networkAccess: True
+
+# To do:
+# - Before execution: create new empty directory in which files are saved
+# - Make tool work in Docker
 
 # hints:
 #   DockerRequirement:
-#     dockerPull: curlimages/curl:7.83.0 # make this work later: /entrypoint.sh: exec: line 14: /var/lib/cwl/stg1b61f255-57e4-4f05-9c56-6f9124b393a0/pdb_batch_download.sh: not found
+#     dockerPull: curlimages/curl:7.83.0 # make this work later: /var/lib/cwl/stgeb44ade0-b56c-4cdd-9cf1-b2bb84e9cecc/pdb_batch_download.sh: line 73: syntax error: unexpected redirection
+#     # dockerOutputDirectory: ./output??
 
 arguments:
 - $(inputs.script.path)
@@ -37,6 +42,11 @@ inputs:
   output_dir:
     type: string
     default: "."
+  # output_dir:
+  #   type: Directory
+  #   default: 
+  #     class: Directory
+  #     path: ./download_files
 
 outputs:
   pdb_files:
@@ -47,4 +57,5 @@ outputs:
     type: File[]
     outputBinding:
       glob: "*.cif.gz"
+
     
