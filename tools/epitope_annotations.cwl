@@ -5,19 +5,28 @@ class: CommandLineTool
 
 baseCommand: python3
 
+label: Extract epitope annotations from mmCIF files.
+
+doc: |
+  Runs Python script which takes directory of mmCIF files as input and outputs directory of FASTA files with protein sequence + epitope annotations.
+
 hints:
   # DockerRequirement:
-  #   dockerPull: quay.io/briansanderson/biopython-sklearn@sha256:e14acfb71f11046236ce471b0cd2acaa0f228bd3d7a420f9cdc827cd5f3d2701
+  #   dockerImageId: pdbecif-pandas:20220620
+  #   dockerFile: |                                                               
+  #     FROM docker.io/debian:stable-slim                                                                                                                         
+  #     RUN apt-get update && apt-get install -y --no-install-recommends python3-pip
+  #     RUN python3 -m pip install PDBeCif pandas  
   SoftwareRequirement:
     packages:
       pandas:
         specs: [ https://anaconda.org/conda-forge/pandas ]
         version: [ "1.2.4" ]
-      # biopython:
-      #   specs: [ https://pypi.org/project/biopython/ ]
-      #   version: [ "1.78" ]
       python:
         version: [ "3.9.1" ]
+      pdbecif:
+        specs: [ https://pypi.org/project/PDBeCif/ ]
+        version: [ "1.5" ]
 
 arguments:
 - $(inputs.script.path)
@@ -33,22 +42,21 @@ inputs:
     type: File
     default:
       class: File
-      path: ./epitope_annotation_pipeline.py
-#   mmcif_directory:
-#     type: File
-#     default:
-#       class: File
-#       path: ../data/1am2.cif
+      location: ./epitope_annotation_pipeline.py
   mmcif_directory:
     type: Directory
-    default:
+    label: Directory containing pdb files in mmCIF format.
+    format: http://edamontology.org/format_1477 # mmCIF
+    default: 
       class: Directory
-      path: ../data/test_set/mmcif_directory/epitope_proteins
+      location: ../data/test_mmcif_dir
   sabdab_processed_file: 
     type: File
+    label: ".csv file with PDB entries with associated H, L and antigen chain."
     default:
       class: File
-      path: /Users/renskedewit/Documents/Bioinformatics_Systems_Biology/CWLproject/learn-git/epitope_annotation/SAbDab_protein_antigens_PDB_chains.csv
+      location: /Users/renskedewit/Documents/Bioinformatics_Systems_Biology/CWLproject/learn-git/epitope_annotation/SAbDab_protein_antigens_PDB_chains.csv
+
   fasta_output_dir:
     type: string
     default: "./epitope_fasta"
@@ -66,7 +74,6 @@ outputs:
     outputBinding:
       glob: $(inputs.df_output_dir)
 
-# outputs: []
 s:dateCreated: 2022-05-30
 s:license: <?>
 

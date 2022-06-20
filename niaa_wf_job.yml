@@ -1,4 +1,38 @@
-fasta_path:
+# sabdab_summary_file:
+#   class: File
+#   path: ./data/sabdab_summary_all_20220527.tsv
+#   format: iana:text/tab-separated-values
+#   # s:Dataset:
+
+# sabdab_processed_file:
+#   class: File
+#   path: /Users/renskedewit/Documents/Bioinformatics_Systems_Biology/CWLproject/learn-git/epitope_annotation/SAbDab_protein_antigens_PDB_chains.csv
+
+# mmcif_directory:
+#   class: Directory
+#   location: ./data/test_mmcif_dir
+#   format: edam:format_1477 # mmCIF
+
+epitope_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/epitope_fasta
+  # format: fasta
+
+ppi_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/ppi_fasta
+  # format: fasta
+
+dssp_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/dssp_output
+
+fasta_file:
   class: File
   location: ./test.fasta
   format: http://edamontology.org/format_2200
+
+$namespaces:
+  iana: "https://www.iana.org/assignments/media-types/"
+  s: "https://schema.org/"
+  edam: "http://edamontology.org/"

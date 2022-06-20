@@ -1,0 +1,21 @@
+epitope_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/epitope_fasta
+  # format: fasta
+
+ppi_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/ppi_fasta
+  # format: fasta
+
+dssp_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/dssp_output
+
+fasta_file:
+  class: File
+  location: ../test.fasta
+  format: http://edamontology.org/format_2200
+
+
+

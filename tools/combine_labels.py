@@ -20,9 +20,7 @@ import os
 import pandas as pd
 import argparse
 from pathlib import Path
-
-from py import process
-
+import platform
 
 def parse_args():
     """
@@ -43,6 +41,15 @@ def parse_args():
 #     path = str(Path(dir) / f"*{ext}")
 #     files = glob(path)
 #     return files
+
+def print_versions():
+    print(f"Packages in execution of {__file__}:")
+    print(f"pandas version: {pd.__version__}")
+    print(f"System information:")
+    print(f"{os.name}")
+    print(f"Python version: {platform.python_version()}")
+    print(f"{platform.processor()}")
+    print(f"{platform.platform()}")
 
 def extract_interaction_labels(fasta_file):
     """
@@ -142,6 +149,8 @@ def main():
     dssp_dir = args.dssp_dir
     out_dir = args.outdir
 
+    print_versions() 
+    
     # Create output directory
     if not os.path.exists(out_dir): # Maybe introduce some safeguards here to avoid overwriting existing files.
         os.mkdir(out_dir)
@@ -234,7 +243,7 @@ def main():
             assert len(combined_data.columns) == len(columns)
 
             # Fill missing data & round to 4 decimal values
-            combined_data = combined_data.fillna("None")
+            combined_data = combined_data.fillna("None") # this is wrong
             # Write combined labels to output directory
             out_file = Path(out_dir) / f"{pdb_chain}.labels"
             combined_data.to_csv(out_file, index=False, sep="\t", float_format="%.4f")

@@ -36,12 +36,12 @@ inputs:
     type: File
     default: 
       class: File
-      location: ./dssp_RASA.py 
+      path: ./dssp_RASA.py 
   source_dir:
     type: Directory
     default: # for testing purposes, remove this later!
       class: Directory
-      location: ../data/test_set/pdb_directory
+      path: ../data/test_set/pdb_directory
   output_dir:
     type: string
     default: "./dssp_output"

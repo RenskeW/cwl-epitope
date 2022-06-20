@@ -3,12 +3,12 @@
 cwlVersion: v1.0
 class: CommandLineTool 
 hints:
-  # DockerRequirement:
-  #   dockerPull: amancevice/pandas:1.3.4-slim # Script needs numpy which is a dependency of pandas
-  SoftwareRequirement:
-    packages: 
-      numpy:
-        specs: [ https://anaconda.org/conda-forge/numpy ]
+  DockerRequirement:
+    dockerPull: amancevice/pandas:1.3.4-slim # Script needs numpy which is a dependency of pandas
+#   SoftwareRequirement:
+#     packages: 
+#       numpy:
+#         specs: [ https://anaconda.org/conda-forge/numpy ]
 
 baseCommand: python3
 
@@ -52,8 +52,8 @@ s:mainEntity: # add that this is a commandlinetool
   s:codeRepository: https://github.com/RenskeW/cwl-epitope/blob/b5e31d42006fd7003716f57963646d47d1154549/tools/get_pc7_inputs.py
   s:isBasedOn:
   - class: s:SoftwareApplication
-  s:name: OPUS-TASS
-  s:identifier: https://bio.tools/opus-tass
+    s:name: OPUS-TASS
+    s:identifier: https://bio.tools/opus-tass
 
 $namespaces:
   s: https://schema.org/

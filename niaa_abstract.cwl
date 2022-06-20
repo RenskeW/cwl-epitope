@@ -164,36 +164,45 @@ steps:
           type: File
       outputs:
         epitope_fasta_dir:
-          type: Directory
-  combine_labels: # Ugly, but probably necessary to simplify input for OPUS-TASS. Need to know more details to make this more elegant.
-    label: "Combine labels"
+          type: Directory 
+  combine_labels:
+    label: Combine labels into 1 file per protein sequence.
+    run: ./tools/combine_labels.cwl
     in:
-      epitope_dir: generate_epitope_labels/epitope_fasta_dir
-      ppi_dir: generate_ppi_labels/ppi_fasta_files
-      dssp_dir: generate_dssp_labels/dssp_output_files
-    out:
-      [ combined_labels, fasta_dir ]
-    run:
-      class: Operation
-      inputs:
-        epitope_dir:
-          type: Directory
-        ppi_dir: 
-          type: Directory
-        dssp_dir:
-          type: Directory
-      outputs:
-        combined_labels:
-          type: Directory
-          label: "Directory with 1 file per training sequence"
-        fasta_dir:
-          type: Directory
-          label: "Directory with fasta files for each train/test protein chain."
+      epitope_directory: generate_epitope_labels/epitope_fasta_dir
+      ppi_directory: generate_ppi_labels/ppi_fasta_files
+      dssp_directory: generate_dssp_labels/dssp_output_files
+    out: 
+      [ labels_combined ] # what to do about fasta_dir?
+  # combine_labels: # Ugly, but probably necessary to simplify input for OPUS-TASS. Need to know more details to make this more elegant.
+  #   label: "Combine labels"
+  #   in:
+  #     epitope_dir: generate_epitope_labels/epitope_fasta_dir
+  #     ppi_dir: generate_ppi_labels/ppi_fasta_files
+  #     dssp_dir: generate_dssp_labels/dssp_output_files
+  #   out:
+  #     [ combined_labels, fasta_dir ]
+  #   run:
+  #     class: Operation
+  #     inputs:
+  #       epitope_dir:
+  #         type: Directory
+  #       ppi_dir: 
+  #         type: Directory
+  #       dssp_dir:
+  #         type: Directory
+  #     outputs:
+  #       combined_labels:
+  #         type: Directory
+  #         label: "Directory with 1 file per training sequence"
+  #       fasta_dir:
+  #         type: Directory
+  #         label: "Directory with fasta files for each train/test protein chain."
   ############## INPUT FEATURE GENERATION ################
   generate_pc7:
     label: "Generate PC7"
     in:
-      fasta: combine_labels/fasta_dir
+      fasta: generate_ppi_labels/ppi_fasta_files
       # outdir: 
       #   default: "pc7_features" # Now defined as string because directory does not exist yet    
     out:
@@ -212,7 +221,7 @@ steps:
     label: "Generate PSP19"
     # run: ./tools/psp19_inputs.cwl
     in:
-      fasta: combine_labels/fasta_dir
+      fasta: generate_ppi_labels/ppi_fasta_files
     out:
       [psp19_features]
     run:
@@ -228,7 +237,7 @@ steps:
   generate_hhm:
     label: "Generate HHM profile"
     in:
-      fasta: combine_labels/fasta_dir
+      fasta: generate_ppi_labels/ppi_fasta_files
       # hhm_db: uniclust30 # Is this correct???
       #number of iterations for hhm
       # anything else?
@@ -249,7 +258,7 @@ steps:
   combine_features:
     label: "Combine features"
     in: 
-      fasta: combine_labels/fasta_dir
+      fasta: generate_ppi_labels/ppi_fasta_files
       pc7: generate_pc7/pc7_features
       psp19: generate_psp19/psp19_features
       hhm: generate_hhm/hhm_features
@@ -272,7 +281,7 @@ steps:
     label: "OPUS-TASS multi-task epitope prediction"
     in:
       features: combine_features/features
-      labels: combine_labels/combined_labels
+      labels: combine_labels/labels_combined
     out: 
       [ predictions ] # i assume???
     run:

@@ -6,6 +6,12 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: amancevice/pandas:1.3.4-slim
+  SoftwareRequirement:
+    packages:
+      python:
+        version: [ "3.9.7" ]
+      pandas:
+        version: [ "1.3.4" ]
 
 baseCommand: python3
 
@@ -29,11 +35,11 @@ inputs:
     type: string
     label: Name of output file in which processed results are stored.
     default: "SAbDab_protein_antigens_PDB_chains.csv"
-    format: iana:text/csv
 
 outputs:
   processed_summary_file:
     type: File
+    format: iana:text/csv
     outputBinding:
       glob: $(inputs.out_file)
 

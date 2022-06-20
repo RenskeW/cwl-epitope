@@ -10,6 +10,9 @@ Outputs:
 
 import argparse
 import pandas as pd
+import os
+import platform
+
 
 def parse_args():
     """
@@ -23,6 +26,15 @@ def parse_args():
     parser.add_argument('-o', dest='out_file', help='Path to output file.', default="./SAbDab_protein_antigens_PDB_chains.csv")
 
     return parser.parse_args()
+
+def print_versions():
+    print(f"Packages in execution of {__file__}:")
+    print(f"pandas version: {pd.__version__}")
+    print(f"System information:")
+    print(f"{os.name}")
+    print(f"Python version: {platform.python_version()}")
+    print(f"{platform.processor()}")
+    print(f"{platform.platform()}")
 
 def create_summary_SAbDab_entries(df_in, onlypaired=True, output_dir=None):
     """
@@ -68,6 +80,8 @@ def create_summary_SAbDab_entries(df_in, onlypaired=True, output_dir=None):
 
 def main():
     args = parse_args()
+
+    print_versions()
 
     summary_file = args.summary_file # tsv file
     out_file = args.out_file
