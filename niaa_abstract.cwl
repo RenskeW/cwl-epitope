@@ -137,18 +137,12 @@ steps:
         ppi_fasta_files:
           type: Directory
   preprocess_sabdab_data:
+    label: Extract antigen chains from SAbDab summary file.
     in:
       sabdab_summary_file: sabdab_summary_file
     out:
-     [ processed_summary_file ]
-    run:
-      class: Operation
-      inputs:
-        sabdab_summary_file:
-          type: File
-      outputs:
-        processed_summary_file:
-          type: File
+      [ processed_summary_file ]
+    run: ./tools/process_sabdab.cwl
   generate_epitope_labels:
     in: 
       mmcif_dir: decompress_mmcif_files/decompressed_mmcif_files
