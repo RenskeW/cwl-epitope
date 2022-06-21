@@ -10,16 +10,14 @@ inputs:
   epitope_directory: Directory
   ppi_directory: Directory
   dssp_directory: Directory
-  fasta_file: File
+  fasta_dir: Directory
+  sabdab_summary_file: File
 
   # fasta_path: 
   #   type: File
   #   default:
   #     class: File
   #     location: /scistor/informatica/hwt330/cwl-epitope/test.fasta
-  # protein_ids:
-  #   type: string[]
-  #   default: [ "3tcl", "4hhb"]
 
 outputs:
   pdb_files: # the compressed pdb files
@@ -34,6 +32,10 @@ outputs:
   pc7_inputs:
     type: Directory
     outputSource: generate_pc7/pc7_features
+  psp19_inputs:
+    type: Directory
+    outputSource: generate_psp19/psp19_features
+
   # predictions: 
   #   type: Directory # I assume that each protein has 1 file containing predictions for all tasks
   #   outputSource: opus_tass/predictions
@@ -53,7 +55,14 @@ steps:
     out:
       [ pdb_files, mmcif_files ]
     run: ./tools/pdb_batch_download.cwl
-
+  
+  preprocess_sabdab_data:
+    label: Extract antigen chains from SAbDab summary file.
+    in:
+      sabdab_summary_file: sabdab_summary_file
+    out:
+      [ processed_summary_file ]
+    run: ./tools/process_sabdab.cwl
   combine_labels:
     label: Combine labels into 1 file per protein sequence.
     run: ./tools/combine_labels.cwl
@@ -63,13 +72,22 @@ steps:
       dssp_directory: dssp_directory
     out: 
       [ labels_combined ]
+  
   generate_pc7:
     label: Calculate PC7 features for each residue in each protein sequence.
     run: ./tools/pc7_inputs.cwl # to do: adapt tool so it takes directory of fasta files as input
     in: 
-      fasta: fasta_file # change this to dssp (or PPI?) directory
+      fasta: fasta_dir 
     out:
       [ pc7_features ]  
+
+  generate_psp19:
+    label: Calculate PSP19 features for each residue in each protein sequence.
+    run: ./tools/psp19_inputs.cwl
+    in:
+      fasta: fasta_dir
+    out:
+      [ psp19_features ]
     
   # download_pdb:
   #   label: "Download structures from PDB"
@@ -80,17 +98,7 @@ steps:
   #   out:
   #     [ pdb_file ] 
   # ############## INPUT FEATURE GENERATION ################
-  # generate_pc7:
-  #   label: "Generate PC7"
-  #   run: ./tools/pc7_inputs.cwl
-  #   in:
-  #     fasta: fasta_path
-  #     outdir: 
-  #       default: "pc7_features" # Now defined as string because directory does not exist yet    
-  #   out:
-  #     [pc7_features]
-  #   doc: |
-  #     Generates PC7 features per residue. Output stored in 1 file per protein sequence.       
+      
   
   # generate_psp19:
   #   label: "Generate PSP19"

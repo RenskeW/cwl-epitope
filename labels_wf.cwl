@@ -7,7 +7,8 @@ inputs:
   epitope_directory: Directory
   ppi_directory: Directory
   dssp_directory: Directory
-  fasta_file: File
+  fasta_dir: Directory
+
 
 outputs: 
   all_labels:
@@ -16,6 +17,9 @@ outputs:
   pc7_inputs:
     type: Directory
     outputSource: generate_pc7/pc7_features
+  psp19_inputs:
+    type: Directory
+    outputSource: generate_psp19/psp19_features
 
 steps:
   combine_labels:
@@ -29,11 +33,18 @@ steps:
       [ labels_combined ]
   generate_pc7:
     label: Calculate PC7 features for each residue in each protein sequence.
-    run: ./tools/pc7_inputs.cwl # to do: adapt tool so it takes directory of fasta files as input
+    run: ./tools/pc7_inputs.cwl 
     in: 
-      fasta: fasta_file # change this to dssp (or PPI?) directory
+      fasta: fasta_dir 
     out:
       [ pc7_features ]
+  generate_psp19:
+    label: Calculate PSP19 features for each residue in each protein sequence.
+    run: ./tools/psp19_inputs.cwl
+    in:
+      fasta: fasta_dir
+    out:
+      [ psp19_features ]
     
 
 

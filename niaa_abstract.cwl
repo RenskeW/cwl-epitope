@@ -200,40 +200,24 @@ steps:
   #         label: "Directory with fasta files for each train/test protein chain."
   ############## INPUT FEATURE GENERATION ################
   generate_pc7:
-    label: "Generate PC7"
-    in:
+    label: Calculate PC7 features for each residue in each protein sequence.
+    run: ./tools/pc7_inputs.cwl 
+    in: 
       fasta: generate_ppi_labels/ppi_fasta_files
-      # outdir: 
-      #   default: "pc7_features" # Now defined as string because directory does not exist yet    
     out:
-      [pc7_features]
-    run:
-      class: Operation
-      inputs: 
-        fasta:
-          type: Directory
-      outputs:
-        pc7_features:
-          type: Directory
+      [ pc7_features ]  
     doc: |
-      Generates PC7 features per residue. Output stored in 1 file per sequence.               
+      Generates PC7 features per residue. Output stored in 1 file per sequence.             
+    
   generate_psp19:
-    label: "Generate PSP19"
-    # run: ./tools/psp19_inputs.cwl
+    label: Calculate PSP19 features for each residue in each protein sequence.
+    run: ./tools/psp19_inputs.cwl
     in:
       fasta: generate_ppi_labels/ppi_fasta_files
     out:
-      [psp19_features]
-    run:
-      class: Operation
-      inputs:
-        fasta:
-          type: Directory
-      outputs:
-        psp19_features:
-          type: Directory
+      [ psp19_features ]
     doc: |
-      "Generates PSP19 features per residue. Output stored in 1 file per sequence."       
+      "Generates PSP19 features per residue. Output stored in 1 file per sequence."  
   generate_hhm:
     label: "Generate HHM profile"
     in:

@@ -1,8 +1,8 @@
-# sabdab_summary_file:
-#   class: File
-#   path: ./data/sabdab_summary_all_20220527.tsv
-#   format: iana:text/tab-separated-values
-#   # s:Dataset:
+sabdab_summary_file:
+  class: File
+  path: ./data/sabdab_summary_all_20220527.tsv
+  format: iana:text/tab-separated-values
+  # s:Dataset:
 
 # sabdab_processed_file:
 #   class: File
@@ -27,9 +27,9 @@ dssp_directory:
   class: Directory
   location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/dssp_output
 
-fasta_file:
-  class: File
-  location: ./test.fasta
+fasta_dir:
+  class: Directory
+  location: ./tools/ppi_fasta
   format: http://edamontology.org/format_2200
 
 $namespaces:
