@@ -40,7 +40,7 @@ steps:
           class: File
           location: ./tools/pdb_batch_download.sh # it should be path but then it doesn't work: [step download_pdb_files] Cannot make job: Invalid job input record: Anonymous file object must have 'contents' and 'basename' fields.
     out:
-      [ pdb_files, mmcif_files ]
+      [ pdb_files ]
     run: ./tools/pdb_batch_download.cwl
     doc: |
       "Batch download of PDB entries (in .pdb & mmcif format) which were returned by the PDB search API. 
@@ -54,7 +54,7 @@ steps:
       class: Operation
       inputs:
         compressed_files:
-          type: File[]
+          type: Directory
       outputs:
         decompressed_pdb_files:
           type: Directory
@@ -81,19 +81,28 @@ steps:
   #       mmcif_files_compressed:
   #         type: Directory
   #         label: "Directory of compressed pdb files with .cif.gz extension"
-  #   doc: |
-  #     "Batch download of PDB entries (in .pdb format) which were returned by the PDB search API. 
-  #     See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
+
+  download_mmcif_files:
+    label: Download PDB entries in mmCIF format
+    in:
+      input_file: run_pdb_query/pdb_ids # change this later
+      mmcif_format: { default: True }
+    out:
+     [ pdb_files ]
+    run: ./tools/pdb_batch_download.cwl
+    doc: |
+      "Batch download of PDB entries (in .pdb format) which were returned by the PDB search API. 
+      See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
   decompress_mmcif_files:
     in:
-      compressed_files: download_pdb_files/mmcif_files
+      compressed_files: download_mmcif_files/pdb_files
     out:
       [ decompressed_mmcif_files ]
     run:
       class: Operation
       inputs:
         compressed_files:
-          type: File[]
+          type: Directory
       outputs:
         decompressed_mmcif_files:
           type: Directory
