@@ -32,6 +32,11 @@ fasta_dir:
   location: ./tools/ppi_fasta
   format: http://edamontology.org/format_2200
 
+pdb_ids:
+  class: File
+  location: ./tools/pdb_ids.txt
+  format: iana:text/csv
+
 $namespaces:
   iana: "https://www.iana.org/assignments/media-types/"
   s: "https://schema.org/"

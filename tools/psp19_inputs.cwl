@@ -2,17 +2,18 @@
 
 cwlVersion: v1.2
 class: CommandLineTool 
-hints:
-  DockerRequirement:
-    dockerPull: amancevice/pandas:1.3.4-slim
-  SoftwareRequirement:
-    packages: 
-      numpy:
-        specs: [ https://anaconda.org/conda-forge/numpy ]
+# hints:
+#   DockerRequirement:
+#     dockerPull: amancevice/pandas:1.3.4-slim
+#   SoftwareRequirement:
+#     packages: 
+#       numpy:
+#         specs: [ https://anaconda.org/conda-forge/numpy ]
       # python:
       #   version:
 
 baseCommand: python3
+
 inputs:
   script:
     type: File

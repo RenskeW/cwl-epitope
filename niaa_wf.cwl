@@ -12,20 +12,16 @@ inputs:
   dssp_directory: Directory
   fasta_dir: Directory
   sabdab_summary_file: File
+  pdb_ids: File
 
-  # fasta_path: 
-  #   type: File
-  #   default:
-  #     class: File
-  #     location: /scistor/informatica/hwt330/cwl-epitope/test.fasta
 
 outputs:
   pdb_files: # the compressed pdb files
-    type: File[]
+    type: Directory
     outputSource: download_pdb_files/pdb_files
   mmcif_files: # the compressed pdb files
-    type: File[]
-    outputSource: download_pdb_files/mmcif_files
+    type: Directory
+    outputSource: download_mmcif_files/pdb_files
   all_labels:
     type: Directory
     outputSource: combine_labels/labels_combined
@@ -43,17 +39,22 @@ outputs:
 steps:
   # run_pdb_query:
   download_pdb_files:
+    label: Download PDB entries in pdb format
     in: 
-      input_file: 
-        default:
-          class: File
-          location: ./tools/pdb_ids.txt # should be path
-      script:
-        default:
-          class: File
-          location: ./tools/pdb_batch_download.sh # it should be path but then it doesn't work: [step download_pdb_files] Cannot make job: Invalid job input record: Anonymous file object must have 'contents' and 'basename' fields.
+      input_file: pdb_ids # change this later
+      mmcif_format: { default: False }
+      pdb_format: { default: True }
     out:
-      [ pdb_files, mmcif_files ]
+      [ pdb_files ]
+    run: ./tools/pdb_batch_download.cwl
+  
+  download_mmcif_files:
+    label: Download PDB entries in mmCIF format
+    in:
+      input_file: pdb_ids # change this later
+      mmcif_format: { default: True }
+    out:
+     [ pdb_files ]
     run: ./tools/pdb_batch_download.cwl
   
   preprocess_sabdab_data:
