@@ -20,18 +20,17 @@ inputs:
     type: File
     default: 
       class: File
-      # location: /scistor/informatica/hwt330/cwl-epitope/tools/get_pc7_inputs.py 
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/get_pc7_inputs.py 
-    inputBinding: {position: 1}
+      location: ./get_pc7_inputs.py 
+    inputBinding: { position: 1 }
   fasta:
-    type: File 
+    # type: File
+    type: Directory 
     format: edam:format_2200 # fasta-like (text)
     inputBinding:
       position: 2
-    default: #remove default later
-      class: File
-      # location: /scistor/informatica/hwt330/cwl-epitope/test.fasta 
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/test.fasta 
+    default: # remove default later
+      class: Directory
+      location: ./ppi_fasta 
   outdir:
     # type: Directory
     type: string

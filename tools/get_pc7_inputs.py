@@ -3,15 +3,16 @@ Definition:
 Generation of PC7 input features.
 
 Inputs: 
-- *.fasta: file containing fasta sequences in ??? format
+- Directory of FASTA files. Format: > header\nFASTASEQUENCE\n001001010111 (last line is optional)
 - name of output directory to store script output. Will be created if it doesn't exist already.
 
 
 Outputs: 
-- *.input files for every sequence in the .fasta file.
+- Directory of *.input files for every sequence in the .fasta files.
 
 """
 
+from pathlib import Path
 import argparse
 import os
 #import sys
@@ -30,25 +31,34 @@ def parse_args():
 
     return parser.parse_args()
 
-def read_fasta(fasta_path):
+def read_fasta_dir(fasta_dir, ext=".fasta"):
     """
-    Reads fasta file, returns list of lists [[pdb_id1.pdb, seq1], [pdb_id2.pdb, seq2], ... ]
-    This function was copied from OPUS-TASS repository: https://github.com/thuxugang/opus_tass/blob/master/inference_utils.py
+    Adapted from read_fasta() in OPUS-TASS repository: https://github.com/thuxugang/opus_tass/blob/master/inference_utils.py
+    Reads directory of FASTA files, returns list of lists [[pdb_id1.pdb, seq1], [pdb_id2.pdb, seq2], ... ]
+    format FASTA files:
+    > header        # > pdbID \t uniprotID
+    FASTASEQUENCE
+    0011011010100 # possibly annotations
     """
-    files = []
-
-    f = open(fasta_path, 'r')
-    tmp = []
-    for i in f.readlines():
-        line = i.strip()
-        if line[0] == '>': # This function can't handle empty lines
-            tmp.append(line[1:])
-        else:
-            tmp.append(line)
-            files.append(tmp)
-            tmp = []
-    f.close()      
-    return files
+    fasta_files = os.listdir(fasta_dir)
+    seq_list = []
+    for file in fasta_files:
+        
+        if not file.endswith(ext):
+            continue
+        
+        path = Path(fasta_dir) / file
+        tmp = []
+        f = open(path, 'r')
+        for i in f.readlines():
+            line = i.strip()
+            if line[0] == '>': # header
+                tmp.append(line[1:].split(sep='\t')[0]) # the PDB ID header, not the UniProt ID
+            elif line[0] not in "0 1": # we don't want the annotations
+                tmp.append(line)
+                seq_list.append(tmp)
+    
+    return seq_list
 
 def get_pc7_dict():
     """
@@ -99,14 +109,15 @@ def main():
     fasta_path = args.fasta
     out_path = args.out_path
 
-    files = read_fasta(fasta_path) 
+    files = read_fasta_dir(fasta_path)
+    # files = read_fasta(fasta_path) 
 
     # Create directory to store output files
     if not os.path.exists(out_path):
         os.mkdir(out_path)
-        print(f"Created new directory {out_path} to store PC7 input features.")
+        print(f"Created new directory '{out_path}' to store PC7 input features.")
     else:
-        print(f"Using existing directory {out_path} to store PC7 input features.")
+        print(f"Using existing directory '{out_path}' to store PC7 input features.")
 
     # Create PC7 dictionary
     resname_to_pc7_dict = get_pc7_dict()

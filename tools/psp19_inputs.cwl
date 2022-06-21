@@ -9,6 +9,8 @@ hints:
     packages: 
       numpy:
         specs: [ https://anaconda.org/conda-forge/numpy ]
+      # python:
+      #   version:
 
 baseCommand: python3
 inputs:
@@ -16,11 +18,12 @@ inputs:
     type: File
     default: 
       class: File
-      location: ../tools/get_psp19_inputs.py  
+      location: ./get_psp19_inputs.py  
     inputBinding: 
       position: 1
   fasta:
-    type: File 
+    type: Directory
+    format: edam:format_2200
     inputBinding:
       position: 2
   outdir:
@@ -35,3 +38,9 @@ outputs:
     type: Directory 
     outputBinding:
       glob: $(inputs.outdir)
+
+$namespaces:
+  edam: http://edamontology.org/
+
+$schemas:
+- https://edamontology.org/EDAM_1.25.owl
