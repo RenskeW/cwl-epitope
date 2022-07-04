@@ -21,3 +21,17 @@ Attribution, and contact details
 License
 ```
 
+## TODO:
+### Check steps with reference data
+### Connect steps
+- [ ] generate_dssp_labels
+- [ ] generate_epitope_labels
+- [ ] generate_hmm
+
+### Modify tool descriptions
+- [ ] dssp_RASA.py: make file extension an input
+- [ ] remove print_versions() from scripts
+
+
+
+
