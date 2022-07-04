@@ -37,6 +37,17 @@ pdb_ids:
   location: ./tools/pdb_ids.txt
   format: iana:text/csv
 
+mmcif_directory:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/mmcif_directory
+
+biodl_train_dataset:
+  class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_a.csv
+biodl_test_dataset:
+  class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_b.csv
+
 $namespaces:
   iana: "https://www.iana.org/assignments/media-types/"
   s: "https://schema.org/"

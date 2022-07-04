@@ -23,6 +23,7 @@ steps:
       [ pdb_ids ]
     run:
       class: Operation
+      intent: [ http://edamontology.org/operation_2421 ] # Database search
       inputs:
         query:
           type: string?
@@ -128,23 +129,31 @@ steps:
           type: Directory
   generate_ppi_labels:
     in:
-      biodl_train: biodl_train_dataset
-      biodl_test: biodl_test_dataset
-      mmcif_dir: decompress_mmcif_files/decompressed_mmcif_files
+      mmcif_directory: decompress_mmcif_files/decompressed_mmcif_files
+      train_dataset: biodl_train_dataset
+      test_dataset: biodl_test_dataset
     out:
       [ ppi_fasta_files ]
-    run:
-      class: Operation
-      inputs:
-        biodl_train:
-          type: File
-        biodl_test:
-          type: File
-        mmcif_dir:
-          type: Directory
-      outputs:
-        ppi_fasta_files:
-          type: Directory
+    run: ./tools/ppi_annotations.cwl 
+  # generate_ppi_labels:
+  #   in:
+  #     biodl_train: biodl_train_dataset
+  #     biodl_test: biodl_test_dataset
+  #     mmcif_dir: decompress_mmcif_files/decompressed_mmcif_files
+  #   out:
+  #     [ ppi_fasta_files ]
+  #   run:
+  #     class: Operation
+  #     inputs:
+  #       biodl_train:
+  #         type: File
+  #       biodl_test:
+  #         type: File
+  #       mmcif_dir:
+  #         type: Directory
+  #     outputs:
+  #       ppi_fasta_files:
+  #         type: Directory
   preprocess_sabdab_data:
     label: Extract antigen chains from SAbDab summary file.
     in:

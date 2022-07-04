@@ -13,7 +13,21 @@ inputs:
   fasta_dir: Directory
   sabdab_summary_file: File
   pdb_ids: File
-
+  mmcif_directory:
+    type: Directory
+    default:
+      class: Directory
+      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/mmcif_directory
+  biodl_train_dataset:
+    type: File
+    default:
+      class: File
+      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_a.csv
+  biodl_test_dataset:
+    type: File
+    default:
+      class: File
+      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_b.csv
 
 outputs:
   pdb_files: # the compressed pdb files
@@ -56,7 +70,14 @@ steps:
     out:
      [ pdb_files ]
     run: ./tools/pdb_batch_download.cwl
-  
+  generate_ppi_labels:
+    in:
+      mmcif_directory: mmcif_directory
+      train_dataset: biodl_train_dataset
+      test_dataset: biodl_test_dataset
+    out:
+      [ ppi_fasta_files ]
+    run: ./tools/ppi_annotations.cwl 
   preprocess_sabdab_data:
     label: Extract antigen chains from SAbDab summary file.
     in:
@@ -90,6 +111,7 @@ steps:
     out:
       [ psp19_features ]
     
+
   # download_pdb:
   #   label: "Download structures from PDB"
   #   run: ./tools/mmcif_download.cwl
