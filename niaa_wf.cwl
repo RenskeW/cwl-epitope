@@ -13,21 +13,10 @@ inputs:
   fasta_dir: Directory
   sabdab_summary_file: File
   pdb_ids: File
-  mmcif_directory:
-    type: Directory
-    default:
-      class: Directory
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/mmcif_directory
-  biodl_train_dataset:
-    type: File
-    default:
-      class: File
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_a.csv
-  biodl_test_dataset:
-    type: File
-    default:
-      class: File
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_b.csv
+  mmcif_directory: Directory
+  biodl_train_dataset: File
+  biodl_test_dataset: File
+  decompressed_pdb_files: Directory 
 
 outputs:
   pdb_files: # the compressed pdb files
@@ -70,6 +59,16 @@ steps:
     out:
      [ pdb_files ]
     run: ./tools/pdb_batch_download.cwl
+
+  generate_dssp_labels:
+    in:
+      source_dir: decompressed_pdb_files # change this later
+      rsa_cutoff: { default :  0.06 }
+      # extension (might need .ent instead of .pdb???)
+    out:
+      [ dssp_output_files ]
+    run: ./tools/dssp.cwl
+
   generate_ppi_labels:
     in:
       mmcif_directory: mmcif_directory
@@ -78,6 +77,7 @@ steps:
     out:
       [ ppi_fasta_files ]
     run: ./tools/ppi_annotations.cwl 
+  
   preprocess_sabdab_data:
     label: Extract antigen chains from SAbDab summary file.
     in:
@@ -85,13 +85,14 @@ steps:
     out:
       [ processed_summary_file ]
     run: ./tools/process_sabdab.cwl
+  
   combine_labels:
     label: Combine labels into 1 file per protein sequence.
     run: ./tools/combine_labels.cwl
     in:
       epitope_directory: epitope_directory
-      ppi_directory: ppi_directory
-      dssp_directory: dssp_directory
+      ppi_directory: generate_ppi_labels/ppi_fasta_files
+      dssp_directory: generate_dssp_labels/dssp_output_files
     out: 
       [ labels_combined ]
   

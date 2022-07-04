@@ -36,24 +36,21 @@ inputs:
     type: File
     default: 
       class: File
-      path: ./dssp_RASA.py 
+      location: ./dssp_RASA.py 
   source_dir:
     type: Directory
-    default: # for testing purposes, remove this later!
-      class: Directory
-      path: ../data/test_set/pdb_directory
   output_dir:
     type: string
-    default: "./dssp_output"
+    default: "dssp_output"
   dssp:
     type: string
     default: "dssp" # for newer dssp versions: mkdssp
   rsa_cutoff:
-    type: string
-    default: "0.06"
+    type: float
+    default: 0.06
 
 outputs:
-  dssp_output:
+  dssp_output_files:
     type: Directory
     outputBinding:
       glob: $(inputs.output_dir)

@@ -110,23 +110,32 @@ steps:
     doc: |
       "Decompress the mmcif files in the unzipped directory."
   ############## LABEL GENERATION ################
+  # generate_dssp_labels:
+  #   in:
+  #     pdb_entries: decompress_pdb_files/decompressed_pdb_files
+  #   out:
+  #     [ dssp_output_files ]
+  #   run:
+  #     class: Operation
+  #     inputs: 
+  #       pdb_entries:
+  #         type: Directory
+  #       # out_dir:
+  #       #   type: string
+  #       # rsa_cutoff:
+  #       #   type: string
+  #     outputs:
+  #       dssp_output_files:
+  #         type: Directory
   generate_dssp_labels:
     in:
-      pdb_entries: decompress_pdb_files/decompressed_pdb_files
+      source_dir: decompress_pdb_files/decompressed_pdb_files # change this later
+      rsa_cutoff: { default :  0.06 }
+      # extension (might need .ent instead of .pdb???)
     out:
       [ dssp_output_files ]
-    run:
-      class: Operation
-      inputs: 
-        pdb_entries:
-          type: Directory
-        # out_dir:
-        #   type: string
-        # rsa_cutoff:
-        #   type: string
-      outputs:
-        dssp_output_files:
-          type: Directory
+    run: ./tools/dssp.cwl
+
   generate_ppi_labels:
     in:
       mmcif_directory: decompress_mmcif_files/decompressed_mmcif_files
@@ -135,25 +144,6 @@ steps:
     out:
       [ ppi_fasta_files ]
     run: ./tools/ppi_annotations.cwl 
-  # generate_ppi_labels:
-  #   in:
-  #     biodl_train: biodl_train_dataset
-  #     biodl_test: biodl_test_dataset
-  #     mmcif_dir: decompress_mmcif_files/decompressed_mmcif_files
-  #   out:
-  #     [ ppi_fasta_files ]
-  #   run:
-  #     class: Operation
-  #     inputs:
-  #       biodl_train:
-  #         type: File
-  #       biodl_test:
-  #         type: File
-  #       mmcif_dir:
-  #         type: Directory
-  #     outputs:
-  #       ppi_fasta_files:
-  #         type: Directory
   preprocess_sabdab_data:
     label: Extract antigen chains from SAbDab summary file.
     in:
@@ -186,30 +176,6 @@ steps:
       dssp_directory: generate_dssp_labels/dssp_output_files
     out: 
       [ labels_combined ] # what to do about fasta_dir?
-  # combine_labels: # Ugly, but probably necessary to simplify input for OPUS-TASS. Need to know more details to make this more elegant.
-  #   label: "Combine labels"
-  #   in:
-  #     epitope_dir: generate_epitope_labels/epitope_fasta_dir
-  #     ppi_dir: generate_ppi_labels/ppi_fasta_files
-  #     dssp_dir: generate_dssp_labels/dssp_output_files
-  #   out:
-  #     [ combined_labels, fasta_dir ]
-  #   run:
-  #     class: Operation
-  #     inputs:
-  #       epitope_dir:
-  #         type: Directory
-  #       ppi_dir: 
-  #         type: Directory
-  #       dssp_dir:
-  #         type: Directory
-  #     outputs:
-  #       combined_labels:
-  #         type: Directory
-  #         label: "Directory with 1 file per training sequence"
-  #       fasta_dir:
-  #         type: Directory
-  #         label: "Directory with fasta files for each train/test protein chain."
   ############## INPUT FEATURE GENERATION ################
   generate_pc7:
     label: Calculate PC7 features for each residue in each protein sequence.
