@@ -61,27 +61,6 @@ steps:
           type: Directory
     doc: |
       "Decompress the files in the unzipped directory."
-  # download_mmcif_files:
-  #   in:
-  #     pdb_ids: run_pdb_query/pdb_ids
-  #     download_format: # which format should be downloaded from the pdb?
-  #       default: "mmcif"
-  #   out:
-  #     [ mmcif_files_compressed ] # is this the unzipped directory already?
-  #   run: 
-  #     class: Operation
-  #     inputs:
-  #       pdb_ids:
-  #         type: File
-  #         label: ".txt file with comma-separated PDB ids"
-  #       download_format:
-  #         type: string
-  #         default: "mmcif"
-  #         label: "Format of PDB downloads"
-  #     outputs: 
-  #       mmcif_files_compressed:
-  #         type: Directory
-  #         label: "Directory of compressed pdb files with .cif.gz extension"
 
   download_mmcif_files:
     label: Download PDB entries in mmCIF format
@@ -110,23 +89,6 @@ steps:
     doc: |
       "Decompress the mmcif files in the unzipped directory."
   ############## LABEL GENERATION ################
-  # generate_dssp_labels:
-  #   in:
-  #     pdb_entries: decompress_pdb_files/decompressed_pdb_files
-  #   out:
-  #     [ dssp_output_files ]
-  #   run:
-  #     class: Operation
-  #     inputs: 
-  #       pdb_entries:
-  #         type: Directory
-  #       # out_dir:
-  #       #   type: string
-  #       # rsa_cutoff:
-  #       #   type: string
-  #     outputs:
-  #       dssp_output_files:
-  #         type: Directory
   generate_dssp_labels:
     in:
       source_dir: decompress_pdb_files/decompressed_pdb_files # change this later
@@ -151,22 +113,15 @@ steps:
     out:
       [ processed_summary_file ]
     run: ./tools/process_sabdab.cwl
+
   generate_epitope_labels:
     in: 
-      mmcif_dir: decompress_mmcif_files/decompressed_mmcif_files
+      mmcif_directory: decompress_mmcif_files/decompressed_mmcif_files
       sabdab_processed_file: preprocess_sabdab_data/processed_summary_file
     out:
       [ epitope_fasta_dir ]
-    run:
-      class: Operation
-      inputs:
-        mmcif_dir:
-          type: Directory
-        sabdab_processed_file:
-          type: File
-      outputs:
-        epitope_fasta_dir:
-          type: Directory 
+    run: ./tools/epitope_annotations.cwl
+
   combine_labels:
     label: Combine labels into 1 file per protein sequence.
     run: ./tools/combine_labels.cwl

@@ -17,6 +17,7 @@ inputs:
   biodl_train_dataset: File
   biodl_test_dataset: File
   decompressed_pdb_files: Directory 
+  mmcif_directory_epitope: Directory
 
 outputs:
   pdb_files: # the compressed pdb files
@@ -81,11 +82,19 @@ steps:
   preprocess_sabdab_data:
     label: Extract antigen chains from SAbDab summary file.
     in:
-      sabdab_summary_file: sabdab_summary_file
+      sabdab_summary_file: sabdab_summary_file # change this?
     out:
       [ processed_summary_file ]
     run: ./tools/process_sabdab.cwl
-  
+
+  generate_epitope_labels:
+    in: 
+      mmcif_directory: mmcif_directory_epitope # change this later
+      sabdab_processed_file: preprocess_sabdab_data/processed_summary_file
+    out:
+      [ epitope_fasta_dir ]
+    run: ./tools/epitope_annotations.cwl
+
   combine_labels:
     label: Combine labels into 1 file per protein sequence.
     run: ./tools/combine_labels.cwl

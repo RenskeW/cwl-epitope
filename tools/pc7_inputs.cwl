@@ -12,7 +12,7 @@ hints:
 
 baseCommand: python3
 
-label: Script which generates pc7 input features.
+# label: Script which generates pc7 input features.
 doc: PC7 features are assigned to each residue in each protein sequence. Output is a directory of files (1 per sequence).
 
 inputs:
@@ -23,7 +23,6 @@ inputs:
       location: ./get_pc7_inputs.py 
     inputBinding: { position: 1 }
   fasta:
-    # type: File
     type: Directory 
     format: edam:format_2200 # fasta-like (text)
     inputBinding:
@@ -32,7 +31,6 @@ inputs:
       class: Directory
       location: ./ppi_fasta 
   outdir:
-    # type: Directory
     type: string
     inputBinding: 
       position: 3

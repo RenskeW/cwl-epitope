@@ -53,6 +53,10 @@ decompressed_pdb_files:
   class: Directory
   location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/pdb_directory
 
+mmcif_directory_epitope:
+  class: Directory
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_mmcif_dir
+
 $namespaces:
   iana: "https://www.iana.org/assignments/media-types/"
   s: "https://schema.org/"

@@ -4,12 +4,10 @@ Script which extracts protein sequence and UniProt ID from mmcif files, extracts
 @dateCreated: 2022-06-03
 """
 from pathlib import Path
-import pdbecif
 from pdbecif.mmcif_io import MMCIF2Dict
 import pandas as pd
 import argparse
 import os
-import platform
 
 def parse_args():
     """
@@ -25,16 +23,6 @@ def parse_args():
     parser.add_argument('--outdir', help='Path to output directory.', default="./ppi_fasta_files")
 
     return parser.parse_args()
-
-def print_versions():
-    print(f"Packages in execution of {__file__}:")
-    print(f"pandas version: {pd.__version__}")
-    print(f"pdbecif version: {pdbecif.__version__}")
-    print(f"system information:")
-    print(f"{os.name}")
-    print(f"Python version: {platform.python_version()}")
-    print(f"{platform.processor()}")
-    print(f"{platform.platform()}")
     
 def merge_datasets(df1_path, df2_path):
     # Read input data
@@ -109,9 +97,6 @@ def main():
     
     biodl_train_path = args.biodl_train
     biodl_test_path = args.biodl_test
-
-    # print system information
-    print_versions()
 
     files = os.listdir(mmcif_dir)
 
