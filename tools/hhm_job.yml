@@ -1,0 +1,15 @@
+protein_query_sequence: 
+  class: File
+  location: ../tests/data/delete/test_fastas/1A2Y_C.fasta
+  format: http://edamontology.org/format_1929
+# # Option 1: the correct database (uniclust30)
+# database: 
+#   class: Directory
+#   location: /scistor/informatica/hwt330/hhblits/databases/uniclust30_2018_08
+# database_name: uniclust30_2018_08
+# Option 2: stand in because it is smaller:
+database: 
+  class: Directory
+  location: /scistor/informatica/hwt330/hhblits/databases
+database_name: pdb70
+n_iterations: 1
