@@ -1,0 +1,16 @@
+query_sequences: 
+- class: File
+  location: /scistor/informatica/hwt330/cwl-epitope/tests/data/delete/test_fastas/1A14_N.fasta
+  format: http://edamontology.org/format_1929
+- class: File
+  location: /scistor/informatica/hwt330/cwl-epitope/tests/data/delete/test_fastas/1ADQ_A.fasta
+  format: http://edamontology.org/format_1929
+
+hhblits_db_dir: 
+  class: Directory
+  location: /scistor/informatica/hwt330/hhblits/databases
+
+hhblits_db_name: pdb70
+
+hhblits_n_iterations: 1
+

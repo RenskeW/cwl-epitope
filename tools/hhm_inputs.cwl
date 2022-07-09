@@ -33,11 +33,6 @@ inputs:
     default: "pdb70"
     doc: |
       "The database against which to run the query protein sequence, must be located in $(inputs.database)"
-    # Metadata for a default input
-    <class??>: s:Dataset ### 
-    s:distribution: https://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz # downloadable form of dataset
-    s:version: "2020_06" # example value
-    s:url: https://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/ # location of page describing dataset
 
   output_directory_name:
     type: string

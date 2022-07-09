@@ -4,14 +4,14 @@ baseCommand: hhblits
 
 doc: |
   CommandLineTool for hhblits, part of HH-suite. See https://github.com/soedinglab/hh-suite for documentation.
-hints:
-  DockerRequirement:
-    dockerPull: quay.io/biocontainers/hhsuite:3.3.0--py39pl5321h67e14b5_5 # this is the version opus-tass uses?
-  SoftwareRequirement:
-    packages:
-      hhsuite:
-        specs: [ https://anaconda.org/bioconda/hhsuite ]
-        version: [ "3.3.0" ]
+# hints:
+#   DockerRequirement:
+#     dockerPull: quay.io/biocontainers/hhsuite:3.3.0--py39pl5321h67e14b5_5 # this is the version opus-tass uses?
+#   SoftwareRequirement:
+#     packages:
+#       hhsuite:
+#         specs: [ https://anaconda.org/bioconda/hhsuite ]
+#         version: [ "3.3.0" ]
 
 inputs:
   protein_query_sequence: 
