@@ -18,6 +18,9 @@ inputs:
   biodl_test_dataset: File
   decompressed_pdb_files: Directory 
   mmcif_directory_epitope: Directory
+  hhblits_db_dir: Directory
+  hhblits_db_name: string
+  hhblits_n_iterations: int
 
 outputs:
   pdb_files: # the compressed pdb files
@@ -120,56 +123,16 @@ steps:
       fasta: fasta_dir
     out:
       [ psp19_features ]
-    
 
-  # download_pdb:
-  #   label: "Download structures from PDB"
-  #   run: ./tools/mmcif_download.cwl
-  #   in:
-  #     pdb_id: protein_ids
-  #   scatter: pdb_id
-  #   out:
-  #     [ pdb_file ] 
-  # ############## INPUT FEATURE GENERATION ################
-      
-  
-  # generate_psp19:
-  #   label: "Generate PSP19"
-  #   run: ./tools/psp19_inputs.cwl
-  #   in:
-  #     fasta: fasta_path
-  #     outdir:
-  #       default: "psp19_features" # Now defined as string because directory does not exist yet
-  #   out:
-  #     [psp19_features]
-  #   doc: |
-  #     Generates PSP19 features per residue. Output stored in 1 file per sequence.
-       
-  # generate_hhm:
+  # generate_hhm: # find a way to convert Directory into file array
   #   label: "Generate HHM profile"
-  #   run: ./tools/hhm_inputs.cwl
-  #   in: 
-  #     protein_query_sequences: fasta_path
-  #     database: 
-  #       default: 
-  #         class: Directory
-  #         location: /scistor/informatica/hwt330/hhblits/databases
-  #     script:
-  #       default:
-  #         class: File
-  #         location: /scistor/informatica/hwt330/cwl-epitope/tools/run_hhblits.py
-  #     database_name: { default: "pdb70" } # for iterative searching, uniclust30 should be used!
-  #     #n_iterations (add later)
-  #     output_directory_name: { default: "hhm_features" }
-  #   out:
-  #     [hhm_profiles]
+  #   in:
+  #     protein_query_sequence: generate_ppi_labels/ppi_fasta_files
+  #     database: hhblits_db_dir
+  #     database_name: hhblits_db_name
+  #     n_iterations: { default: 1 } # this is not correct, change value
+  #   out: [ hhm_file ]
+  #   scatter: protein_query_sequence
+  #   run: ./tools/hhm_inputs_scatter.cwl
   #   doc: |
-  #     Builds multiple sequence alignment using HHBlits for every protein sequence. Output stored in 1 .hhm file per sequence.
-  #     # format: https://github.com/soedinglab/hh-suite/wiki#file-formats .hhm
-    
-
-
-  
-  
-  # ############## LABEL GENERATION ################
-  
+  #     "Generates HHM profiles with HHBlits. Output stored in 1 file per sequence."  
