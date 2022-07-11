@@ -1,0 +1,17 @@
+in_gz:
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.cif.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.pdb.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.cif.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.pdb.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.cif.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.pdb.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.cif.gz
+  class: File
+- location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.pdb.gz
+  class: File

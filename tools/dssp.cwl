@@ -4,6 +4,14 @@ cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: python3
 
+requirements:
+  InlineJavascriptRequirement: {}
+  InitialWorkDirRequirement: # the script takes a directory as input
+    listing: |
+      ${
+           return [{"entry": {"class": "Directory", "basename": "pdb_source_dir", "listing": inputs.pdb_files}, "writable": true}]
+       }
+
 hints:
   DockerRequirement:
     dockerPull: biopython/biopython@sha256:437075df44b0c9b3da96f71040baef0086789de7edf73c81de4ace30a127a245
@@ -23,7 +31,7 @@ hints:
 
 arguments:
 - $(inputs.script.path)
-- $(inputs.source_dir.path)
+- "pdb_source_dir"
 - "-o"
 - $(inputs.output_dir)
 - "-d"
@@ -37,8 +45,10 @@ inputs:
     default: 
       class: File
       location: ./dssp_RASA.py 
-  source_dir:
-    type: Directory
+  # source_dir:
+  #   type: Directory
+  pdb_files:
+    type: File[]
   output_dir:
     type: string
     default: "dssp_output"
@@ -58,17 +68,15 @@ outputs:
 s:author:
 - class: s:Person
   s:name: "Renske de Wit"
-s:license: <?>
+s:license: https://spdx.org/licenses/Apache-2.0
 s:dateCreated: "2022-05-28"
 s:mainEntity:
   class: s:SoftwareApplication
-  s:name: "dssp_RASA.py"
-  s:programmingLanguage: Python
-  s:license: <?>
+  s:license: https://spdx.org/licenses/Apache-2.0
   s:author:
   - class: s:Person
     s:name: "DS"
-  s:about: "Script which takes a directory of pdb files as input and calculates relative surface accessibility for each residue in the protein sequence."
+  s:description: "Script which takes a directory of pdb files as input and calculates relative surface accessibility for each residue in the protein sequence."
   s:basedOn:
   - class: s:SoftwareApplication
     s:name: "DSSP"

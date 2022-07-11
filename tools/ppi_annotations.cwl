@@ -6,9 +6,18 @@ class: CommandLineTool
 baseCommand: python3
 
 # To do: add DockerRequirement (give network access)
+
+requirements:
+  InlineJavascriptRequirement: {}
+  InitialWorkDirRequirement: # the script takes a directory as input
+    listing: |
+      ${
+           return [{"entry": {"class": "Directory", "basename": "mmcif_directory", "listing": inputs.mmcif_files}, "writable": true}]
+       }
+
 arguments:
 - $(inputs.script.path)
-- $(inputs.mmcif_directory.path)
+- "mmcif_directory"
 - $(inputs.train_dataset.path) # path to train biodl dataset
 - $(inputs.test_dataset.path)
 - "--outdir"
@@ -20,8 +29,8 @@ inputs:
     default:
       class: File
       location: ./ppi_annotations.py
-  mmcif_directory:
-    type: Directory
+  mmcif_files: # the download leaves us with an array of files, but script takes type Directory --> InitialWorkdirRequirement
+    type: File[]
   train_dataset:
     type: File
   test_dataset:

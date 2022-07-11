@@ -75,9 +75,10 @@ inputs:
 
 outputs:
   pdb_files:
-    type: Directory
-    outputBinding:
-      glob: "." # entire directory
+    type: File[]
+    # type: Directory
+    # outputBinding:
+    #   glob: "." # entire directory
 
     
 $namespaces:

@@ -1,0 +1,4 @@
+sabdab_summary_file:
+  class: File
+  path: ../data/sabdab_summary_all_20220527.tsv
+out_file: "processed_sabdab_results.csv"

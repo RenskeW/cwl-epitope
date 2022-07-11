@@ -9,6 +9,8 @@ requirements:
   NetworkAccess: 
     networkAccess: True
 
+intent: [ http://edamontology.org/operation_2421 ] # Database search
+
 hints:
   DockerRequirement:
     dockerPull: nyurik/alpine-python3-requests@sha256:e0553236e3ebaa240752b41b8475afb454c5ab4c17eb023a2a904637eda16cf6
@@ -30,13 +32,10 @@ inputs:
     type: File
     default:
       class: File
-      path: ./pdb_query.py
+      location: ./pdb_query.py
   pdb_search_query:
     type: File
-    default:
-      class: File
-      path: ./pdb_query.json
-      format: iana:application/json
+    label: Query for PDB search API in json format
     format: iana:application/json
   return_file:
     type: string
@@ -46,11 +45,12 @@ inputs:
 outputs:
   processed_response:
     type: File
+    format: iana:text/csv
     label: Comma-separated text file with returned identifiers from PDB search API
     outputBinding:
        glob: $(inputs.return_file)
 
-label: Query PDB search API and store output in comma-separated text file.
+# label: Query PDB search API and store output in comma-separated text file.
 
 doc: |
   "This tool invokes a Python script which uses requests library to query PDB search API and return a comma-separated file of identifiers returned by the API.
@@ -61,14 +61,14 @@ $namespaces:
   iana: https://www.iana.org/assignments/media-types/
   s: https://www.schema.org/
 
-# $schemas:
+$schemas:
+- https://schema.org/version/latest/schemaorg-current-https.rdf
+- https://www.iana.org/assignments/media-types/media-types.xhtml
 
 s:author:
-- class: s:Person
-  s:name: "Renske de Wit"
+- s:identifier: https://orcid.org/0000-0003-0902-0086
 
 s:mainEntity:
   s:author:
-  - class: s:Person
-    s:name: "Renske de Wit"
+  - s:identifier: https://orcid.org/0000-0003-0902-0086
 

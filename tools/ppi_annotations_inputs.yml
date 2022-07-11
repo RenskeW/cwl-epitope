@@ -1,0 +1,16 @@
+  mmcif_files: 
+  - class: File
+    location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.cif
+  - class: File
+    location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.cif
+  - class: File
+    location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.cif
+  - class: File
+    location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.cif
+
+  train_dataset: 
+    class: File
+    location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_a.csv
+  test_dataset:
+    class: File
+    location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_b.csv

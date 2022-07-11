@@ -1,8 +1,12 @@
+pdb_search_api_query:
+  class: File
+  location: ./tools/pdb_query.json
+  format: iana:application/json
+
 sabdab_summary_file:
   class: File
   path: ./data/sabdab_summary_all_20220527.tsv
   format: iana:text/tab-separated-values
-  # s:Dataset:
 
 # sabdab_processed_file:
 #   class: File
@@ -56,6 +60,24 @@ decompressed_pdb_files:
 mmcif_directory_epitope:
   class: Directory
   location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_mmcif_dir
+
+test_in_gz: 
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.cif.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.cif.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.cif.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.cif.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.pdb.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.pdb.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.pdb.gz
+- class: File
+  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.pdb.gz
 
 $namespaces:
   iana: "https://www.iana.org/assignments/media-types/"

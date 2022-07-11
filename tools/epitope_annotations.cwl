@@ -7,6 +7,14 @@ baseCommand: python3
 
 # label: Extract epitope annotations from mmCIF files.
 
+requirements:
+  InlineJavascriptRequirement: {}
+  InitialWorkDirRequirement: # the script takes a directory as input
+    listing: |
+      ${
+           return [{"entry": {"class": "Directory", "basename": "mmcif_directory", "listing": inputs.mmcif_files}, "writable": true}]
+       }
+
 doc: |
   Runs Python script which takes directory of mmCIF files as input and outputs directory of FASTA files with protein sequence + epitope annotations.
 
@@ -30,7 +38,7 @@ doc: |
 
 arguments:
 - $(inputs.script.path)
-- $(inputs.mmcif_directory.path)
+- "mmcif_directory"
 - $(inputs.sabdab_processed_file.path)
 - "--fasta_directory"
 - $(inputs.fasta_output_dir)
@@ -43,13 +51,12 @@ inputs:
     default:
       class: File
       location: ./epitope_annotation_pipeline.py
-  mmcif_directory:
-    type: Directory
-    label: Directory containing pdb files in mmCIF format.
-    format: http://edamontology.org/format_1477 # mmCIF
+  mmcif_files:
+    type: File[]
+    label: mmCIF file array
     default: 
-      class: Directory
-      location: ../data/test_mmcif_dir
+    - class: File
+      location: ../data/test_mmcif_dir/5js9.cif
   sabdab_processed_file: 
     type: File
     label: ".csv file with PDB entries with associated H, L and antigen chain."

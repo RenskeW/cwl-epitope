@@ -8,6 +8,7 @@ inputs:
   biodl_train_dataset: File
   biodl_test_dataset: File
   sabdab_summary_file: File # manual download
+  pdb_search_api_query: File
 
 outputs:
   predictions: 
@@ -16,26 +17,18 @@ outputs:
 
 steps:  
   run_pdb_query:
-    label: "Run pdb query via search API"
     in:
-      query: pdb_query
+      pdb_search_query: pdb_search_api_query
     out:
-      [ pdb_ids ]
-    run:
-      class: Operation
-      intent: [ http://edamontology.org/operation_2421 ] # Database search
-      inputs:
-        query:
-          type: string?
-      outputs:
-        pdb_ids:
-          type: File # comma-separated file
+      [ processed_response ]
+    run: ./tools/pdb_query.cwl
     doc: |
       "Use PDB search API to run a query on the Protein Data Bank. Returns .txt file with comma-separated PDB IDs which satisfy the query requirements.
       See https://search.rcsb.org/index.html#search-api for a tutorial."
+
   download_pdb_files:
     in: 
-      input_file: run_pdb_query/pdb_ids
+      input_file: run_pdb_query/processed_response
       script:
         default:
           class: File
@@ -47,51 +40,18 @@ steps:
       "Batch download of PDB entries (in .pdb & mmcif format) which were returned by the PDB search API. 
       See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
   decompress_pdb_files:
+    label: Decompress using gzip
     in:
-      compressed_files: download_pdb_files/pdb_files
-    out:
-      [ decompressed_pdb_files ]
-    run:
-      class: Operation
-      inputs:
-        compressed_files:
-          type: Directory
-      outputs:
-        decompressed_pdb_files:
-          type: Directory
+      in_gz: download_pdb_files/pdb_files
+    out: [ out_cif, out_pdb ]
+    run: ./tools/decompress.cwl
     doc: |
       "Decompress the files in the unzipped directory."
 
-  download_mmcif_files:
-    label: Download PDB entries in mmCIF format
-    in:
-      input_file: run_pdb_query/pdb_ids # change this later
-      mmcif_format: { default: True }
-    out:
-     [ pdb_files ]
-    run: ./tools/pdb_batch_download.cwl
-    doc: |
-      "Batch download of PDB entries (in .pdb format) which were returned by the PDB search API. 
-      See https://www.rcsb.org/docs/programmatic-access/batch-downloads-with-shell-script"
-  decompress_mmcif_files:
-    in:
-      compressed_files: download_mmcif_files/pdb_files
-    out:
-      [ decompressed_mmcif_files ]
-    run:
-      class: Operation
-      inputs:
-        compressed_files:
-          type: Directory
-      outputs:
-        decompressed_mmcif_files:
-          type: Directory
-    doc: |
-      "Decompress the mmcif files in the unzipped directory."
   ############## LABEL GENERATION ################
   generate_dssp_labels:
     in:
-      source_dir: decompress_pdb_files/decompressed_pdb_files # change this later
+      pdb_files: decompress_pdb_files/out_pdb 
       rsa_cutoff: { default :  0.06 }
       # extension (might need .ent instead of .pdb???)
     out:
@@ -100,12 +60,13 @@ steps:
 
   generate_ppi_labels:
     in:
-      mmcif_directory: decompress_mmcif_files/decompressed_mmcif_files
+      mmcif_files: decompress_pdb_files/out_cif
       train_dataset: biodl_train_dataset
       test_dataset: biodl_test_dataset
     out:
       [ ppi_fasta_files ]
     run: ./tools/ppi_annotations.cwl 
+  
   preprocess_sabdab_data:
     label: Extract antigen chains from SAbDab summary file.
     in:
@@ -116,7 +77,7 @@ steps:
 
   generate_epitope_labels:
     in: 
-      mmcif_directory: decompress_mmcif_files/decompressed_mmcif_files
+      mmcif_files: decompress_pdb_files/out_cif
       sabdab_processed_file: preprocess_sabdab_data/processed_summary_file
     out:
       [ epitope_fasta_dir ]
