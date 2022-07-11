@@ -49,6 +49,8 @@ License
 - CWL tool repository: https://github.com/common-workflow-library/bio-cwl-tools
 - Ask CWL-related questions: https://matrix.to/#/#common-workflow-language_common-workflow-language:gitter.im
 - cwltool repository: https://github.com/common-workflow-language/cwltool
+- official CWL example repository: https://github.com/common-workflow-library/cwl-patterns
+- custom cwl-example repository: https://github.com/RenskeW/cwl-examples
 
 ## Common errors and troubleshooting
 Sometimes tool descriptions work when run as separate files but give an error when connected in a workflow. Possible solutions:
