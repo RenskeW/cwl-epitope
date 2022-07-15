@@ -16,10 +16,10 @@ doc: |
 inputs:
   protein_query_sequence: 
     type: File
-    format: [ 
-      edam:format_1929, # FASTA
-      edam:format_3281, # A2M
-      ]
+    # format: [ 
+    #   edam:format_1929, # FASTA
+    #   edam:format_3281, # A2M
+    #   ]
   database: Directory # too large to be included in RO, change later to type string = path to database
   database_name: string
   n_iterations: 

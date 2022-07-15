@@ -13,7 +13,7 @@ inputs:
   hhblits_n_iterations: int
 
 outputs:
-  hhm_outputs:
+  hhm_array:
     type: File[]
     outputSource: run_hhblits/hhm_file
 
@@ -27,4 +27,3 @@ steps:
     out: [ hhm_file ]
     scatter: protein_query_sequence
     run: ./hhm_inputs_scatter.cwl
-

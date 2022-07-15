@@ -17,67 +17,74 @@ sabdab_summary_file:
 #   location: ./data/test_mmcif_dir
 #   format: edam:format_1477 # mmCIF
 
-epitope_directory:
-  class: Directory
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/epitope_fasta
-  # format: fasta
+# epitope_directory:
+#   class: Directory
+#   location: ../data/test_set/epitope_fasta
+#   # format: fasta
 
-ppi_directory:
-  class: Directory
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/ppi_fasta
-  # format: fasta
+# ppi_directory:
+#   class: Directory
+#   location: ../data/test_set/ppi_fasta
+#   # format: fasta
 
-dssp_directory:
-  class: Directory
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/dssp_output
+# dssp_directory:
+#   class: Directory
+#   location: ../data/test_set/dssp_output
 
-fasta_dir:
-  class: Directory
-  location: ./tools/ppi_fasta
-  format: http://edamontology.org/format_2200
+# fasta_dir:
+#   class: Directory
+#   location: ./tools/ppi_fasta
+#   format: http://edamontology.org/format_2200
 
-pdb_ids:
-  class: File
-  location: ./tools/pdb_ids.txt
-  format: iana:text/csv
+# pdb_ids:
+#   class: File
+#   location: ./tools/pdb_ids.txt
+#   format: iana:text/csv
 
-mmcif_directory:
-  class: Directory
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/mmcif_directory
+# mmcif_directory:
+#   class: Directory
+#   location: ./data/test_set/mmcif_directory
 
 biodl_train_dataset:
   class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_a.csv
+  location: ./data/biodl_small_a.csv
 
 biodl_test_dataset:
   class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/biodl_small_b.csv
+  location: ./data/biodl_small_b.csv
 
-decompressed_pdb_files:
+# decompressed_pdb_files:
+#   class: Directory
+#   location: ./data/test_set/pdb_directory
+
+# mmcif_directory_epitope:
+#   class: Directory
+#   location: ./data/test_mmcif_dir
+
+# test_in_gz: 
+# - class: File
+#   location: ./tools/1C2W.cif.gz
+# - class: File
+#   location: ./tools/1C2X.cif.gz
+# - class: File
+#   location: ./tools/1D3E.cif.gz
+# - class: File
+#   location: ./tools/1D3I.cif.gz
+# - class: File
+#   location: ./tools/1C2W.pdb.gz
+# - class: File
+#   location: ./tools/1C2X.pdb.gz
+# - class: File
+#   location: ./tools/1D3E.pdb.gz
+# - class: File
+#   location: ./tools/1D3I.pdb.gz
+
+
+hhblits_db_dir: 
   class: Directory
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_set/pdb_directory
-
-mmcif_directory_epitope:
-  class: Directory
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/data/test_mmcif_dir
-
-test_in_gz: 
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.cif.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.cif.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.cif.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.cif.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2W.pdb.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1C2X.pdb.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3E.pdb.gz
-- class: File
-  location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/1D3I.pdb.gz
+  location: ../hhblits/databases
+hhblits_db_name: pdb70
+hhblits_n_iterations: 1
 
 $namespaces:
   iana: "https://www.iana.org/assignments/media-types/"

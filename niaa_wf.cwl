@@ -3,24 +3,26 @@
 cwlVersion: v1.2
 class: Workflow
 
-# requirements:
-#   ScatterFeatureRequirement: {}
+requirements:
+- class: ScatterFeatureRequirement # because some steps are scattered
+- class: StepInputExpressionRequirement # because there are JavaScript expressions in the workflow
+- class: SubworkflowFeatureRequirement # because workflow contains subworkflow (generate_hhm)
 
 inputs: 
-  epitope_directory: Directory
-  ppi_directory: Directory
-  dssp_directory: Directory
-  fasta_dir: Directory
+  # epitope_directory: Directory
+  # ppi_directory: Directory
+  # dssp_directory: Directory
+  # fasta_dir: Directory
   sabdab_summary_file: File
-  pdb_ids: File
+  # pdb_ids: File
   # mmcif_directory: Directory
   biodl_train_dataset: File
   biodl_test_dataset: File
-  decompressed_pdb_files: Directory 
-  mmcif_directory_epitope: Directory
-  # hhblits_db_dir: Directory
-  # hhblits_db_name: string
-  # hhblits_n_iterations: int
+  # decompressed_pdb_files: Directory 
+  # mmcif_directory_epitope: Directory
+  hhblits_db_dir: Directory
+  hhblits_db_name: string
+  hhblits_n_iterations: int
   pdb_search_api_query: File
   # test_in_gz: File[]
 
@@ -111,7 +113,7 @@ steps:
     label: Calculate PC7 features for each residue in each protein sequence.
     run: ./tools/pc7_inputs.cwl # to do: adapt tool so it takes directory of fasta files as input
     in: 
-      fasta: fasta_dir 
+      fasta: generate_ppi_labels/ppi_fasta_files 
     out:
       [ pc7_features ]  
 
@@ -119,7 +121,7 @@ steps:
     label: Calculate PSP19 features for each residue in each protein sequence.
     run: ./tools/psp19_inputs.cwl
     in:
-      fasta: fasta_dir
+      fasta: generate_ppi_labels/ppi_fasta_files
     out:
       [ psp19_features ]
 
@@ -135,3 +137,34 @@ steps:
   #   run: ./tools/hhm_inputs_scatter.cwl
   #   doc: |
   #     "Generates HHM profiles with HHBlits. Output stored in 1 file per sequence."  
+
+  generate_hhm:
+    in:
+      query_sequences: 
+        source: generate_ppi_labels/ppi_fasta_files # type Directory
+        valueFrom: $(self.listing) # here type Directory is converted to File array
+      hhblits_db_dir: hhblits_db_dir
+      hhblits_db_name: hhblits_db_name
+      hhblits_n_iterations: hhblits_n_iterations
+    out: [ hhm_file_array ]
+    run:
+      class: Workflow # this is a subworkflow as a workaround because generate_ppi_labels/ppi_fasta_files is Directory while run_hhblits takes File
+      inputs:
+        query_sequences: File[] # file array
+        hhblits_db_dir: Directory
+        hhblits_db_name: string
+        hhblits_n_iterations: int
+      outputs:
+        hhm_file_array:
+          type: File[]
+          outputSource: run_hhblits/hhm_file
+      steps:
+        run_hhblits:
+          in: 
+            protein_query_sequence: query_sequences
+            database: hhblits_db_dir
+            database_name: hhblits_db_name
+            n_iterations: hhblits_n_iterations
+          out: [ hhm_file ]
+          scatter: protein_query_sequence # File[] --> File
+          run: ./tools/hhm_inputs_scatter.cwl
