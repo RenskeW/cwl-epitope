@@ -48,14 +48,6 @@ steps:
       [ pdb_files ]
     run: ./tools/pdb_batch_download.cwl
   
-  # download_mmcif_files:
-  #   label: Download PDB entries in mmCIF format
-  #   in:
-  #     input_file: pdb_ids # change this later
-  #     mmcif_format: { default: True }
-  #   out:
-  #    [ pdb_files ]
-  #   run: ./tools/pdb_batch_download.cwl
   decompress_pdb_files:
     label: Decompress using gzip
     in:
