@@ -27,9 +27,6 @@ inputs:
     format: edam:format_2200 # fasta-like (text)
     inputBinding:
       position: 2
-    default: # remove default later
-      class: Directory
-      location: ./ppi_fasta 
   outdir:
     type: string
     inputBinding: 

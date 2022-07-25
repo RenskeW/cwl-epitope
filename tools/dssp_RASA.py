@@ -88,6 +88,8 @@ def main(args):
     output = args.output
 
     files = get_file_list(source)
+    print("The file list as input for dssp_RASA.py is:\n")
+    print(files)
     Path(output).mkdir(parents=True, exist_ok=True)
     for file in files:
         calculate_rsa(filename=file,rsa_cutoff=args.cutoff,dssp_algo=args.dssp,output_dir=output)

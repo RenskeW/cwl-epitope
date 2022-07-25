@@ -76,9 +76,8 @@ inputs:
 outputs:
   pdb_files:
     type: File[]
-    # type: Directory
-    # outputBinding:
-    #   glob: "." # entire directory
+    outputBinding:
+      glob: "*.gz"
 
     
 $namespaces:

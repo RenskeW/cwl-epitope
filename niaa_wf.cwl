@@ -9,24 +9,17 @@ requirements:
 - class: SubworkflowFeatureRequirement # because workflow contains subworkflow (generate_hhm)
 
 inputs: 
-  # epitope_directory: Directory
-  # ppi_directory: Directory
-  # dssp_directory: Directory
-  # fasta_dir: Directory
   sabdab_summary_file: File
-  # pdb_ids: File
-  # mmcif_directory: Directory
   biodl_train_dataset: File
   biodl_test_dataset: File
-  # decompressed_pdb_files: Directory 
-  # mmcif_directory_epitope: Directory
   hhblits_db_dir: Directory
   hhblits_db_name: string
-  hhblits_n_iterations: int
   pdb_search_api_query: File
-  # test_in_gz: File[]
 
-outputs: []
+outputs: 
+  dssp_output_files:
+    type: Directory
+    outputSource: generate_dssp_labels/dssp_output_files
 
 steps:
   run_pdb_query:
@@ -117,19 +110,6 @@ steps:
     out:
       [ psp19_features ]
 
-  # generate_hhm: # find a way to convert Directory into file array
-  #   label: "Generate HHM profile"
-  #   in:
-  #     protein_query_sequence: generate_ppi_labels/ppi_fasta_files
-  #     database: hhblits_db_dir
-  #     database_name: hhblits_db_name
-  #     n_iterations: { default: 1 } # this is not correct, change value
-  #   out: [ hhm_file ]
-  #   scatter: protein_query_sequence
-  #   run: ./tools/hhm_inputs_scatter.cwl
-  #   doc: |
-  #     "Generates HHM profiles with HHBlits. Output stored in 1 file per sequence."  
-
   generate_hhm:
     in:
       query_sequences: 
@@ -137,7 +117,7 @@ steps:
         valueFrom: $(self.listing) # here type Directory is converted to File array
       hhblits_db_dir: hhblits_db_dir
       hhblits_db_name: hhblits_db_name
-      hhblits_n_iterations: hhblits_n_iterations
+      hhblits_n_iterations: { default: 1 }
     out: [ hhm_file_array ]
     run:
       class: Workflow # this is a subworkflow as a workaround because generate_ppi_labels/ppi_fasta_files is Directory while run_hhblits takes File

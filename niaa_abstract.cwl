@@ -3,12 +3,20 @@
 cwlVersion: v1.2
 class: Workflow
 
+
+requirements:
+- class: ScatterFeatureRequirement # because some steps are scattered
+- class: StepInputExpressionRequirement # because there are JavaScript expressions in the workflow
+- class: SubworkflowFeatureRequirement # because workflow contains subworkflow (generate_hhm)
+
 inputs: 
   pdb_query: string?
   biodl_train_dataset: File
   biodl_test_dataset: File
   sabdab_summary_file: File # manual download
   pdb_search_api_query: File
+  hhblits_db_dir: Directory
+  hhblits_db_name: string
 
 outputs:
   predictions: 
@@ -113,33 +121,42 @@ steps:
     doc: |
       "Generates PSP19 features per residue. Output stored in 1 file per sequence."  
   generate_hhm:
-    label: "Generate HHM profile"
     in:
-      fasta: generate_ppi_labels/ppi_fasta_files
-      # hhm_db: uniclust30 # Is this correct???
-      #number of iterations for hhm
-      # anything else?
-    out:
-      [hhm_features]
+      query_sequences: 
+        source: generate_ppi_labels/ppi_fasta_files # type Directory
+        valueFrom: $(self.listing) # here type Directory is converted to File array
+      hhblits_db_dir: hhblits_db_dir
+      hhblits_db_name: hhblits_db_name
+      hhblits_n_iterations: { default: 1 }
+    out: [ hhm_file_array ]
     run:
-      class: Operation
-      inputs: 
-        fasta: # not sure if this is necessary, it could just be filenames as well
-          type: Directory
-        # hhm_db:
-        #   type: Any
+      class: Workflow # this is a subworkflow as a workaround because generate_ppi_labels/ppi_fasta_files is Directory while run_hhblits takes File
+      inputs:
+        query_sequences: File[] # file array
+        hhblits_db_dir: Directory
+        hhblits_db_name: string
+        hhblits_n_iterations: int
       outputs:
-        hhm_features:
-          type: Directory
-    doc: |
-      "Generates HHM profiles with HHBlits. Output stored in 1 file per sequence."
+        hhm_file_array:
+          type: File[]
+          outputSource: run_hhblits/hhm_file
+      steps:
+        run_hhblits:
+          in: 
+            protein_query_sequence: query_sequences
+            database: hhblits_db_dir
+            database_name: hhblits_db_name
+            n_iterations: hhblits_n_iterations
+          out: [ hhm_file ]
+          scatter: protein_query_sequence # File[] --> File
+          run: ./tools/hhm_inputs_scatter.cwl
   combine_features:
     label: "Combine features"
     in: 
       fasta: generate_ppi_labels/ppi_fasta_files
       pc7: generate_pc7/pc7_features
       psp19: generate_psp19/psp19_features
-      hhm: generate_hhm/hhm_features
+      hhm: generate_hhm/hhm_file_array
     out: [features]
     run:
       class: Operation
@@ -151,7 +168,7 @@ steps:
         psp19:
           type: Directory
         hhm:
-          type: Directory 
+          type: File[] 
       outputs:
         features: 
           type: Directory        

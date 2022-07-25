@@ -45,8 +45,6 @@ inputs:
     default: 
       class: File
       location: ./dssp_RASA.py 
-  # source_dir:
-  #   type: Directory
   pdb_files:
     type: File[]
   output_dir:

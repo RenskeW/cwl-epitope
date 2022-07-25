@@ -8,43 +8,6 @@ sabdab_summary_file:
   path: ./data/sabdab_summary_all_20220527.tsv
   format: iana:text/tab-separated-values
 
-# sabdab_processed_file:
-#   class: File
-#   path: /Users/renskedewit/Documents/Bioinformatics_Systems_Biology/CWLproject/learn-git/epitope_annotation/SAbDab_protein_antigens_PDB_chains.csv
-
-# mmcif_directory:
-#   class: Directory
-#   location: ./data/test_mmcif_dir
-#   format: edam:format_1477 # mmCIF
-
-# epitope_directory:
-#   class: Directory
-#   location: ../data/test_set/epitope_fasta
-#   # format: fasta
-
-# ppi_directory:
-#   class: Directory
-#   location: ../data/test_set/ppi_fasta
-#   # format: fasta
-
-# dssp_directory:
-#   class: Directory
-#   location: ../data/test_set/dssp_output
-
-# fasta_dir:
-#   class: Directory
-#   location: ./tools/ppi_fasta
-#   format: http://edamontology.org/format_2200
-
-# pdb_ids:
-#   class: File
-#   location: ./tools/pdb_ids.txt
-#   format: iana:text/csv
-
-# mmcif_directory:
-#   class: Directory
-#   location: ./data/test_set/mmcif_directory
-
 biodl_train_dataset:
   class: File
   location: ./data/biodl_small_a.csv
@@ -52,33 +15,6 @@ biodl_train_dataset:
 biodl_test_dataset:
   class: File
   location: ./data/biodl_small_b.csv
-
-# decompressed_pdb_files:
-#   class: Directory
-#   location: ./data/test_set/pdb_directory
-
-# mmcif_directory_epitope:
-#   class: Directory
-#   location: ./data/test_mmcif_dir
-
-# test_in_gz: 
-# - class: File
-#   location: ./tools/1C2W.cif.gz
-# - class: File
-#   location: ./tools/1C2X.cif.gz
-# - class: File
-#   location: ./tools/1D3E.cif.gz
-# - class: File
-#   location: ./tools/1D3I.cif.gz
-# - class: File
-#   location: ./tools/1C2W.pdb.gz
-# - class: File
-#   location: ./tools/1C2X.pdb.gz
-# - class: File
-#   location: ./tools/1D3E.pdb.gz
-# - class: File
-#   location: ./tools/1D3I.pdb.gz
-
 
 hhblits_db_dir: 
   class: Directory

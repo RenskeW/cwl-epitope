@@ -18,23 +18,23 @@ requirements:
 doc: |
   Runs Python script which takes directory of mmCIF files as input and outputs directory of FASTA files with protein sequence + epitope annotations.
 
-# hints:
-#   # DockerRequirement:
-#   #   dockerImageId: pdbecif-pandas:20220620
-#   #   dockerFile: |                                                               
-#   #     FROM docker.io/debian:stable-slim                                                                                                                         
-#   #     RUN apt-get update && apt-get install -y --no-install-recommends python3-pip
-#   #     RUN python3 -m pip install PDBeCif pandas  
-#   SoftwareRequirement:
-#     packages:
-#       pandas:
-#         specs: [ https://anaconda.org/conda-forge/pandas ]
-#         version: [ "1.2.4" ]
-#       python:
-#         version: [ "3.9.1" ]
-#       pdbecif:
-#         specs: [ https://pypi.org/project/PDBeCif/ ]
-#         version: [ "1.5" ]
+hints:
+  # DockerRequirement:
+  #   dockerImageId: pdbecif-pandas:20220620
+  #   dockerFile: |                                                               
+  #     FROM docker.io/debian:stable-slim                                                                                                                         
+  #     RUN apt-get update && apt-get install -y --no-install-recommends python3-pip
+  #     RUN python3 -m pip install PDBeCif pandas  
+  SoftwareRequirement:
+    packages:
+      pandas:
+        specs: [ https://anaconda.org/conda-forge/pandas ]
+        version: [ "1.2.4" ]
+      python:
+        version: [ "3.9.1" ]
+      pdbecif:
+        specs: [ https://pypi.org/project/PDBeCif/ ]
+        version: [ "1.5" ]
 
 arguments:
 - $(inputs.script.path)
@@ -54,16 +54,9 @@ inputs:
   mmcif_files:
     type: File[]
     label: mmCIF file array
-    default: 
-    - class: File
-      location: ../data/test_mmcif_dir/5js9.cif
   sabdab_processed_file: 
     type: File
     label: ".csv file with PDB entries with associated H, L and antigen chain."
-    default:
-      class: File
-      location: /Users/renskedewit/Documents/Bioinformatics_Systems_Biology/CWLproject/learn-git/epitope_annotation/SAbDab_protein_antigens_PDB_chains.csv
-
   fasta_output_dir:
     type: string
     default: "./epitope_fasta"

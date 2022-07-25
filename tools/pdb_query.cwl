@@ -63,7 +63,6 @@ $namespaces:
 
 $schemas:
 - https://schema.org/version/latest/schemaorg-current-https.rdf
-- https://www.iana.org/assignments/media-types/media-types.xhtml
 
 s:author:
 - s:identifier: https://orcid.org/0000-0003-0902-0086
