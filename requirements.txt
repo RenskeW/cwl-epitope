@@ -83,8 +83,6 @@ dependencies:
   - multidict=5.2.0=py39h7f8727e_2
   - munkres=1.1.4=py_0
   - ncurses=6.3=h9c3ff4c_0
-  - numpy=1.21.5=py39he7a7128_1
-  - numpy-base=1.21.5=py39hf524024_1
   - oauthlib=3.2.0=pyhd3eb1b0_0
   - openssl=1.1.1n=h7f8727e_0
   - opt_einsum=3.3.0=pyhd3eb1b0_1
@@ -157,6 +155,7 @@ dependencies:
     - msgpack==1.0.3
     - mypy-extensions==0.4.3
     - networkx==2.8.1
+    - numpy==1.20.0
     - pdbecif==1.5
     - prov==1.5.1
     - psutil==5.9.0
@@ -172,5 +171,6 @@ dependencies:
     - tensorflow-estimator==2.9.0
     - tensorflow-gpu==2.9.1
     - tensorflow-io-gcs-filesystem==0.26.0
+    - tqdm==4.64.0
     - typeguard==2.13.3
 prefix: /scistor/informatica/hwt330/.conda/envs/hhsuite

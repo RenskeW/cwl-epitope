@@ -1,0 +1,49 @@
+{
+    // input paths for the datasets: train test and validation
+    "inputs_files_path_trainval": "/scistor/informatica/hwt330/niaa-wf/niaa_data/trainval_inputs",
+    "fastas_files_path_trainval": "/scistor/informatica/hwt330/niaa-wf/niaa_data/trainval_fastas",
+    "labels_files_path_trainval": "/scistor/informatica/hwt330/niaa-wf/niaa_data/trainval_my_labels",
+    "fastas_files_path_test": "/scistor/informatica/hwt330/niaa-wf/niaa_data/test_fastas",
+    "inputs_files_path_test": "/scistor/informatica/hwt330/niaa-wf/niaa_data/test_inputs",
+    "labels_files_path_test": "/scistor/informatica/hwt330/niaa-wf/niaa_data/test_my_labels",
+    "training_path": "/scistor/informatica/hwt330/niaa-wf/niaa_data/small_training_ppi_pdb.txt",
+    "validation_path": "/scistor/informatica/hwt330/niaa-wf/niaa_data/small_validation_ppi_pdb.txt",
+    "test_path": "/scistor/informatica/hwt330/niaa-wf/niaa_data/small_test_ppi_pdb.txt",
+
+    // model parameters
+    "used_features": [
+      "hmm",
+      "pssm",
+      "psp19"
+    ],
+    "used_labels": [
+      "ss8",
+      "ss3",
+      "phipsi",
+      "ppi",
+      "asa",
+      "buried"
+    ],
+    "cnn_layers": 5,
+    "cnn_channels": 32,
+    "lstm_layers": 4,
+    "lstm_units": 1024,
+    "dropout_rate": 0.25,
+    "use_transformer": false,
+    "transformer_layers": 2,
+    "transformer_num_heads": 3,
+    "weight_loss_ss8": 0,
+    "weight_loss_ss3": 1,
+    "weight_loss_asa": 1,
+    "weight_loss_buried": 1,
+    "weight_loss_phipsi": 0,
+    "weight_loss_ppi": 1,
+    "batch_size": 2,
+    "input_normalization": true,
+
+    // precomputed class weights. can be omitted to be automatically computed
+    "ppi_class_weights": [
+      1,
+      6.434396268257245
+    ]
+}

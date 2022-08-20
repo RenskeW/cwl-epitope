@@ -1,0 +1,74 @@
+#!/usr/bin/env cwl-runner
+
+cwlVersion: v1.2
+class: CommandLineTool
+
+baseCommand: python3
+
+hints:
+  SoftwareRequirement:
+    packages:
+      python:
+        version: [ "3.9" ]
+      tqdm:
+        specs: [ https://pypi.org/project/tqdm/ ]
+        version: [ "4.64.0" ]
+      tensorflow-gpu:
+        specs: [ https://pypi.org/project/tensorflow-gpu/ ]
+        version: [ 2.9.1 ]
+      tensorflow-addons:
+        specs: [ https://pypi.org/project/tensorflow-addons/ ]
+        version: [ "0.17.1" ]
+      numpy:
+        version: [ "1.21.5" ]
+      click:
+        version: [ "8.0.4" ]
+      commentjson:
+        specs: [ https://pypi.org/project/commentjson/ ]
+        version: [ "0.9.0" ]
+
+# python3 
+# /scistor/informatica/nuu400/niaa-project/epitope/train/train.py 
+# -p /scistor/informatica/hwt330/cwl-epitope/model_example_params.json 
+# -t /scistor/informatica/hwt330/cwl-epitope/tensorflow_output
+
+arguments: 
+- $(inputs.script.path)
+- $(inputs.config_file.path)
+- $(inputs.input_features.path)
+- $(inputs.input_labels.path)
+
+inputs:
+  script:
+    type: File
+    default:
+      class: File
+      location: ./emulated_model.py # this is a placeholder script
+  config_file:
+    type: File
+    default:
+      class: File
+      location: ../model_example_params.json
+  input_features:
+    type: Directory
+    # default:
+    #   class: Directory
+    #   location: /scistor/informatica/hwt330/cwl-epitope/final_test_run/opus_tass_input_data
+  input_labels:
+    type: Directory
+    # default:
+    #   class: Directory
+    #   location: /scistor/informatica/hwt330/cwl-epitope/final_test_run/combined_labels
+  
+stdout: "training_log.txt"
+
+outputs:
+  train_log:
+    type: stdout
+
+
+
+
+
+
+

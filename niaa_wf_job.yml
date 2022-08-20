@@ -1,6 +1,6 @@
 pdb_search_api_query:
   class: File
-  location: ./tools/pdb_query.json
+  location: ./data/pdb_query.json
   format: iana:application/json
 
 sabdab_summary_file:
@@ -10,11 +10,11 @@ sabdab_summary_file:
 
 biodl_train_dataset:
   class: File
-  location: ./data/biodl_small_a.csv
+  location: https://www.ibi.vu.nl/downloads/PIPENN/PIPENN/BioDL-Datasets/prepared_biolip_win_p_training.csv
 
 biodl_test_dataset:
   class: File
-  location: ./data/biodl_small_b.csv
+  location: https://www.ibi.vu.nl/downloads/PIPENN/PIPENN/BioDL-Datasets/prepared_biolip_win_p_testing.csv
 
 hhblits_db_dir: 
   class: Directory

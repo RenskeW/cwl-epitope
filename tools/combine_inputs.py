@@ -2,11 +2,11 @@
 DESCRIPTION:
 Combine input features into 1 file per fasta sequence.
 
-Inputs: 3 directories:
+Inputs: 4 directories:
 - pc7 files
 - psp19 files
 - hhm profiles
-1 file, containing all fasta sequences
+- fasta: ppi fasta files
 
 Outputs are stored in new directory: opus_tass_inputs
 """
@@ -25,7 +25,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Combines features into 1 file for every fasta sequence, stores files in 1 output directory.')
     
     # Arguments
-    parser.add_argument('fasta', help='Path to .fasta file containing fasta sequences.')
+    parser.add_argument('fasta', help='Path to directory containing fasta sequences.')
     parser.add_argument('hhm', help='Path to directory containing hhm profiles.')
     parser.add_argument('pc7', help='Path to directory containing pc7 features.')
     parser.add_argument('psp19', help='Path to directory containing psp19 features.')
@@ -36,7 +36,7 @@ def parse_args():
 def read_fasta(fasta_path):
     """
     Reads fasta file, returns list of lists [[pdb_id1.pdb, seq1], [pdb_id2.pdb, seq2], ... ]
-    This function was copied from OPUS-TASS repository: https://github.com/thuxugang/opus_tass/blob/master/inference_utils.py
+    This function was adapted from OPUS-TASS repository: https://github.com/thuxugang/opus_tass/blob/master/inference_utils.py
     """
     files = []
 
@@ -45,8 +45,8 @@ def read_fasta(fasta_path):
     for i in f.readlines():
         line = i.strip()
         if line[0] == '>': # This function can't handle empty lines
-            tmp.append(line[1:])
-        else:
+            tmp.append(line.split(sep='\t')[0][1:])
+        elif line[0] not in '10': # if not the ppi annotations
             tmp.append(line)
             files.append(tmp)
             tmp = []
@@ -94,15 +94,18 @@ def make_input(file, parameters):
     psp19_path = Path(parameters["psp19"]) / f"psp19_{filename}.input"    
     input_path = Path(parameters["out_dir"]) / f"{filename}.inputs" # output file which stores complete set of OPUS-TASS input features  
 
-    # Read files and combine into one file with all the input features
-    hhm = read_hhm(hhm_path, fasta)
-    pc7 = np.loadtxt(pc7_path, dtype=float)
-    psp = np.loadtxt(psp19_path, dtype=float)
-    
-    input_data = np.concatenate((hhm, pc7, psp),axis=1)
+    if os.path.exists(hhm_path) and os.path.exists(pc7_path) and os.path.exists(psp19_path):      
+        # Read files and combine into one file with all the input features
+        hhm = read_hhm(hhm_path, fasta)
+        pc7 = np.loadtxt(pc7_path, dtype=float)
+        psp = np.loadtxt(psp19_path, dtype=float)
+        
+        input_data = np.concatenate((hhm, pc7, psp),axis=1)
 
-    assert input_data.shape == (seq_len, n_features)
-    np.savetxt(input_path, input_data, fmt="%.4f")
+        assert input_data.shape == (seq_len, n_features)
+        np.savetxt(input_path, input_data, fmt="%.4f")
+
+        print(f"{input_path} saved.")
 
 
 def main():
@@ -110,7 +113,7 @@ def main():
 
     args = parse_args()
     
-    fasta_path = args.fasta 
+    ppi_dir = args.fasta
     hhm_dir = args.hhm
     pc7_dir = args.pc7
     psp19_dir = args.psp19
@@ -128,10 +131,12 @@ def main():
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
 
-    files = read_fasta(fasta_path) # [[id1.pdb, seq1], [id2.pdb, seq2], ... ] 
+    all_ppi_files = os.listdir(ppi_dir)
 
-    for file in files:
-        make_input(file, parameters)
+    for file in all_ppi_files:
+        fasta_path = Path(ppi_dir) / file
+        [file_content] = read_fasta(fasta_path)
+        make_input(file_content, parameters)
 
 
 if __name__ == "__main__":

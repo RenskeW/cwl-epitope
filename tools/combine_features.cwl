@@ -21,10 +21,18 @@ hints:
         specs: [ https://anaconda.org/conda-forge/pandas ]
         version: [ "1.3.4" ]
 
+requirements:
+  InlineJavascriptRequirement: {}
+  InitialWorkDirRequirement:
+    listing: |
+      ${
+           return [{"entry": {"class": "Directory", "basename": "hhm_features_dir", "listing": inputs.hhm_features}, "writable": true}]
+       }
+
 arguments:
 - $(inputs.script.path)
 - $(inputs.input_sequences.path)
-- $(inputs.hhm_features.path)
+- "hhm_features_dir"
 - $(inputs.pc7_features.path)
 - $(inputs.psp19_features.path)
 - "--outdir"
@@ -35,35 +43,36 @@ inputs:
     type: File
     default:
       class: File
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/tools/combine_inputs.py # delete this later
-    #   location: ./tools/combine_inputs.py # relative to cwl-epitope
+      location: ./combine_inputs.py 
   input_sequences:
-    type: File
-    default:
-      class: File
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/test.fasta # delete this later
-    #   location: ./test.fasta
-  hhm_features:
     type: Directory
-    default:
-      class: Directory
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/hhm_features
-    #   location: ./prov_output/hhm_features
+    # default:
+    #   class: Directory
+    #   location: ../data/test_set/ppi_fasta # delete this later
+  hhm_features:
+    type: File[]
+    # default:
+    # - class: File
+    #   location: ../final_test_run/2HKF_P.hhm
+    # - class: File
+    #   location: ../final_test_run/4W6W_A.hhm
+    # - class: File
+    #   location: ../final_test_run/4W6X_A.hhm
+    # - class: File
+    #   location: ../final_test_run/4W6Y_A.hhm
   pc7_features:
     type: Directory
-    default:
-      class: Directory
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/pc7_features
-    #   location: ./prov_output/pc7_features
+    # default:
+    #   class: Directory
+    #   location: ../final_test_run/pc7_features
   psp19_features:
     type: Directory
-    default:
-      class: Directory
-      location: /Users/renskedewit/Documents/GitHub/cwl-epitope/prov_output/psp19_features
-    #   location: ./prov_output/psp19_features
+    # default:
+    #   class: Directory
+    #   location: ../final_test_run/psp19_features
   outdir_name:
     type: string
-    default: "opus_tass_input_data"
+    default: "input_features"
 
 outputs:
   combined_features:

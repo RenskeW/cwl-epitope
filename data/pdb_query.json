@@ -1,0 +1,10 @@
+{
+    "query": {
+      "type": "terminal",
+      "service": "full_text",
+      "parameters": {
+        "value": "2HKF | 5G5R | 4W6W | 4W6X | 4W6Y | 6WWZ | 2Y5I | 5DWZ | 2MSC | 1ZVW | 4M0R | 5UMF | 6MHP | 6LFM | 5JS9 "
+      }
+    },
+    "return_type": "entry"
+  }

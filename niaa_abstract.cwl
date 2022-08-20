@@ -10,7 +10,6 @@ requirements:
 - class: SubworkflowFeatureRequirement # because workflow contains subworkflow (generate_hhm)
 
 inputs: 
-  pdb_query: string?
   biodl_train_dataset: File
   biodl_test_dataset: File
   sabdab_summary_file: File # manual download
@@ -20,8 +19,8 @@ inputs:
 
 outputs:
   predictions: 
-    type: Directory # I assume that each protein has 1 file containing predictions for all tasks
-    outputSource: train_epitope_prediction_model/predictions
+    type: File 
+    outputSource: train_epitope_prediction_model/train_log
 
 steps:  
   run_pdb_query:
@@ -151,45 +150,21 @@ steps:
           scatter: protein_query_sequence # File[] --> File
           run: ./tools/hhm_inputs_scatter.cwl
   combine_features:
-    label: "Combine features"
     in: 
-      fasta: generate_ppi_labels/ppi_fasta_files
-      pc7: generate_pc7/pc7_features
-      psp19: generate_psp19/psp19_features
-      hhm: generate_hhm/hhm_file_array
-    out: [features]
-    run:
-      class: Operation
-      inputs:
-        fasta: 
-          type: Directory
-        pc7:
-          type: Directory
-        psp19:
-          type: Directory
-        hhm:
-          type: File[] 
-      outputs:
-        features: 
-          type: Directory        
+      input_sequences: generate_ppi_labels/ppi_fasta_files
+      pc7_features: generate_pc7/pc7_features
+      psp19_features: generate_psp19/psp19_features
+      hhm_features: generate_hhm/hhm_file_array # file array, combine_features.cwl converts it to directory
+    out: [ combined_features ]
+    run: ./tools/combine_features.cwl       
   train_epitope_prediction_model: # This step incorporates both training and prediction, not sure if this is the case in the real workflow.
-    label: "OPUS-TASS multi-task epitope prediction"
-    in:
-      features: combine_features/features
-      labels: combine_labels/labels_combined
+    in: # in the real workflow, the configuration file would be generated as part of the workflow as well
+      input_features: combine_features/combined_features
+      input_labels: combine_labels/labels_combined
     out: 
-      [ predictions ] # i assume???
-    run:
-      class: Operation
-      inputs:
-        features:
-          type: Directory # I assume
-        labels: 
-          type: Directory # I assume
-      outputs:
-        predictions:
-          type: Directory # I assume
+      [ train_log ] 
+    run: ./tools/train_epitope_model.cwl
     doc: |
-      "Predict epitope residues using a multi-task learning approach."  
+      "Predict epitope residues using a multi-task learning approach. This step is not real yet."  
 
   

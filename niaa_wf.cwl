@@ -17,13 +17,27 @@ inputs:
   pdb_search_api_query: File
 
 outputs: 
-  dssp_output_files:
-    type: Directory
-    outputSource: generate_dssp_labels/dssp_output_files
+  model_output:
+    type: File
+    outputSource: train_epitope_prediction_model/train_log
+  # combined_labels:
+  #   type: Directory
+  #   outputSource: combine_labels/labels_combined
+  # combined_features:
+  #   type: Directory
+  #   outputSource: combine_features/combined_features
+  # hhm_features:
+  #   type: File[]
+  #   outputSource: generate_hhm/hhm_file_array
+  # psp19_features:
+  #   type: Directory
+  #   outputSource: generate_psp19/psp19_features
+  # pc7_features:
+  #   type: Directory
+  #   outputSource: generate_pc7/pc7_features
 
 steps:
   run_pdb_query:
-    label: "Run pdb query via search API"
     in:
       pdb_search_query: pdb_search_api_query
     out:
@@ -34,7 +48,6 @@ steps:
       See https://search.rcsb.org/index.html#search-api for a tutorial."
 
   download_pdb_files:
-    label: Download PDB entries in pdb format
     in: 
       input_file: run_pdb_query/processed_response 
       mmcif_format: { default: True }
@@ -44,20 +57,20 @@ steps:
     run: ./tools/pdb_batch_download.cwl
   
   decompress_pdb_files:
-    label: Decompress using gzip
     in:
       in_gz: download_pdb_files/pdb_files
     out: [ out_cif, out_pdb ]
     run: ./tools/decompress.cwl
+    doc: "Decompress files using gzip"
 
   generate_dssp_labels:
     in:
       pdb_files: decompress_pdb_files/out_pdb # change this later
       rsa_cutoff: { default :  0.06 }
-      # extension (might need .ent instead of .pdb???)
     out:
       [ dssp_output_files ]
     run: ./tools/dssp.cwl
+    doc: "Use DSSP to extract secondary structure and solvent accessibility from PDB files."
 
   generate_ppi_labels:
     in:
@@ -66,10 +79,11 @@ steps:
       test_dataset: biodl_test_dataset
     out:
       [ ppi_fasta_files ]
-    run: ./tools/ppi_annotations.cwl 
+    run: ./tools/ppi_annotations.cwl
+    doc: "Extract ppi annoatations from BioDL. This step is partly emulated."
   
   preprocess_sabdab_data:
-    label: Extract antigen chains from SAbDab summary file.
+    doc: Extract antigen chains from SAbDab summary file.
     in:
       sabdab_summary_file: sabdab_summary_file # change this?
     out:
@@ -83,9 +97,10 @@ steps:
     out:
       [ epitope_fasta_dir ]
     run: ./tools/epitope_annotations.cwl
+    doc: "Extract epitope annotations from PDB files."
 
   combine_labels:
-    label: Combine labels into 1 file per protein sequence.
+    doc: Combine labels into 1 file per protein sequence.
     run: ./tools/combine_labels.cwl
     in:
       epitope_directory: generate_epitope_labels/epitope_fasta_dir
@@ -95,7 +110,7 @@ steps:
       [ labels_combined ]
   
   generate_pc7:
-    label: Calculate PC7 features for each residue in each protein sequence.
+    doc: Calculate PC7 features for each residue in each protein sequence.
     run: ./tools/pc7_inputs.cwl # to do: adapt tool so it takes directory of fasta files as input
     in: 
       fasta: generate_ppi_labels/ppi_fasta_files 
@@ -140,3 +155,21 @@ steps:
           out: [ hhm_file ]
           scatter: protein_query_sequence # File[] --> File
           run: ./tools/hhm_inputs_scatter.cwl
+  combine_features:
+    in: 
+      input_sequences: generate_ppi_labels/ppi_fasta_files
+      pc7_features: generate_pc7/pc7_features
+      psp19_features: generate_psp19/psp19_features
+      hhm_features: generate_hhm/hhm_file_array # file array, combine_features.cwl converts it to directory
+    out: [ combined_features ]
+    run: ./tools/combine_features.cwl  
+  
+  train_epitope_prediction_model: # This step incorporates both training and prediction, not sure if this is the case in the real workflow.
+    in: # in the real workflow, the configuration file would be generated as part of the workflow as well
+      input_features: combine_features/combined_features
+      input_labels: combine_labels/labels_combined
+    out: 
+      [ train_log ] 
+    run: ./tools/train_epitope_model.cwl
+    doc: |
+      "Predict epitope residues using a multi-task learning approach. This step is not real yet."  
