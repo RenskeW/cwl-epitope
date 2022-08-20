@@ -5,8 +5,11 @@ class: CommandLineTool
 
 baseCommand: python3
 
+doc: "Extract PPI annotations from BioDL."
+intent: [ http://edamontology.org/operation_0320 ]
+
 hints:
-  # DockerRequirement:
+  # DockerRequirement: # dockerFile does not work with Singularity, upload image to repository and pull from there.
   #   dockerImageId: pdbecif-pandas:20220620
   #   dockerFile: |                                                               
   #     FROM docker.io/debian:stable-slim                                                                                                                         
@@ -49,8 +52,10 @@ inputs:
     type: File[]
   train_dataset:
     type: File
+    doc: "BioDL training set"
   test_dataset:
     type: File
+    doc: "BioDL test set"
   output_directory:
     type: string
     default: "ppi_fasta"
@@ -60,5 +65,3 @@ outputs:
     type: Directory
     outputBinding:
       glob: $(inputs.output_directory) 
-
-doc: Some tool which uses BioDL dataset

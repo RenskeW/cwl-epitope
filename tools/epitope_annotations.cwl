@@ -5,7 +5,7 @@ class: CommandLineTool
 
 baseCommand: python3
 
-# label: Extract epitope annotations from mmCIF files.
+intent: [ http://edamontology.org/operation_0320 ]
 
 requirements:
   InlineJavascriptRequirement: {}
@@ -53,10 +53,10 @@ inputs:
       location: ./epitope_annotation_pipeline.py
   mmcif_files:
     type: File[]
-    label: mmCIF file array
+    doc: mmCIF file array
   sabdab_processed_file: 
     type: File
-    label: ".csv file with PDB entries with associated H, L and antigen chain."
+    doc: ".csv file with PDB entries with associated H, L and antigen chain."
   fasta_output_dir:
     type: string
     default: "./epitope_fasta"
@@ -75,17 +75,14 @@ outputs:
       glob: $(inputs.df_output_dir)
 
 s:dateCreated: 2022-05-30
-s:license: <?>
 
 s:mainEntity:
-  class: s:SoftwareApplication
+  s:additionalType: s:SoftwareApplication
   s:author:
-  - class: s:Person
-    s:name: "Katharina Waury"
+  - s:name: "Katharina Waury"
   s:dateCreated: 2022-02-10
   s:programmingLanguage: Python
-  s:license: <?>
-  s:about: "Script which extracts epitope annotations and dataframes from mmCIF files."
+  s:description: "Script which extracts epitope annotations and dataframes from mmCIF files."
 
 $namespaces:
   s: https://schema.org/

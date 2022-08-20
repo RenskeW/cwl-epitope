@@ -41,12 +41,13 @@ inputs:
     type: string
     label: Path to output file
     default: "./pdb_ids.txt"
+    doc: "Comma-separated text file with PDB ids"
 
 outputs:
   processed_response:
     type: File
     format: iana:text/csv
-    label: Comma-separated text file with returned identifiers from PDB search API
+    doc: Comma-separated text file with returned identifiers from PDB search API
     outputBinding:
        glob: $(inputs.return_file)
 

@@ -5,6 +5,8 @@ class: CommandLineTool
 
 baseCommand: python3
 
+doc: "Model training."
+intent: [ http://edamontology.org/operation_2423 ]
 hints:
   SoftwareRequirement:
     packages:
@@ -49,22 +51,19 @@ inputs:
     default:
       class: File
       location: ../model_example_params.json
+    doc: "Configuration file used for the model. Here: standard file, but in real workflow it should be generated from previous steps."
   input_features:
     type: Directory
-    # default:
-    #   class: Directory
-    #   location: /scistor/informatica/hwt330/cwl-epitope/final_test_run/opus_tass_input_data
   input_labels:
     type: Directory
-    # default:
-    #   class: Directory
-    #   location: /scistor/informatica/hwt330/cwl-epitope/final_test_run/combined_labels
+
   
 stdout: "training_log.txt"
 
 outputs:
   train_log:
     type: stdout
+    doc: "Output of the model containing predictions and/or performance on the test set."
 
 
 

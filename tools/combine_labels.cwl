@@ -32,13 +32,13 @@ inputs:
       location: ./combine_labels.py
   epitope_directory:
     type: Directory
-    label: Directory with FASTA files with epitope annotations.
+    doc: Directory with FASTA files with epitope annotations.
   ppi_directory:
     type: Directory
-    label: Directory with FASTA files with PPI annotations.
+    doc: Directory with FASTA files with PPI annotations.
   dssp_directory:
     type: Directory
-    label: Directory with DSSP output files.
+    doc: Directory with DSSP output files.
   output_directory:
     type: string
     default: "./combined_labels"
@@ -46,6 +46,7 @@ inputs:
 outputs:
   labels_combined:
     type: Directory
+    doc: "Directory with 1 file per sequence, containing label values for each residue"
     outputBinding:
       glob: $(inputs.output_directory)
 

@@ -3,6 +3,9 @@
 cwlVersion: v1.2
 class: CommandLineTool
 
+doc: "Preprocess SAbDab summary file."
+intent: [ http://edamontology.org/operation_2409 ]
+
 hints:
   DockerRequirement:
     dockerPull: amancevice/pandas:1.3.4-slim
@@ -46,7 +49,7 @@ outputs:
 s:author:
 - class: s:Person
   s:name: "Renske de Wit"
-  s:identifier: <ORCID identifier>
+  s:identifier: https://orcid.org/0000-0003-0902-0086
 s:license: https://spdx.org/licenses/Apache-2.0
 
 s:mainEntity:

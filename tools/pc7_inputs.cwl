@@ -12,8 +12,8 @@ hints:
 
 baseCommand: python3
 
-# label: Script which generates pc7 input features.
 doc: PC7 features are assigned to each residue in each protein sequence. Output is a directory of files (1 per sequence).
+intent: [ http://edamontology.org/operation_0361 ]
 
 inputs:
   script:
@@ -40,12 +40,11 @@ outputs:
     outputBinding:
       glob: $(inputs.outdir)
 
-#add: Author = Renske
 s:mainEntity: # add that this is a commandlinetool
   s:programmingLanguage: Python
   s:codeRepository: https://github.com/RenskeW/cwl-epitope/blob/b5e31d42006fd7003716f57963646d47d1154549/tools/get_pc7_inputs.py
   s:isBasedOn:
-  - class: s:SoftwareApplication
+  - s:additionalType: s:SoftwareApplication
     s:name: OPUS-TASS
     s:identifier: https://bio.tools/opus-tass
 

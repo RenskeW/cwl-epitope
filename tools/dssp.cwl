@@ -4,6 +4,9 @@ cwlVersion: v1.2
 class: CommandLineTool
 baseCommand: python3
 
+doc: "Use DSSP to extract secondary structure and solvent accessibility from PDB files."
+intent: [ http://edamontology.org/operation_0320 ]
+
 requirements:
   InlineJavascriptRequirement: {}
   InitialWorkDirRequirement: # the script takes a directory as input
@@ -47,6 +50,7 @@ inputs:
       location: ./dssp_RASA.py 
   pdb_files:
     type: File[]
+    doc: "Protein structures in PDB format."
   output_dir:
     type: string
     default: "dssp_output"
@@ -56,6 +60,7 @@ inputs:
   rsa_cutoff:
     type: float
     default: 0.06
+    doc: "Threshold exposed surface area for considering amino acids buried."
 
 outputs:
   dssp_output_files:

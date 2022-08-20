@@ -3,23 +3,39 @@
 cwlVersion: v1.2
 class: Workflow
 
+intent: [ http://edamontology.org/operation_2423 ] # prediction 
+doc: "This workflow calculates input features and labels which are used to train a deep learning model for epitope prediction."
+
 requirements:
 - class: ScatterFeatureRequirement # because some steps are scattered
 - class: StepInputExpressionRequirement # because there are JavaScript expressions in the workflow
 - class: SubworkflowFeatureRequirement # because workflow contains subworkflow (generate_hhm)
 
 inputs: 
-  sabdab_summary_file: File
-  biodl_train_dataset: File
-  biodl_test_dataset: File
-  hhblits_db_dir: Directory
-  hhblits_db_name: string
-  pdb_search_api_query: File
+  sabdab_summary_file: 
+    type: File
+    doc: "Summary file downloaded from SAbDab containing metadata about all structures in the database."
+  biodl_train_dataset: 
+    type: File
+    doc: "BioDL training dataset containing PPI interactions"
+  biodl_test_dataset: 
+    type: File
+    doc: "BioDL test dataset with PPI interactions."
+  hhblits_db_dir: 
+    type: Directory
+    doc: "Directory with reference database for HHblits"
+  hhblits_db_name: 
+    type: string
+    doc: "Name of hhblits reference database"
+  pdb_search_api_query: 
+    type: File
+    doc: "File with structured query in JSON format for PDB API."
 
 outputs: 
   model_output:
     type: File
     outputSource: train_epitope_prediction_model/train_log
+    doc: "Output of the prediction model."
   # combined_labels:
   #   type: Directory
   #   outputSource: combine_labels/labels_combined
@@ -80,10 +96,10 @@ steps:
     out:
       [ ppi_fasta_files ]
     run: ./tools/ppi_annotations.cwl
-    doc: "Extract ppi annoatations from BioDL. This step is partly emulated."
+    doc: "Extract ppi annotations from BioDL. This step is partly emulated."
   
   preprocess_sabdab_data:
-    doc: Extract antigen chains from SAbDab summary file.
+    doc: "Extract antigen chains from SAbDab summary file."
     in:
       sabdab_summary_file: sabdab_summary_file # change this?
     out:
@@ -100,7 +116,7 @@ steps:
     doc: "Extract epitope annotations from PDB files."
 
   combine_labels:
-    doc: Combine labels into 1 file per protein sequence.
+    doc: "Combine labels into 1 file per protein sequence."
     run: ./tools/combine_labels.cwl
     in:
       epitope_directory: generate_epitope_labels/epitope_fasta_dir
@@ -173,3 +189,9 @@ steps:
     run: ./tools/train_epitope_model.cwl
     doc: |
       "Predict epitope residues using a multi-task learning approach. This step is not real yet."  
+
+s:author:
+- s:name: "Renske de Wit"
+  s:identifier: https://orcid.org/0000-0003-0902-0086
+- s:name: "Katharina Waury"
+s:license: https://spdx.org/licenses/Apache-2.0

@@ -5,6 +5,9 @@ class: CommandLineTool
 
 baseCommand: [ bash ]
 
+doc: "Download files from the PDB in a specific format."
+
+intent: [ http://edamontology.org/operation_2422 ]
 requirements: 
   NetworkAccess:
     networkAccess: True
@@ -23,8 +26,9 @@ inputs:
       prefix: "-o"
       position: 2
     default: "."
+    doc: "Where downloaded files are stored."
   input_file:
-    label: "Comma-separated .txt file with pdb entries to download"
+    doc: "Comma-separated .txt file with pdb entries to download"
     type: File
     format: iana:text/csv
     inputBinding:
@@ -78,6 +82,7 @@ outputs:
     type: File[]
     outputBinding:
       glob: "*.gz"
+    doc: "Downloaded files"
 
     
 $namespaces:
