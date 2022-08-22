@@ -1,0 +1,58 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+id:04124e55-4966-40eb-8f97-688c74263e14 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "5JS9_C.labels"^^xsd:string ;
+    ore:proxyFor id:80a2ee7b-e746-4e90-9e7f-9bfccf418180 ;
+    ore:proxyIn id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a .
+
+id:1a6af457-6260-442e-ad36-a57542b510ea a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "2HKF_P.labels"^^xsd:string ;
+    ore:proxyFor id:140c9ca9-5bb5-4a37-aa04-580e6cef09d2 ;
+    ore:proxyIn id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a .
+
+id:222829fe-87bf-4ba2-9e14-f81d74d24ba1 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "4W6X_A.labels"^^xsd:string ;
+    ore:proxyFor id:2b2a88ef-cdd8-43a5-b77c-54ac99ea8870 ;
+    ore:proxyIn id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a .
+
+id:2d49899c-72be-40e0-ae41-c3642db0341f a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "5JS9_D.labels"^^xsd:string ;
+    ore:proxyFor id:d5a1dafb-057c-4291-a577-8ce16042796b ;
+    ore:proxyIn id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a .
+
+id:4a58a0f8-1096-4510-98e3-2d3060acc713 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "4W6Y_A.labels"^^xsd:string ;
+    ore:proxyFor id:02d692b2-665b-48dd-9b79-acdb66e2e1b7 ;
+    ore:proxyIn id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a .
+
+id:df24c978-9cb8-482d-8be0-c8c88ae65b11 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "4W6W_A.labels"^^xsd:string ;
+    ore:proxyFor id:495fc011-cba6-4088-a0fd-e60d16651bad ;
+    ore:proxyIn id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a .
+
+id:80d4c41f-c57d-40c0-8af1-fe6fd5775b6a a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates id:04124e55-4966-40eb-8f97-688c74263e14,
+        id:1a6af457-6260-442e-ad36-a57542b510ea,
+        id:222829fe-87bf-4ba2-9e14-f81d74d24ba1,
+        id:2d49899c-72be-40e0-ae41-c3642db0341f,
+        id:4a58a0f8-1096-4510-98e3-2d3060acc713,
+        id:df24c978-9cb8-482d-8be0-c8c88ae65b11 .
+

@@ -1,0 +1,329 @@
+[2022-08-21T12:05:33,916.853189Z] [cwltool] /scistor/informatica/hwt330/.conda/envs/hhsuite/bin/cwltool --singularity --provenance /scistor/informatica/hwt330/cwl-epitope/ro_full_wf --full-name Renske de Wit /scistor/informatica/hwt330/cwl-epitope/niaa_wf.cwl /scistor/informatica/hwt330/cwl-epitope/niaa_wf_job.yml
+[2022-08-21T12:05:33,922.097683Z] Resolved '/scistor/informatica/hwt330/cwl-epitope/niaa_wf.cwl' to 'file:///scistor/informatica/hwt330/cwl-epitope/niaa_wf.cwl'
+[2022-08-21T12:06:02,732.146502Z] [provenance] Adding to RO file:///scistor/informatica/hwt330/cwl-epitope/data/pdb_query.json
+[2022-08-21T12:06:02,733.387709Z] [provenance] Adding to RO file:///scistor/informatica/hwt330/cwl-epitope/data/sabdab_summary_all_20220527.tsv
+[2022-08-21T12:06:02,739.425182Z] [provenance] Adding to RO https://www.ibi.vu.nl/downloads/PIPENN/PIPENN/BioDL-Datasets/prepared_biolip_win_p_training.csv
+[2022-08-21T12:06:02,739.522219Z] [provenance] Adding to RO https://www.ibi.vu.nl/downloads/PIPENN/PIPENN/BioDL-Datasets/prepared_biolip_win_p_testing.csv
+[2022-08-21T12:31:21,831.174850Z] [workflow ] start
+[2022-08-21T12:31:21,837.653399Z] [workflow ] starting step preprocess_sabdab_data
+[2022-08-21T12:31:21,837.790728Z] [step preprocess_sabdab_data] start
+[2022-08-21T12:31:22,73.045254Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/provenance_output
+[2022-08-21T12:31:22,178.040504Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/prov_output
+[2022-08-21T12:31:22,186.112404Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/final_test_run
+[2022-08-21T12:31:22,208.929777Z] [job preprocess_sabdab_data] /scratch/101621/s9qyxy5o$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/101621/s9qyxy5o:/ehvjmf \
+    --bind \
+    /scratch/101621/czwbzt02:/tmp \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/data/sabdab_summary_all_20220527.tsv:/var/lib/cwl/stgce6cb07d-4439-451e-b9a7-69db03872b66/sabdab_summary_all_20220527.tsv:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/process_sabdab_summary.py:/var/lib/cwl/stg609669f4-d988-4fb6-b60e-f689f47b6ad3/process_sabdab_summary.py:ro \
+    --pwd \
+    /ehvjmf \
+    --net \
+    --network \
+    none \
+    /scistor/informatica/hwt330/cwl-epitope/final_test_run/amancevice_pandas:1.3.4-slim.sif \
+    python3 \
+    /var/lib/cwl/stg609669f4-d988-4fb6-b60e-f689f47b6ad3/process_sabdab_summary.py \
+    /var/lib/cwl/stgce6cb07d-4439-451e-b9a7-69db03872b66/sabdab_summary_all_20220527.tsv \
+    -o \
+    SAbDab_protein_antigens_PDB_chains.csv
+[2022-08-21T12:31:23,949.239731Z] [job preprocess_sabdab_data] completed success
+[2022-08-21T12:31:23,949.450731Z] [step preprocess_sabdab_data] completed success
+[2022-08-21T12:31:23,949.991226Z] [workflow ] starting step run_pdb_query
+[2022-08-21T12:31:23,950.143337Z] [step run_pdb_query] start
+[2022-08-21T12:31:23,957.570314Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope
+[2022-08-21T12:31:24,4.879713Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/final_test_run
+[2022-08-21T12:31:24,5.766869Z] [job run_pdb_query] /scratch/101621/9nei1333$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/101621/9nei1333:/ehvjmf \
+    --bind \
+    /scratch/101621/uxx2ylme:/tmp \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/data/pdb_query.json:/var/lib/cwl/stg6ca1cc19-93d1-4491-9aef-66b8d070d1b8/pdb_query.json:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/pdb_query.py:/var/lib/cwl/stg72b14b92-5037-4d6e-9737-2b3dbe843301/pdb_query.py:ro \
+    --pwd \
+    /ehvjmf \
+    /scistor/informatica/hwt330/cwl-epitope/final_test_run/nyurik_alpine-python3-requests@sha256:e0553236e3ebaa240752b41b8475afb454c5ab4c17eb023a2a904637eda16cf6.sif \
+    python3 \
+    /var/lib/cwl/stg72b14b92-5037-4d6e-9737-2b3dbe843301/pdb_query.py \
+    /var/lib/cwl/stg6ca1cc19-93d1-4491-9aef-66b8d070d1b8/pdb_query.json \
+    --outpath \
+    ./pdb_ids.txt
+[2022-08-21T12:31:25,50.391197Z] [job run_pdb_query] completed success
+[2022-08-21T12:31:25,50.625563Z] [step run_pdb_query] completed success
+[2022-08-21T12:31:25,50.978661Z] [workflow ] starting step download_pdb_files
+[2022-08-21T12:31:25,51.156759Z] [step download_pdb_files] start
+[2022-08-21T12:31:25,56.608438Z] [job download_pdb_files] /scratch/101621/s4dtnbfy$ bash \
+    /scratch/101621/16a0jupy/stg546c4980-c661-463c-9d91-e8c1e4dd96a2/pdb_batch_download.sh \
+    -o \
+    . \
+    -f \
+    /scratch/101621/16a0jupy/stg050cf7ea-8a5b-47a5-8948-e017c962dd25/pdb_ids.txt \
+    -c \
+    -p
+[2022-08-21T12:31:35,204.544783Z] [job download_pdb_files] Max memory used: 12MiB
+[2022-08-21T12:31:35,222.229004Z] [job download_pdb_files] completed success
+[2022-08-21T12:31:35,222.351074Z] [step download_pdb_files] completed success
+[2022-08-21T12:31:35,223.288536Z] [workflow ] starting step decompress_pdb_files
+[2022-08-21T12:31:35,223.439932Z] [step decompress_pdb_files] start
+[2022-08-21T12:31:37,873.656034Z] [job decompress_pdb_files] /scratch/101621/fmldan9j$ gzip \
+    -df \
+    /scratch/101621/fmldan9j/1ZVW.cif.gz \
+    /scratch/101621/fmldan9j/1ZVW.pdb.gz \
+    /scratch/101621/fmldan9j/2HKF.cif.gz \
+    /scratch/101621/fmldan9j/2HKF.pdb.gz \
+    /scratch/101621/fmldan9j/4M0R.cif.gz \
+    /scratch/101621/fmldan9j/4M0R.pdb.gz \
+    /scratch/101621/fmldan9j/4W6W.cif.gz \
+    /scratch/101621/fmldan9j/4W6W.pdb.gz \
+    /scratch/101621/fmldan9j/4W6X.cif.gz \
+    /scratch/101621/fmldan9j/4W6X.pdb.gz \
+    /scratch/101621/fmldan9j/4W6Y.cif.gz \
+    /scratch/101621/fmldan9j/4W6Y.pdb.gz \
+    /scratch/101621/fmldan9j/5G5R.cif.gz \
+    /scratch/101621/fmldan9j/5G5R.pdb.gz \
+    /scratch/101621/fmldan9j/5JS9.cif.gz \
+    /scratch/101621/fmldan9j/5JS9.pdb.gz \
+    /scratch/101621/fmldan9j/5UMF.cif.gz \
+    /scratch/101621/fmldan9j/5UMF.pdb.gz \
+    /scratch/101621/fmldan9j/6MHP.cif.gz \
+    /scratch/101621/fmldan9j/6MHP.pdb.gz
+[2022-08-21T12:31:37,994.588137Z] [job decompress_pdb_files] completed success
+[2022-08-21T12:31:37,994.801521Z] [step decompress_pdb_files] completed success
+[2022-08-21T12:31:37,995.225668Z] [workflow ] starting step generate_epitope_labels
+[2022-08-21T12:31:37,995.383739Z] [step generate_epitope_labels] start
+[2022-08-21T12:31:38,10.547400Z] [job generate_epitope_labels] /scratch/101621/6l8ss0to$ python3 \
+    /scratch/101621/m807c9bd/stgd6b09f40-b7ee-4318-8611-df19518c3ee4/epitope_annotation_pipeline.py \
+    mmcif_directory \
+    /scratch/101621/m807c9bd/stgd8d06928-b749-487a-89e3-85d8465cd4dc/SAbDab_protein_antigens_PDB_chains.csv \
+    --fasta_directory \
+    ./epitope_fasta \
+    --df_directory \
+    ./epitope_df
+[2022-08-21T12:33:33,680.471182Z] [job generate_epitope_labels] Max memory used: 74MiB
+[2022-08-21T12:33:33,695.942402Z] [job generate_epitope_labels] completed success
+[2022-08-21T12:33:33,696.061134Z] [step generate_epitope_labels] completed success
+[2022-08-21T12:33:33,697.144985Z] [workflow ] starting step generate_ppi_labels
+[2022-08-21T12:33:33,697.355986Z] [step generate_ppi_labels] start
+[2022-08-21T12:34:10,878.196001Z] [job generate_ppi_labels] /scratch/101621/7p70w7ly$ python3 \
+    /scratch/101621/9l6sngpg/stgd93725d1-7ebc-48e7-9bc6-964ec14618eb/ppi_annotations.py \
+    mmcif_directory \
+    /scratch/101621/9l6sngpg/stg83f7e8ee-a2d3-4d96-a34a-be55c8492fe9/prepared_biolip_win_p_training.csv \
+    /scratch/101621/9l6sngpg/stg34c79ef8-2087-40db-9ec7-3f80e55a78d6/prepared_biolip_win_p_testing.csv \
+    --outdir \
+    ppi_fasta
+[2022-08-21T12:34:34,795.983315Z] [job generate_ppi_labels] Max memory used: 150MiB
+[2022-08-21T12:34:34,808.044910Z] [job generate_ppi_labels] completed success
+[2022-08-21T12:34:34,808.158398Z] [step generate_ppi_labels] completed success
+[2022-08-21T12:34:34,808.946133Z] [workflow ] starting step generate_hhm
+[2022-08-21T12:34:34,809.307814Z] [step generate_hhm] start
+[2022-08-21T12:47:00,924.219608Z] [workflow generate_hhm] start
+[2022-08-21T12:47:00,925.299883Z] [workflow generate_hhm] starting step run_hhblits
+[2022-08-21T12:47:00,925.690651Z] [step run_hhblits] start
+[2022-08-21T12:47:00,930.266857Z] [job run_hhblits] /scratch/101621/d1za659x$ hhblits \
+    -i \
+    /scratch/101621/kiolwvm4/stgef0f19cd-6975-4b46-81e1-1716117e5df7/2HKF_P.fasta \
+    -d \
+    /scratch/101621/kiolwvm4/stg9a4641f8-d22f-4e74-98fa-1c130915db81/databases/pdb70 \
+    -o \
+    2HKF_P.hhr \
+    -ohhm \
+    2HKF_P.hhm \
+    -n \
+    1
+[2022-08-21T12:57:55,321.788311Z] [job run_hhblits] completed success
+[2022-08-21T12:57:55,322.351456Z] [step run_hhblits] start
+[2022-08-21T12:57:55,327.842474Z] [job run_hhblits_2] /scratch/101621/c8vih808$ hhblits \
+    -i \
+    /scratch/101621/stzw1fr7/stgd4b730fe-3d10-4264-9062-43a29279fae0/4W6W_A.fasta \
+    -d \
+    /scratch/101621/stzw1fr7/stg565158f7-f014-423b-8f1e-6fe45ed0ae66/databases/pdb70 \
+    -o \
+    4W6W_A.hhr \
+    -ohhm \
+    4W6W_A.hhm \
+    -n \
+    1
+[2022-08-21T13:06:54,272.300959Z] [job run_hhblits_2] completed success
+[2022-08-21T13:06:54,272.872210Z] [step run_hhblits] start
+[2022-08-21T13:06:54,277.655363Z] [job run_hhblits_3] /scratch/101621/mxw1y_nv$ hhblits \
+    -i \
+    /scratch/101621/06ye7uc6/stg29037b21-3af7-4692-aed6-4fc1af5a6e9e/4W6X_A.fasta \
+    -d \
+    /scratch/101621/06ye7uc6/stg5d7faf6b-2f70-4a87-b2ec-1345767c3dd3/databases/pdb70 \
+    -o \
+    4W6X_A.hhr \
+    -ohhm \
+    4W6X_A.hhm \
+    -n \
+    1
+[2022-08-21T13:15:13,151.762009Z] [job run_hhblits_3] completed success
+[2022-08-21T13:15:13,152.340412Z] [step run_hhblits] start
+[2022-08-21T13:15:13,157.362700Z] [job run_hhblits_4] /scratch/101621/lx4zjz55$ hhblits \
+    -i \
+    /scratch/101621/ily1btls/stgb4e3fa5d-1549-4eec-bd7b-69509d045402/4W6Y_A.fasta \
+    -d \
+    /scratch/101621/ily1btls/stg8a176c83-955c-4002-ba37-453aba224c82/databases/pdb70 \
+    -o \
+    4W6Y_A.hhr \
+    -ohhm \
+    4W6Y_A.hhm \
+    -n \
+    1
+[2022-08-21T13:22:54,786.471128Z] [job run_hhblits_4] completed success
+[2022-08-21T13:22:54,786.751986Z] [step run_hhblits] completed success
+[2022-08-21T13:22:55,661.789656Z] [workflow generate_hhm] completed success
+[2022-08-21T13:22:55,662.254810Z] [step generate_hhm] completed success
+[2022-08-21T13:22:55,664.042473Z] [workflow ] starting step generate_dssp_labels
+[2022-08-21T13:22:55,664.447308Z] [step generate_dssp_labels] start
+[2022-08-21T13:22:55,744.576216Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/tools
+[2022-08-21T13:22:55,747.459888Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/data/test_set
+[2022-08-21T13:22:55,836.479425Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/final_test_run
+[2022-08-21T13:22:55,849.215746Z] [job generate_dssp_labels] /scratch/101621/ukuekxfb$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/101621/ukuekxfb:/ehvjmf \
+    --bind \
+    /scratch/101621/sv7edxgv:/tmp \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/dssp_RASA.py:/var/lib/cwl/stgb61b4eeb-df08-45f9-9c36-18c4b271eca4/dssp_RASA.py:ro \
+    --pwd \
+    /ehvjmf \
+    --net \
+    --network \
+    none \
+    /scistor/informatica/hwt330/cwl-epitope/final_test_run/biopython_biopython@sha256:437075df44b0c9b3da96f71040baef0086789de7edf73c81de4ace30a127a245.sif \
+    python3 \
+    /var/lib/cwl/stgb61b4eeb-df08-45f9-9c36-18c4b271eca4/dssp_RASA.py \
+    pdb_source_dir \
+    -o \
+    dssp_output \
+    -d \
+    dssp \
+    -c \
+    0.06
+[2022-08-21T13:23:09,587.336779Z] [job generate_dssp_labels] completed success
+[2022-08-21T13:23:09,587.597609Z] [step generate_dssp_labels] completed success
+[2022-08-21T13:23:09,587.934494Z] [workflow ] starting step generate_psp19
+[2022-08-21T13:23:09,588.077068Z] [step generate_psp19] start
+[2022-08-21T13:23:09,681.194544Z] [job generate_psp19] /scratch/101621/njyoa8op$ python3 \
+    /scratch/101621/jnxvtd4x/stg555fb122-d8bc-4df3-813b-8337cf0688d3/get_psp19_inputs.py \
+    /scratch/101621/jnxvtd4x/stg38d84982-cd3f-4bba-8d00-2ddf792acc93/ppi_fasta \
+    -o \
+    psp19_features
+[2022-08-21T13:23:10,32.652617Z] [job generate_psp19] completed success
+[2022-08-21T13:23:10,32.826185Z] [step generate_psp19] completed success
+[2022-08-21T13:23:10,33.743620Z] [workflow ] starting step generate_pc7
+[2022-08-21T13:23:10,33.891439Z] [step generate_pc7] start
+[2022-08-21T13:23:10,45.764685Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/provenance_output
+[2022-08-21T13:23:10,109.927654Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/prov_output
+[2022-08-21T13:23:10,112.427473Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/final_test_run
+[2022-08-21T13:23:10,113.291502Z] [job generate_pc7] /scratch/101621/5qgd3fr9$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/101621/5qgd3fr9:/ehvjmf \
+    --bind \
+    /scratch/101621/lmiaejmi:/tmp \
+    --bind \
+    /scratch/101621/7p70w7ly/ppi_fasta:/var/lib/cwl/stgce7341be-bb1d-4199-9501-f2fbdad013d3/ppi_fasta:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/get_pc7_inputs.py:/var/lib/cwl/stgcf7288df-65d9-4471-9468-a51bd9886bfe/get_pc7_inputs.py:ro \
+    --pwd \
+    /ehvjmf \
+    /scistor/informatica/hwt330/cwl-epitope/final_test_run/amancevice_pandas:1.3.4-slim.sif \
+    python3 \
+    /var/lib/cwl/stgcf7288df-65d9-4471-9468-a51bd9886bfe/get_pc7_inputs.py \
+    /var/lib/cwl/stgce7341be-bb1d-4199-9501-f2fbdad013d3/ppi_fasta \
+    -o \
+    pc7_features
+[2022-08-21T13:23:11,968.385458Z] [job generate_pc7] completed success
+[2022-08-21T13:23:11,968.576670Z] [step generate_pc7] completed success
+[2022-08-21T13:23:11,969.057560Z] [workflow ] starting step combine_labels
+[2022-08-21T13:23:11,969.245672Z] [step combine_labels] start
+[2022-08-21T13:23:11,977.621555Z] [job combine_labels] /scratch/101621/o11d9dqj$ python3 \
+    /scratch/101621/7_m2smmj/stg52f4d12d-4b7a-4815-9ff7-77d4d78988db/combine_labels.py \
+    /scratch/101621/7_m2smmj/stg02fed5e8-32b4-405e-8a00-0d6fa6e09deb/epitope_fasta \
+    /scratch/101621/7_m2smmj/stg8c710a62-acd7-402b-89e6-6012672b77ce/ppi_fasta \
+    /scratch/101621/7_m2smmj/stgc49e9692-152d-4dde-adf0-5235a4f80b87/dssp_output \
+    --outdir \
+    ./combined_labels
+[2022-08-21T13:23:14,529.042006Z] [job combine_labels] Max memory used: 44MiB
+[2022-08-21T13:23:14,547.330856Z] [job combine_labels] completed success
+[2022-08-21T13:23:14,547.443628Z] [step combine_labels] completed success
+[2022-08-21T13:23:14,548.106909Z] [workflow ] starting step combine_features
+[2022-08-21T13:23:14,548.289061Z] [step combine_features] start
+[2022-08-21T13:23:14,567.485332Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/provenance_output
+[2022-08-21T13:23:14,600.081205Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/prov_output
+[2022-08-21T13:23:14,602.353573Z] Using local copy of Singularity image found in /scistor/informatica/hwt330/cwl-epitope/final_test_run
+[2022-08-21T13:23:14,609.502554Z] [job combine_features] /scratch/101621/pmptbsif$ singularity \
+    --quiet \
+    exec \
+    --contain \
+    --ipc \
+    --cleanenv \
+    --userns \
+    --home \
+    /scratch/101621/pmptbsif:/ehvjmf \
+    --bind \
+    /scratch/101621/5unfievx:/tmp \
+    --bind \
+    /scratch/101621/7p70w7ly/ppi_fasta:/var/lib/cwl/stg0be1b08e-8517-4d4b-8b02-712343ccf939/ppi_fasta:ro \
+    --bind \
+    /scratch/101621/5qgd3fr9/pc7_features:/var/lib/cwl/stg46c40766-fc71-448c-b00c-6bae9115c96f/pc7_features:ro \
+    --bind \
+    /scratch/101621/njyoa8op/psp19_features:/var/lib/cwl/stg3f2540e5-bee5-4026-953c-fab12b336230/psp19_features:ro \
+    --bind \
+    /scistor/informatica/hwt330/cwl-epitope/tools/combine_inputs.py:/var/lib/cwl/stg73ce5ccc-58f4-4bb5-8607-69f92e6773af/combine_inputs.py:ro \
+    --pwd \
+    /ehvjmf \
+    --net \
+    --network \
+    none \
+    /scistor/informatica/hwt330/cwl-epitope/final_test_run/amancevice_pandas:1.3.4-slim.sif \
+    python3 \
+    /var/lib/cwl/stg73ce5ccc-58f4-4bb5-8607-69f92e6773af/combine_inputs.py \
+    /var/lib/cwl/stg0be1b08e-8517-4d4b-8b02-712343ccf939/ppi_fasta \
+    hhm_features_dir \
+    /var/lib/cwl/stg46c40766-fc71-448c-b00c-6bae9115c96f/pc7_features \
+    /var/lib/cwl/stg3f2540e5-bee5-4026-953c-fab12b336230/psp19_features \
+    --outdir \
+    ./input_features
+[2022-08-21T13:23:16,756.169319Z] [job combine_features] completed success
+[2022-08-21T13:23:16,756.376028Z] [step combine_features] completed success
+[2022-08-21T13:23:16,756.748199Z] [workflow ] starting step train_epitope_prediction_model
+[2022-08-21T13:23:16,756.906033Z] [step train_epitope_prediction_model] start
+[2022-08-21T13:23:16,764.499903Z] [job train_epitope_prediction_model] /scratch/101621/zzuybmgz$ python3 \
+    /scratch/101621/yjkwod4n/stgfa02e052-efe1-4d05-9749-18722648a1e7/emulated_model.py \
+    /scratch/101621/yjkwod4n/stgc546e8d3-7610-4eae-9eb6-1a2253ef92ba/model_example_params.json \
+    /scratch/101621/yjkwod4n/stg8deaef70-93cb-4722-ac64-6cf3781696f0/input_features \
+    /scratch/101621/yjkwod4n/stg373f837f-b294-4a35-9c84-0bf9cfa6a5e7/combined_labels > /scratch/101621/zzuybmgz/training_log.txt
+[2022-08-21T13:23:16,828.747272Z] [job train_epitope_prediction_model] completed success
+[2022-08-21T13:23:16,828.953028Z] [step train_epitope_prediction_model] completed success
+[2022-08-21T13:23:16,829.261541Z] [workflow ] completed success
+[2022-08-21T13:23:17,982.808352Z] Final process status is success

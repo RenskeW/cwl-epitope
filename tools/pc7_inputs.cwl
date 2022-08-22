@@ -13,7 +13,7 @@ hints:
 baseCommand: python3
 
 doc: PC7 features are assigned to each residue in each protein sequence. Output is a directory of files (1 per sequence).
-intent: [ http://edamontology.org/operation_0361 ]
+# intent: [ http://edamontology.org/operation_0361 ]
 
 inputs:
   script:

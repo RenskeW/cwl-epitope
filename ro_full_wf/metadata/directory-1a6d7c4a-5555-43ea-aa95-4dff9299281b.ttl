@@ -1,0 +1,138 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+id:1307f901-cead-4ee2-b037-b8dc88a314c9 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "slurm-35486.out"^^xsd:string ;
+    ore:proxyFor id:20e04866-8d3e-4faf-9b90-7583d85ea1e9 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:1b53273d-cf1d-4eea-a164-f111cb8f3041 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_a3m.ffdata"^^xsd:string ;
+    ore:proxyFor id:52351a00-fcde-44b5-9a19-074d9577fd44 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:220eb7c7-2da9-441f-81f7-726763c8fe10 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08.tar.gz"^^xsd:string ;
+    ore:proxyFor id:c8cf98d5-2607-4a1c-9b03-0d3e2bf7610f ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:278b1c12-baae-4ca3-b9bb-ed266de04db9 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_clu.tsv"^^xsd:string ;
+    ore:proxyFor id:9f2212bd-3b6f-4a17-ab55-12337e91427e ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:3c5894f1-9576-4ba2-b565-192b533cd383 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "SLURM_job_script.sh"^^xsd:string ;
+    ore:proxyFor id:d607d0e6-3eb1-4cd7-af1f-8b5bccbd6e4e ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:455d7592-ecf6-427e-a01a-4a76c91b207d a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_cs219.ffdata"^^xsd:string ;
+    ore:proxyFor id:af51fb2c-1555-4464-ab76-e5f1e729434e ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:5147e0cf-8b05-49f3-941b-ca2d788c0e7a a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_a3m.ffindex"^^xsd:string ;
+    ore:proxyFor id:a405f740-8297-45c3-bb33-932d2951beb3 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:54b2dbe3-e5f3-4da9-adc2-88bdf8723740 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "slurm-35484.out"^^xsd:string ;
+    ore:proxyFor id:5b1e7a2c-d1ce-445f-b131-6851ed21fde3 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:6d589450-95b5-4078-b9a4-94cd752cb13b a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_cs219.ffindex"^^xsd:string ;
+    ore:proxyFor id:9d3b8ad6-d162-4ad1-bebc-834e6a69577a ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:96777d86-dd3e-4941-bdd7-3d009f6de234 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08"^^xsd:string ;
+    ore:proxyFor id:f12ea709-063d-4055-9a68-97382d6602b2 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:9c136335-ac93-4e2b-9920-c509421d3869 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb_filter.dat"^^xsd:string ;
+    ore:proxyFor id:94c7e301-5bca-4fdd-9fd3-b5b1fdddb60d ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:a0e72998-16da-4360-9690-a0afbdd1378e a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_hhm.ffdata"^^xsd:string ;
+    ore:proxyFor id:81ae66ec-a96b-4f81-b19c-72c4c21af293 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:a6bb2c33-c96a-4180-a39c-a7069270bc49 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "md5sum"^^xsd:string ;
+    ore:proxyFor id:f5f03926-0c80-41ae-8a46-cfbdb0626532 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:a900f24d-d0ff-4e63-9b6c-09f93c227f02 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "slurm-35483.out"^^xsd:string ;
+    ore:proxyFor id:d4573621-97c3-4a0b-87e2-da1ba7607876 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:be5e57f5-abd2-4be4-a834-5e3510cd01e1 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_hhsuite.tar.gz"^^xsd:string ;
+    ore:proxyFor id:eb1911b0-4864-4e64-b562-bbae4fea2034 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:e16b78f6-d9b9-4abc-b694-fe20f3700ff8 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pdb70_hhm.ffindex"^^xsd:string ;
+    ore:proxyFor id:c9849113-8647-4b77-adf0-d0274e3fe881 ;
+    ore:proxyIn id:1a6d7c4a-5555-43ea-aa95-4dff9299281b .
+
+id:1a6d7c4a-5555-43ea-aa95-4dff9299281b a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates id:1307f901-cead-4ee2-b037-b8dc88a314c9,
+        id:1b53273d-cf1d-4eea-a164-f111cb8f3041,
+        id:220eb7c7-2da9-441f-81f7-726763c8fe10,
+        id:278b1c12-baae-4ca3-b9bb-ed266de04db9,
+        id:3c5894f1-9576-4ba2-b565-192b533cd383,
+        id:455d7592-ecf6-427e-a01a-4a76c91b207d,
+        id:5147e0cf-8b05-49f3-941b-ca2d788c0e7a,
+        id:54b2dbe3-e5f3-4da9-adc2-88bdf8723740,
+        id:6d589450-95b5-4078-b9a4-94cd752cb13b,
+        id:96777d86-dd3e-4941-bdd7-3d009f6de234,
+        id:9c136335-ac93-4e2b-9920-c509421d3869,
+        id:a0e72998-16da-4360-9690-a0afbdd1378e,
+        id:a6bb2c33-c96a-4180-a39c-a7069270bc49,
+        id:a900f24d-d0ff-4e63-9b6c-09f93c227f02,
+        id:be5e57f5-abd2-4be4-a834-5e3510cd01e1,
+        id:e16b78f6-d9b9-4abc-b694-fe20f3700ff8 .
+

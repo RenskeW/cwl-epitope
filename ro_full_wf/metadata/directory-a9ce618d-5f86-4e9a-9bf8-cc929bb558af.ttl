@@ -1,0 +1,26 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+id:535098d6-2ec7-444f-9600-0bf85e773dc6 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "5JS9_C.csv"^^xsd:string ;
+    ore:proxyFor id:748adeec-bac9-4463-8663-b2e7c1721937 ;
+    ore:proxyIn id:a9ce618d-5f86-4e9a-9bf8-cc929bb558af .
+
+id:7a6348e0-6873-45c4-b6ff-3f5d5dec6758 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "5JS9_D.csv"^^xsd:string ;
+    ore:proxyFor id:73a7f24b-67a0-4b72-a7f5-c932f3cd22ee ;
+    ore:proxyIn id:a9ce618d-5f86-4e9a-9bf8-cc929bb558af .
+
+id:a9ce618d-5f86-4e9a-9bf8-cc929bb558af a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates id:535098d6-2ec7-444f-9600-0bf85e773dc6,
+        id:7a6348e0-6873-45c4-b6ff-3f5d5dec6758 .
+

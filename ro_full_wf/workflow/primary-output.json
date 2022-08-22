@@ -1,0 +1,13 @@
+{
+    "model_output": {
+        "location": "../data/da/da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "basename": "training_log.txt",
+        "nameroot": "training_log",
+        "nameext": ".txt",
+        "class": "File",
+        "checksum": "sha1$da39a3ee5e6b4b0d3255bfef95601890afd80709",
+        "size": 0,
+        "http://commonwl.org/cwltool#generation": 0,
+        "@id": "urn:uuid:fd7cd3c2-4cfd-492b-95a3-b246a8208719"
+    }
+}

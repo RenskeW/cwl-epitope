@@ -1,0 +1,42 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+id:1c28c38c-4b1c-4c0b-9976-2a4bf098678a a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pc7_4W6Y_A.input"^^xsd:string ;
+    ore:proxyFor id:8697da53-d65c-4f3c-bf03-4f7479c33e22 ;
+    ore:proxyIn id:64e2178d-0c2f-4cee-bb69-d70778cc1a19 .
+
+id:3242fb5e-49c7-488f-83d3-b3ffa435b89e a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pc7_4W6W_A.input"^^xsd:string ;
+    ore:proxyFor id:291908d5-d4e8-4fcf-8d31-44feaedc77c2 ;
+    ore:proxyIn id:64e2178d-0c2f-4cee-bb69-d70778cc1a19 .
+
+id:797a3a37-ade5-4c00-bbf8-e058f043c7af a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pc7_2HKF_P.input"^^xsd:string ;
+    ore:proxyFor id:51d0b4f5-7d4f-4390-ba31-3243b00eaabc ;
+    ore:proxyIn id:64e2178d-0c2f-4cee-bb69-d70778cc1a19 .
+
+id:d4dda08f-5722-4b4a-ab3c-e5331d255923 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "pc7_4W6X_A.input"^^xsd:string ;
+    ore:proxyFor id:81abc2b2-87b6-4422-9017-b65b685c5dee ;
+    ore:proxyIn id:64e2178d-0c2f-4cee-bb69-d70778cc1a19 .
+
+id:64e2178d-0c2f-4cee-bb69-d70778cc1a19 a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates id:1c28c38c-4b1c-4c0b-9976-2a4bf098678a,
+        id:3242fb5e-49c7-488f-83d3-b3ffa435b89e,
+        id:797a3a37-ade5-4c00-bbf8-e058f043c7af,
+        id:d4dda08f-5722-4b4a-ab3c-e5331d255923 .
+

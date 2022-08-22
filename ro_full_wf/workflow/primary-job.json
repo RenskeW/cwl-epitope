@@ -1,0 +1,103 @@
+{
+    "cwlprov:prov": {
+        "sabdab_search": {
+            "https://schema.org/additionalType": "s:SearchAction",
+            "https://schema.org/query": "All structures",
+            "https://schema.org/endTime": "2022-05-27",
+            "https://schema.org/object": {
+                "https://schema.org/name": "Structural Antibody Database",
+                "https://schema.org/citation": {
+                    "https://schema.org/identifier": "https://doi.org/10.1093/nar/gkab1050"
+                }
+            },
+            "https://schema.org/result": "sabdab_summary_file",
+            "https://schema.org/description": "Search Action for metadata on antibody-antigen complexes in SAbDab"
+        }
+    },
+    "pdb_search_api_query": {
+        "class": "File",
+        "location": "../data/fe/fe7bd47a4d052879ad8e4cacf3e569088e300952",
+        "format": "https://www.iana.org/assignments/media-types/application/json",
+        "https://schema.org/description": "Input query for PDB search API.",
+        "https://schema.org/additionalType": [
+            "edam:data_3786"
+        ],
+        "size": 263,
+        "basename": "pdb_query.json",
+        "nameroot": "pdb_query",
+        "nameext": ".json",
+        "checksum": "sha1$fe7bd47a4d052879ad8e4cacf3e569088e300952"
+    },
+    "sabdab_summary_file": {
+        "class": "File",
+        "format": "https://www.iana.org/assignments/media-types/text/tab-separated-values",
+        "https://schema.org/description": "Summary file downloaded from SAbDAb database, containing metadata for all structures.",
+        "https://schema.org/additionalType": [
+            "edam:data_2080",
+            "s:Dataset"
+        ],
+        "location": "../data/5e/5e026d2a039e60827d3834596a8c30256aa85e57",
+        "size": 4598025,
+        "basename": "sabdab_summary_all_20220527.tsv",
+        "nameroot": "sabdab_summary_all_20220527",
+        "nameext": ".tsv",
+        "checksum": "sha1$5e026d2a039e60827d3834596a8c30256aa85e57"
+    },
+    "biodl_train_dataset": {
+        "class": "File",
+        "location": "https://www.ibi.vu.nl/downloads/PIPENN/PIPENN/BioDL-Datasets/prepared_biolip_win_p_training.csv",
+        "https://schema.org/description": "BioDL training set containing PPI annotations for protein sequences (UniProt IDs)",
+        "https://schema.org/name": "BioDL training dataset",
+        "https://schema.org/citation": {
+            "https://schema.org/identifier": "https://doi.org/10.1093/bioinformatics/btac071"
+        },
+        "https://schema.org/additionalType": [
+            "s:Dataset",
+            "edam:data_1277"
+        ],
+        "basename": "prepared_biolip_win_p_training.csv",
+        "nameroot": "prepared_biolip_win_p_training",
+        "nameext": ".csv"
+    },
+    "biodl_test_dataset": {
+        "class": "File",
+        "location": "https://www.ibi.vu.nl/downloads/PIPENN/PIPENN/BioDL-Datasets/prepared_biolip_win_p_testing.csv",
+        "https://schema.org/description": "BioDL test set containing PPI annotations for protein sequences (UniProt IDs).",
+        "https://schema.org/name": "BioDL test dataset",
+        "https://schema.org/citation": {
+            "https://schema.org/identifier": "https://doi.org/10.1093/bioinformatics/btac071"
+        },
+        "https://schema.org/additionalType": [
+            "s:Dataset",
+            "edam:data_1277"
+        ],
+        "basename": "prepared_biolip_win_p_testing.csv",
+        "nameroot": "prepared_biolip_win_p_testing",
+        "nameext": ".csv"
+    },
+    "hhblits_db_dir": {
+        "class": "Directory",
+        "https://schema.org/citation": {
+            "https://schema.org/identifier": "https://doi.org/10.1038/nmeth.1818"
+        },
+        "https://schema.org/name": "pdb70",
+        "https://schema.org/description": "Directory containing HHBlits reference database.",
+        "https://schema.org/additionalType": [
+            "s:Dataset",
+            "edam:data_0955"
+        ],
+        "basename": "databases"
+    },
+    "hhblits_db_name": "pdb70",
+    "hhblits_n_iterations": 1,
+    "$namespaces": {
+        "iana": "https://www.iana.org/assignments/media-types/",
+        "s": "https://schema.org/",
+        "edam": "http://edamontology.org/"
+    },
+    "$schemas": [
+        "https://schema.org/version/latest/schemaorg-current-https.rdf",
+        "https://edamontology.org/EDAM_1.25.owl"
+    ],
+    "https://schema.org/description": "Demonstration run of epitope prediction workflow. Some steps are emulated, so the results of the workflow are not yet biologically meaningful."
+}

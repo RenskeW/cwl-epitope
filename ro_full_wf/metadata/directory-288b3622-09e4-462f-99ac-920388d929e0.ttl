@@ -1,0 +1,138 @@
+@prefix id: <urn:uuid:> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ro: <http://purl.org/wf4ever/ro#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+id:12cad2d4-d37a-4735-8d2b-5663218f7fb7 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_hhm_db"^^xsd:string ;
+    ore:proxyFor id:406a9ad3-060b-46b1-b4a2-04a691a5685c ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:13f7684e-6938-44f1-8b42-b3b1bcd69112 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_a3m_db"^^xsd:string ;
+    ore:proxyFor id:12759044-fd21-4f21-96ae-6a1359992441 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:199f66a0-7d4d-43b9-bc12-955f8d569777 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_a3m_db.index"^^xsd:string ;
+    ore:proxyFor id:9fd07ee1-c5f8-449b-9294-c51d25c37daa ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:1e9f8538-a108-492d-bbea-19af8e94ce66 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_cs219.ffindex"^^xsd:string ;
+    ore:proxyFor id:2a1af9e4-7f65-4b62-940a-631d300c19fb ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:28cff1b5-5692-4ce0-9907-e956b07f2df9 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08.cs219"^^xsd:string ;
+    ore:proxyFor id:38d9ed6c-c7ac-42e3-acf5-3e5305772080 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:32536df7-5623-41d3-bef2-96fc015ef486 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_seed.fasta"^^xsd:string ;
+    ore:proxyFor id:32c1e84d-7387-41ab-9e98-c1bb7568558b ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:772ac795-7d11-4b82-8a1b-9800107c11a0 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_a3m.ffdata"^^xsd:string ;
+    ore:proxyFor id:4cf8836d-fb9d-4eb2-9225-580ee3732028 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:86f29518-b4e9-4fc7-8c5b-d96f7fbeb42d a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08.tsv"^^xsd:string ;
+    ore:proxyFor id:fd91a82e-d3cd-44eb-85c7-96a1f106d49c ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:87f0148f-4e3f-437c-b478-0919742141a0 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_hhm.ffdata"^^xsd:string ;
+    ore:proxyFor id:27441480-bcce-4628-9d78-b4d672a7a9d0 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:91e0974b-e1af-4737-9005-1921fb47685f a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_cs219.ffdata"^^xsd:string ;
+    ore:proxyFor id:273b1cec-8c10-4e17-9a5c-c748866e1d12 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:a84848b2-e8cb-4d5f-83cd-e9c286215e79 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_md5sum"^^xsd:string ;
+    ore:proxyFor id:d3e0d8f7-0b2e-4001-bb6b-737727e59ab5 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:ad6ab9e7-a690-410d-8c4b-377caf88464a a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08.cs219.sizes"^^xsd:string ;
+    ore:proxyFor id:60f7f6b1-5019-4859-8030-69658c957dd9 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:d5367eb0-ece5-4569-953b-086ab94a7b8e a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_consensus.fasta"^^xsd:string ;
+    ore:proxyFor id:30f5c9f4-b2f6-4a84-9d44-26c2eb4d179a ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:e8982165-9a1f-4c20-b983-9079cf20e868 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_hhm.ffindex"^^xsd:string ;
+    ore:proxyFor id:df4a806b-c229-4f07-ad1d-ae2d6856f38a ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:f912f1e4-5c89-4737-9aa0-86d13d6e5b23 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_hhm_db.index"^^xsd:string ;
+    ore:proxyFor id:df3e7808-b656-4163-825d-34512c979f22 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:fcedbc28-90f3-4d69-baa5-989ee1180f53 a ro:FolderEntry,
+        ore:Proxy,
+        prov:Entity ;
+    ro:entryName "uniclust30_2018_08_a3m.ffindex"^^xsd:string ;
+    ore:proxyFor id:47e61454-d073-4488-a5b4-e125d332d697 ;
+    ore:proxyIn id:288b3622-09e4-462f-99ac-920388d929e0 .
+
+id:288b3622-09e4-462f-99ac-920388d929e0 a ro:Folder,
+        ore:Aggregation,
+        prov:Entity ;
+    ore:aggregates id:12cad2d4-d37a-4735-8d2b-5663218f7fb7,
+        id:13f7684e-6938-44f1-8b42-b3b1bcd69112,
+        id:199f66a0-7d4d-43b9-bc12-955f8d569777,
+        id:1e9f8538-a108-492d-bbea-19af8e94ce66,
+        id:28cff1b5-5692-4ce0-9907-e956b07f2df9,
+        id:32536df7-5623-41d3-bef2-96fc015ef486,
+        id:772ac795-7d11-4b82-8a1b-9800107c11a0,
+        id:86f29518-b4e9-4fc7-8c5b-d96f7fbeb42d,
+        id:87f0148f-4e3f-437c-b478-0919742141a0,
+        id:91e0974b-e1af-4737-9005-1921fb47685f,
+        id:a84848b2-e8cb-4d5f-83cd-e9c286215e79,
+        id:ad6ab9e7-a690-410d-8c4b-377caf88464a,
+        id:d5367eb0-ece5-4569-953b-086ab94a7b8e,
+        id:e8982165-9a1f-4c20-b983-9079cf20e868,
+        id:f912f1e4-5c89-4737-9aa0-86d13d6e5b23,
+        id:fcedbc28-90f3-4d69-baa5-989ee1180f53 .
+
