@@ -8,6 +8,12 @@
 - `ro_full_wf/`: a RO of a (test) workflow run
 - `tools/`: CommandLineTool descriptions for each step in the workflow.
 - `tests/`: Tests and test data for part of the steps.
+- `requirements.txt`: Installed software on which original workflow run was enacted
+- `niaa_wf.cwl`: Epitope prediction workflow in CWL
+- `niaa_abstract.cwl`: Abstract workflow, originally only contained abstract Operations for the steps.
+- `niaa_wf_job.yml`: Input parameter file for `niaa_wf.cwl`
+- `niaa_real_graph.svg`: Graph of `niaa_wf.cwl`
+- `niaa_abstract_graph.svg`: Graph of `niaa_abstract.cwl`
 
 ## What (software) does it need to run?
 - A CWL engine, e.g. cwltool (at this moment the only CWL runner with an implementation of CWLProv)
@@ -46,4 +52,5 @@
 Sometimes tool descriptions work when run as separate files but give an error when connected in a workflow. Possible solutions:
 - Error: "anonymous file object missing 'basename' and 'contents'? fields" --> When using default values for file inputs in the CWL tool description, change `path` into `location`. `path` is technically correct but gives an error when the tool is run as a step in a workflow. 
 - Error: no input ports found for step ... / step ... has no output X". When step gives an error when connected in a workflow even though the tool run by itself works properly, comment the `DockerRequirement` and `SoftwareRequirement` fields, save the CommandLineTool description, save the workflow document. The errors should disappear. Now you can uncomment the `DockerRequirement` and `SoftwareRequirement` fields again and save the CommandLineTool document. Repeat if error resurfaces.
-- 
+- Error: I'm sorry, I couldn't load this CWL file, try again with --debug for more information.
+The error was: cwltool requires Node.js engine to evaluate and validate Javascript expressions, but couldn't find it.  Tried nodejs, node, docker run node:slim --> **Solution**: run workflow with `--singularity`  
